@@ -4,182 +4,258 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>HOORI | سامانه مدیریت</title>
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
 *{box-sizing:border-box}
+
 :root{
- --gold:#c5a04a;
- --dark:#85651c;
- --bg:#f8f7f2;
- --border:#eee4ca;
- --white:#fff;
- --red:#b33;
+  --gold:#c5a04a;
+  --dark:#85651c;
+  --bg:#faf9f5;
+  --border:#eadfbe;
+  --white:#fff;
+  --red:#c0392b;
+  --green:#23834b;
 }
+
 body{
- margin:0;
- font-family:Tahoma,Arial,sans-serif;
- background:var(--bg);
- color:#292929;
+  margin:0;
+  font-family:Tahoma,Arial,sans-serif;
+  background:var(--bg);
+  color:#292929;
 }
+
 button,input,select{font:inherit}
+
 button{
- cursor:pointer;
- padding:11px 15px;
- border:1px solid var(--border);
- border-radius:10px;
- background:white;
- color:var(--dark);
- margin:3px;
- transition:.2s;
+  cursor:pointer;
+  padding:12px 16px;
+  border:1px solid var(--border);
+  border-radius:11px;
+  background:white;
+  color:var(--dark);
+  margin:4px 2px;
+  transition:.2s;
 }
-button:hover,.primary{
- background:var(--gold);
- color:white;
+
+button:hover{
+  background:var(--gold);
+  color:white;
 }
-button:disabled{opacity:.5;cursor:wait}
+
+button:disabled{
+  opacity:.5;
+  cursor:not-allowed;
+}
+
+.primary{
+  background:var(--gold);
+  color:white;
+}
+
+.danger{
+  color:var(--red);
+}
+
 .header{
- text-align:center;
- padding:25px;
- background:white;
- border-bottom:1px solid var(--border);
+  background:white;
+  text-align:center;
+  padding:26px 12px;
+  border-bottom:1px solid var(--border);
 }
+
 .logo{
- font-size:36px;
- font-weight:bold;
- letter-spacing:5px;
- color:var(--dark);
+  font-size:36px;
+  font-weight:bold;
+  letter-spacing:6px;
+  color:var(--dark);
 }
-.header p{font-size:12px;color:#888}
+
+.header p{
+  color:#888;
+  font-size:12px;
+}
+
 nav{
- display:flex;
- flex-wrap:wrap;
- justify-content:center;
- gap:5px;
- padding:12px;
- background:white;
- position:sticky;
- top:0;
- z-index:5;
- border-bottom:1px solid var(--border);
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:5px;
+  padding:12px;
+  background:white;
+  position:sticky;
+  top:0;
+  z-index:10;
+  border-bottom:1px solid var(--border);
 }
+
 main{
- max-width:1000px;
- margin:auto;
- padding:18px;
- min-height:70vh;
+  max-width:1050px;
+  margin:auto;
+  padding:18px;
+  min-height:75vh;
 }
+
 .page{display:none}
 .page.active{display:block}
-.card,.feature,.stat{
- background:white;
- border:1px solid var(--border);
- border-radius:16px;
- padding:20px;
- margin-bottom:16px;
+
+.card,.stat,.feature{
+  background:white;
+  border:1px solid var(--border);
+  border-radius:17px;
+  padding:20px;
+  margin-bottom:17px;
+  box-shadow:0 4px 15px #00000005;
 }
+
 .hero{
- padding:30px;
- background:linear-gradient(135deg,#fff,#f3e5bd);
- border:1px solid var(--border);
- border-radius:20px;
- margin-bottom:18px;
+  background:linear-gradient(135deg,#fff,#f2e4bc);
+  border:1px solid var(--border);
+  border-radius:22px;
+  padding:30px 22px;
+  margin-bottom:18px;
 }
+
 h2,h3{color:var(--dark)}
-.muted{font-size:12px;color:#888;line-height:2}
+
+.muted{
+  font-size:12px;
+  color:#888;
+  line-height:2;
+}
+
 .grid,.stats{
- display:grid;
- grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
- gap:12px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
+  gap:12px;
 }
-.stat span{font-size:12px;color:#888}
+
+.stat span{
+  font-size:12px;
+  color:#888;
+}
+
 .stat strong{
- display:block;
- font-size:27px;
- color:var(--dark);
- margin-top:10px;
+  display:block;
+  font-size:28px;
+  color:var(--dark);
+  margin-top:12px;
 }
-label{display:block;margin:15px 0 7px;font-size:13px}
+
+label{
+  display:block;
+  margin:14px 0 7px;
+  font-size:13px;
+}
+
 input,select{
- width:100%;
- padding:13px;
- border:1px solid var(--border);
- border-radius:10px;
- background:white;
-}
-.item{
- padding:15px;
- border:1px solid var(--border);
- border-radius:12px;
- margin-top:12px;
- background:#fffdf8;
- overflow-wrap:anywhere;
-}
-.message{
- padding:12px;
- margin-top:12px;
- border-radius:10px;
- background:#f3ead4;
- line-height:2;
- overflow-wrap:anywhere;
-}
-.error{background:#fff0ef;color:#a33}
-.success{background:#edf7ef;color:#276c40}
-.ticket{
- padding:20px;
- border:2px dashed var(--gold);
- border-radius:14px;
- margin-top:15px;
- background:white;
-}
-.ticket-code{
- direction:ltr;
- text-align:center;
- font-size:23px;
- font-weight:bold;
- color:var(--dark);
- margin:20px 0;
- overflow-wrap:anywhere;
-}
-.hidden{display:none!important}
-.danger{color:var(--red)}
-.badge{
- display:inline-block;
- background:#f3ead4;
- color:var(--dark);
- padding:6px 12px;
- border-radius:20px;
- font-size:12px;
-}
-.suggested-name{
- font-size:24px;
- font-weight:bold;
- color:var(--dark);
- margin:12px 0;
-}
-footer{
- text-align:center;
- padding:20px;
- color:#888;
- background:white;
- font-size:11px;
-}
-@media(max-width:500px){
- .logo{font-size:30px}
- nav button{font-size:11px;padding:9px}
- main{padding:12px}
- .card{padding:15px}
-}
-@media print{
- body *{visibility:hidden}
- #ticketResult,#ticketResult *{visibility:visible}
- #ticketResult{
-  position:absolute;
-  top:0;
-  left:0;
   width:100%;
- }
- #ticketResult button{display:none}
+  padding:13px;
+  border:1px solid var(--border);
+  border-radius:11px;
+  background:white;
+  outline:none;
+}
+
+input:focus,select:focus{
+  border-color:var(--gold);
+  box-shadow:0 0 0 3px #c5a04a20;
+}
+
+form button{margin-top:15px}
+
+.item{
+  padding:15px;
+  border:1px solid var(--border);
+  border-radius:13px;
+  margin-top:12px;
+  background:#fffdf8;
+  overflow-wrap:anywhere;
+}
+
+.message{
+  padding:12px;
+  margin-top:12px;
+  border-radius:11px;
+  line-height:2;
+  overflow-wrap:anywhere;
+}
+
+.error{
+  background:#fff0ef;
+  color:#a33;
+}
+
+.success{
+  background:#edf7ef;
+  color:#276c40;
+}
+
+.ticket{
+  padding:20px;
+  border:2px dashed var(--gold);
+  border-radius:15px;
+  margin-top:18px;
+  background:#fffdf7;
+}
+
+.ticket-code{
+  direction:ltr;
+  text-align:center;
+  font-size:24px;
+  font-weight:bold;
+  color:var(--dark);
+  margin:20px 0;
+  overflow-wrap:anywhere;
+}
+
+.badge{
+  display:inline-block;
+  background:#f3ead4;
+  color:var(--dark);
+  padding:6px 12px;
+  border-radius:20px;
+  font-size:12px;
+}
+
+.hidden{display:none!important}
+
+.empty{
+  text-align:center;
+  padding:22px;
+  color:#888;
+  line-height:2;
+}
+
+footer{
+  text-align:center;
+  padding:22px;
+  color:#888;
+  background:white;
+  font-size:11px;
+  border-top:1px solid var(--border);
+}
+
+@media(max-width:500px){
+  .logo{font-size:29px}
+  nav button{font-size:11px;padding:9px}
+  main{padding:12px}
+  .card{padding:15px}
+  .ticket-code{font-size:19px}
+}
+
+@media print{
+  body *{visibility:hidden}
+  #ticketResult,#ticketResult *{visibility:visible}
+  #ticketResult{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+  }
+  #ticketResult button{display:none}
 }
 </style>
 </head>
@@ -187,184 +263,195 @@ footer{
 <body>
 
 <header class="header">
- <div class="logo">HOORI</div>
- <p>سامانه مدیریت و صدور بلیت</p>
+  <div class="logo">HOORI</div>
+  <p>سامانه مدیریت و صدور بلیت</p>
 </header>
 
 <nav>
- <button onclick="go('home')">خانه</button>
- <button onclick="go('hooris')">حوری‌ها</button>
- <button onclick="go('register')">ثبت بلیت</button>
- <button onclick="go('tickets')">فهرست بلیت‌ها</button>
- <button onclick="go('search')">جستجو</button>
- <button onclick="go('admin')">مدیریت</button>
+  <button type="button" data-page="home">خانه</button>
+  <button type="button" data-page="hooris">حوری‌ها</button>
+  <button type="button" data-page="register">ثبت بلیت</button>
+  <button type="button" data-page="tickets">فهرست بلیت‌ها</button>
+  <button type="button" data-page="search">جستجو</button>
+  <button type="button" data-page="admin">مدیریت</button>
 </nav>
 
 <main>
 
+<!-- خانه -->
 <section id="home" class="page active">
- <div class="hero">
-  <div class="logo">HOORI</div>
-  <h2>مدیریت، با امضای طلایی.</h2>
-  <p class="muted">سامانه مدیریت حوری‌ها و صدور بلیت</p>
-  <button class="primary" onclick="go('register')">＋ صدور بلیت</button>
-  <button onclick="go('hooris')">مشاهده حوری‌ها</button>
- </div>
 
- <div class="stats">
-  <div class="stat">
-   <span>تعداد حوری‌ها</span>
-   <strong id="homeHooriCount">۰</strong>
+  <div class="hero">
+    <div class="logo">HOORI</div>
+    <h2>مدیریت، با امضای طلایی.</h2>
+    <p class="muted">سامانه مدیریت حوری‌ها و صدور بلیت</p>
+    <button class="primary" type="button" data-page="register">
+      ＋ صدور بلیت جدید
+    </button>
+    <button type="button" data-page="hooris">
+      مشاهده حوری‌ها
+    </button>
   </div>
-  <div class="stat">
-   <span>تعداد بلیت‌ها</span>
-   <strong id="homeTicketCount">۰</strong>
-  </div>
- </div>
 
- <div class="card">
-  <h2>⭐ حوری پیشنهادی</h2>
-  <div id="suggestedHoori">در حال دریافت...</div>
- </div>
+  <div class="stats">
+    <div class="stat">
+      <span>تعداد حوری‌ها</span>
+      <strong id="homeHooriCount">—</strong>
+    </div>
+    <div class="stat">
+      <span>تعداد بلیت‌ها</span>
+      <strong id="homeTicketCount">—</strong>
+    </div>
+  </div>
 
- <div class="grid">
-  <div class="feature">
-   <h3>✦ حوری‌ها</h3>
-   <p class="muted">فهرست حوری‌ها</p>
-   <button onclick="go('hooris')">مشاهده</button>
+  <div class="card">
+    <h2>⭐ حوری پیشنهادی</h2>
+    <div id="suggestedHoori">در حال دریافت...</div>
   </div>
-  <div class="feature">
-   <h3>♢ صدور بلیت</h3>
-   <p class="muted">ثبت اطلاعات و دریافت کد</p>
-   <button onclick="go('register')">صدور بلیت</button>
-  </div>
-  <div class="feature">
-   <h3>⌕ جستجو</h3>
-   <p class="muted">جستجوی بلیت</p>
-   <button onclick="go('search')">جستجو</button>
-  </div>
- </div>
 
- <div class="card">
-  <h2>آخرین بلیت‌ها</h2>
-  <div id="recentTickets">در حال دریافت...</div>
- </div>
+  <div class="card">
+    <h2>آخرین بلیت‌ها</h2>
+    <div id="recentTickets">در حال دریافت...</div>
+  </div>
+
 </section>
 
+<!-- حوری‌ها -->
 <section id="hooris" class="page">
- <div class="card">
-  <h2>✦ فهرست حوری‌ها</h2>
-  <button onclick="loadHooris()">به‌روزرسانی</button>
-  <div id="hooriList">در حال دریافت...</div>
- </div>
+  <div class="card">
+    <h2>✦ فهرست حوری‌ها</h2>
+    <button type="button" id="refreshHooris">به‌روزرسانی</button>
+    <div id="hooriList">در حال دریافت...</div>
+  </div>
 </section>
 
+<!-- ثبت بلیت -->
 <section id="register" class="page">
- <div class="card">
-  <h2>صدور بلیت جدید</h2>
-  <div id="registerMsg"></div>
+  <div class="card">
+    <h2>🎟️ صدور بلیت جدید</h2>
+    <div id="registerMsg"></div>
 
-  <form id="registerForm">
-   <label for="firstName">نام</label>
-   <input id="firstName" maxlength="80" required>
+    <form id="registerForm">
+      <label for="firstName">نام</label>
+      <input id="firstName" maxlength="80" required>
 
-   <label for="lastName">نام خانوادگی</label>
-   <input id="lastName" maxlength="80" required>
+      <label for="lastName">نام خانوادگی</label>
+      <input id="lastName" maxlength="80" required>
 
-   <label for="hooriSelect">انتخاب حوری</label>
-   <select id="hooriSelect" required>
-    <option value="">در حال دریافت...</option>
-   </select>
+      <label for="hooriSelect">انتخاب حوری</label>
+      <select id="hooriSelect" required>
+        <option value="">در حال دریافت...</option>
+      </select>
 
-   <button class="primary" type="submit">ثبت و صدور بلیت</button>
-  </form>
+      <button class="primary" type="submit">ثبت و صدور بلیت</button>
+    </form>
 
-  <div id="ticketResult"></div>
- </div>
+    <div id="ticketResult"></div>
+  </div>
 </section>
 
+<!-- فهرست بلیت‌ها -->
 <section id="tickets" class="page">
- <div class="card">
-  <h2>فهرست بلیت‌ها</h2>
-  <button onclick="loadTickets()">به‌روزرسانی</button>
-  <div id="publicTickets">در حال دریافت...</div>
- </div>
+  <div class="card">
+    <h2>فهرست بلیت‌ها</h2>
+    <button type="button" id="refreshTickets">به‌روزرسانی</button>
+    <div id="publicTickets">در حال دریافت...</div>
+  </div>
 </section>
 
+<!-- جستجو -->
 <section id="search" class="page">
- <div class="card">
-  <h2>⌕ جستجوی بلیت</h2>
-  <form id="searchForm">
-   <label for="searchText">کد بلیت</label>
-   <input id="searchText" required placeholder="کد بلیت را وارد کن">
-   <button class="primary" type="submit">جستجو</button>
-  </form>
-  <div id="searchResult"></div>
- </div>
+  <div class="card">
+    <h2>⌕ جستجوی بلیت</h2>
+
+    <form id="searchForm">
+      <label for="searchText">کد بلیت</label>
+      <input id="searchText" required placeholder="کد بلیت را وارد کن">
+      <button class="primary" type="submit">جستجو</button>
+    </form>
+
+    <div id="searchResult"></div>
+  </div>
 </section>
 
+<!-- مدیریت -->
 <section id="admin" class="page">
- <div id="loginBox" class="card">
-  <h2>ورود مدیریت</h2>
-  <p class="muted">رمز مدیریت را وارد کن.</p>
-  <form id="loginForm">
-   <label for="password">رمز مدیریت</label>
-   <input id="password" type="password" required>
-   <button class="primary" type="submit">ورود</button>
-  </form>
-  <div id="loginMsg"></div>
- </div>
 
- <div id="adminPanel" class="hidden">
-  <div class="card">
-   <h2>پنل مدیریت HOORI</h2>
-   <div class="stats">
-    <div class="stat">
-     <span>حوری‌ها</span>
-     <strong id="adminHooriCount">۰</strong>
+  <div id="loginBox" class="card">
+    <h2>🔐 ورود مدیریت</h2>
+    <p class="muted">رمز مدیریت را وارد کن.</p>
+
+    <form id="loginForm">
+      <label for="password">رمز مدیریت</label>
+      <input id="password" type="password" required>
+      <button class="primary" type="submit">ورود</button>
+    </form>
+
+    <div id="loginMsg"></div>
+  </div>
+
+  <div id="adminPanel" class="hidden">
+
+    <div class="card">
+      <h2>پنل مدیریت HOORI</h2>
+
+      <div class="stats">
+        <div class="stat">
+          <span>تعداد حوری‌ها</span>
+          <strong id="adminHooriCount">—</strong>
+        </div>
+        <div class="stat">
+          <span>تعداد بلیت‌ها</span>
+          <strong id="adminTicketCount">—</strong>
+        </div>
+      </div>
+
+      <button type="button" id="adminRefresh">به‌روزرسانی</button>
+      <button type="button" id="logoutBtn">خروج</button>
     </div>
-    <div class="stat">
-     <span>بلیت‌ها</span>
-     <strong id="adminTicketCount">۰</strong>
+
+    <div class="card">
+      <h2>＋ افزودن حوری</h2>
+
+      <form id="addHooriForm">
+        <label for="newHoori">نام حوری</label>
+        <input id="newHoori" maxlength="100" required>
+        <button class="primary" type="submit">افزودن حوری</button>
+      </form>
+
+      <div id="addHooriMsg"></div>
     </div>
-   </div>
-   <button onclick="refreshAll()">به‌روزرسانی</button>
-   <button onclick="logout()">خروج</button>
-  </div>
 
-  <div class="card">
-   <h2>＋ افزودن حوری</h2>
-   <form id="addHooriForm">
-    <label for="newHoori">نام حوری</label>
-    <input id="newHoori" maxlength="100" required>
-    <button class="primary" type="submit">افزودن حوری</button>
-   </form>
-   <div id="addHooriMsg"></div>
-  </div>
+    <div class="card">
+      <h2>⭐ انتخاب حوری پیشنهادی</h2>
 
-  <div class="card">
-   <h2>⭐ حوری پیشنهادی</h2>
-   <label for="suggestedSelect">انتخاب حوری</label>
-   <select id="suggestedSelect">
-    <option value="">انتخاب حوری</option>
-   </select>
-   <button class="primary" type="button" id="saveSuggestedBtn">
-    ثبت حوری پیشنهادی
-   </button>
-   <button type="button" id="clearSuggestedBtn">لغو پیشنهاد</button>
-   <div id="suggestedMsg"></div>
-  </div>
+      <label for="suggestedSelect">حوری موردنظر</label>
+      <select id="suggestedSelect">
+        <option value="">انتخاب کن</option>
+      </select>
 
-  <div class="card">
-   <h2>مدیریت حوری‌ها</h2>
-   <div id="adminHooris"></div>
-  </div>
+      <button class="primary" type="button" id="saveSuggestedBtn">
+        ثبت حوری پیشنهادی
+      </button>
 
-  <div class="card">
-   <h2>مدیریت بلیت‌ها</h2>
-   <div id="adminTickets"></div>
+      <button type="button" id="clearSuggestedBtn">
+        لغو حوری پیشنهادی
+      </button>
+
+      <div id="suggestedMsg"></div>
+    </div>
+
+    <div class="card">
+      <h2>مدیریت حوری‌ها</h2>
+      <div id="adminHooris">در حال دریافت...</div>
+    </div>
+
+    <div class="card">
+      <h2>مدیریت بلیت‌ها</h2>
+      <div id="adminTickets">در حال دریافت...</div>
+    </div>
+
   </div>
- </div>
 </section>
 
 </main>
@@ -374,475 +461,459 @@ footer{
 <script>
 "use strict";
 
-const SUPABASE_URL="https://mttcthmicgnryolaxxdy.supabase.co";
-const SUPABASE_KEY="sb_publishable_P6QG6ILA-DN1_GpHwGnz2w_mn5DPwT7";
+/* اتصال به دیتابیس */
+const SUPABASE_URL =
+  "https://mttcthmicgnryolaxxdy.supabase.co";
 
-const $=id=>document.getElementById(id);
-const db=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+const SUPABASE_KEY =
+  "sb_publishable_P6QG6ILA-DN1_GpHwGnz2w_mn5DPwT7";
 
-let admin=false;
-let hooris=[];
-let tickets=[];
-let suggestedHooriId=null;
+const db = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
 
-function escapeHTML(value){
- return String(value??"").replace(/[&<>"']/g,ch=>({
-  "&":"&amp;","<":"&lt;",">":"&gt;",
-  '"':"&quot;","'":"&#39;"
- })[ch]);
+const $ = id => document.getElementById(id);
+
+let hooris = [];
+let tickets = [];
+let admin = false;
+let suggestedId = null;
+
+/* ابزارهای عمومی */
+
+function esc(value) {
+  return String(value ?? "").replace(/[&<>"']/g, ch => ({
+    "&":"&amp;",
+    "<":"&lt;",
+    ">":"&gt;",
+    '"':"&quot;",
+    "'":"&#39;"
+  })[ch]);
 }
 
-function message(id,text,type=""){
- const el=$(id);
- if(!el)return;
- el.className="message "+type;
- el.textContent=text;
+function showMessage(id, message, type = "error") {
+  const el = $(id);
+  if (!el) return;
+
+  el.innerHTML =
+    '<div class="message ' + type + '">' +
+    esc(message) +
+    '</div>';
 }
 
-function go(page){
- const target=$(page);
- if(!target)return;
-
- document.querySelectorAll(".page").forEach(p=>{
-  p.classList.remove("active");
- });
- target.classList.add("active");
-
- if(page==="hooris")loadHooris();
- if(page==="tickets")loadTickets();
- if(page==="admin"&&admin)refreshAll();
-
- window.scrollTo({top:0,behavior:"smooth"});
+function clearMessage(id) {
+  if ($(id)) $(id).innerHTML = "";
 }
 
-function makeTicketCode(){
- const d=new Date();
- const stamp=
-  d.getFullYear().toString().slice(-2)+
-  String(d.getMonth()+1).padStart(2,"0")+
-  String(d.getDate()).padStart(2,"0");
- const random=Math.random().toString(36).slice(2,8).toUpperCase();
- return "HO-"+stamp+"-"+random;
+function errorText(error) {
+  return error?.message || "خطای نامشخص رخ داد.";
 }
 
-function renderHooriOptions(){
- const select=$("hooriSelect");
- const suggested=$("suggestedSelect");
- const oldValue=select.value;
-
- select.innerHTML='<option value="">انتخاب حوری</option>';
- suggested.innerHTML='<option value="">انتخاب حوری</option>';
-
- hooris.forEach(h=>{
-  const a=document.createElement("option");
-  a.value=h.id;
-  a.textContent=h.name;
-  select.appendChild(a);
-
-  const b=document.createElement("option");
-  b.value=h.id;
-  b.textContent=h.name;
-  suggested.appendChild(b);
- });
-
- if(hooris.some(h=>String(h.id)===String(oldValue))){
-  select.value=oldValue;
- }
-
- if(suggestedHooriId!==null){
-  suggested.value=String(suggestedHooriId);
- }
+function showError(id, error) {
+  console.error(error);
+  showMessage(id, "خطا: " + errorText(error), "error");
 }
 
-async function loadHooris(){
- $("hooriList").textContent="در حال دریافت...";
+function go(page) {
+  document.querySelectorAll(".page").forEach(section => {
+    section.classList.toggle("active", section.id === page);
+  });
 
- try{
-  const {data,error}=await db
-   .from("hooris")
-   .select("id,name")
-   .order("id",{ascending:true});
+  window.scrollTo({ top: 0, behavior: "smooth" });
 
-  if(error)throw error;
-
-  hooris=data||[];
-
-  $("homeHooriCount").textContent=hooris.length;
-  $("adminHooriCount").textContent=hooris.length;
-
-  $("hooriList").innerHTML=hooris.length
-   ?hooris.map(h=>`
-     <div class="item">
-      <strong>${escapeHTML(h.name)}</strong>
-     </div>`).join("")
-   :'<div class="message">هنوز حوری‌ای ثبت نشده است.</div>';
-
-  renderHooriOptions();
-  renderAdminHooris();
-  await loadSuggestedHoori();
-
- }catch(error){
-  $("hooriList").innerHTML=
-   '<div class="message error">خطا در دریافت حوری‌ها: '+
-   escapeHTML(error.message)+'</div>';
- }
+  if (page === "home") refreshAll();
+  if (page === "hooris") loadHooris();
+  if (page === "tickets") loadTickets();
+  if (page === "admin" && admin) loadAdmin();
 }
 
-async function loadSuggestedHoori(){
- const home=$("suggestedHoori");
-
- try{
-  const {data,error}=await db
-   .from("hoori_settings")
-   .select("suggested_hoori_id")
-   .eq("id",1)
-   .maybeSingle();
-
-  if(error)throw error;
-
-  suggestedHooriId=data?.suggested_hoori_id??null;
-
-  if(suggestedHooriId===null){
-   home.innerHTML='<div class="message">هنوز حوری پیشنهادی انتخاب نشده است.</div>';
-   $("suggestedSelect").value="";
-   return;
-  }
-
-  const selected=hooris.find(
-   h=>String(h.id)===String(suggestedHooriId)
-  );
-
-  if(!selected){
-   home.innerHTML='<div class="message">حوری پیشنهادی در فهرست نیست.</div>';
-   return;
-  }
-
-  home.innerHTML=`
-   <div class="item">
-    <span class="badge">⭐ انتخاب مدیریت</span>
-    <div class="suggested-name">${escapeHTML(selected.name)}</div>
-    <button class="primary" onclick="go('register')">صدور بلیت</button>
-   </div>`;
-
-  $("suggestedSelect").value=String(selected.id);
-
- }catch(error){
-  home.innerHTML='<div class="message error">خطای تنظیمات: '+
-   escapeHTML(error.message)+'</div>';
- }
-}
-
-async function saveSuggested(){
- if(!admin)return message("suggestedMsg","ابتدا وارد مدیریت شو.","error");
-
- const id=$("suggestedSelect").value;
- const selected=hooris.find(h=>String(h.id)===String(id));
-
- if(!selected){
-  return message("suggestedMsg","یک حوری انتخاب کن.","error");
- }
-
- const button=$("saveSuggestedBtn");
- button.disabled=true;
-
- try{
-  const {data,error}=await db
-   .from("hoori_settings")
-   .update({suggested_hoori_id:selected.id})
-   .eq("id",1)
-   .select("id");
-
-  if(error)throw error;
-  if(!data?.length)throw new Error("ردیف تنظیمات پیدا نشد.");
-
-  suggestedHooriId=selected.id;
-  await loadSuggestedHoori();
-  message("suggestedMsg","حوری پیشنهادی ثبت شد.","success");
-
- }catch(error){
-  message("suggestedMsg","خطا: "+error.message,"error");
- }finally{
-  button.disabled=false;
- }
-}
-
-async function clearSuggested(){
- if(!admin)return message("suggestedMsg","ابتدا وارد مدیریت شو.","error");
-
- const button=$("clearSuggestedBtn");
- button.disabled=true;
-
- try{
-  const {data,error}=await db
-   .from("hoori_settings")
-   .update({suggested_hoori_id:null})
-   .eq("id",1)
-   .select("id");
-
-  if(error)throw error;
-  if(!data?.length)throw new Error("ردیف تنظیمات پیدا نشد.");
-
-  suggestedHooriId=null;
-  $("suggestedSelect").value="";
-  await loadSuggestedHoori();
-  message("suggestedMsg","حوری پیشنهادی لغو شد.","success");
-
- }catch(error){
-  message("suggestedMsg","خطا: "+error.message,"error");
- }finally{
-  button.disabled=false;
- }
-}
-
-function renderAdminHooris(){
- if(!admin)return;
-
- $("adminHooris").innerHTML=hooris.length
-  ?hooris.map(h=>`
-   <div class="item">
-    <strong>${escapeHTML(h.name)}</strong>
-    <button class="danger" onclick="deleteHoori('${String(h.id)}')">حذف</button>
-   </div>`).join("")
-  :'<div class="message">حوری‌ای وجود ندارد.</div>';
-}
-
-async function addHoori(event){
- event.preventDefault();
- if(!admin)return;
-
- const name=$("newHoori").value.trim();
- if(!name)return;
-
- const button=this.querySelector('button[type="submit"]');
- button.disabled=true;
-
- try{
-  const {error}=await db.from("hooris").insert({name});
-  if(error)throw error;
-
-  $("newHoori").value="";
-  message("addHooriMsg","حوری اضافه شد.","success");
-  await loadHooris();
-
- }catch(error){
-  message("addHooriMsg","خطا در افزودن: "+error.message,"error");
- }finally{
-  button.disabled=false;
- }
-}
-
-async function deleteHoori(id){
- if(!admin)return;
-
- const h=hooris.find(x=>String(x.id)===String(id));
- if(!h||!confirm("حوری «"+h.name+"» حذف شود؟"))return;
-
- try{
-  if(String(suggestedHooriId)===String(id)){
-   const {error}=await db.from("hoori_settings")
-    .update({suggested_hoori_id:null}).eq("id",1);
-   if(error)throw error;
-  }
-
-  const {error}=await db.from("hooris").delete().eq("id",id);
-  if(error)throw error;
-
-  await loadHooris();
-  alert("حوری حذف شد.");
-
- }catch(error){
-  alert("حذف ناموفق بود: "+error.message);
- }
-}
-
-function ticketCard(t){
- return `<div class="item">
-  <strong>${escapeHTML(t.ticket_code)}</strong>
-  <p>حوری: ${escapeHTML(t.hoori_name)}</p>
-  <p class="muted">تاریخ: ${escapeHTML(t.issue_date||"—")}</p>
- </div>`;
-}
-
-async function loadTickets(){
- $("publicTickets").textContent="در حال دریافت...";
- $("recentTickets").textContent="در حال دریافت...";
-
- try{
-  const {data,error}=await db
-   .from("hoori_tickets")
-   .select("id,ticket_code,hoori_name,issue_date,created_at")
-   .order("created_at",{ascending:false});
-
-  if(error)throw error;
-
-  tickets=data||[];
-  $("homeTicketCount").textContent=tickets.length;
-  $("adminTicketCount").textContent=tickets.length;
-
-  $("publicTickets").innerHTML=tickets.length
-   ?tickets.map(ticketCard).join("")
-   :'<div class="message">هنوز بلیتی ثبت نشده است.</div>';
-
-  $("recentTickets").innerHTML=tickets.length
-   ?tickets.slice(0,5).map(ticketCard).join("")
-   :'<div class="message">هنوز بلیتی ثبت نشده است.</div>';
-
-  if(admin){
-   $("adminTickets").innerHTML=tickets.length
-    ?tickets.map(t=>`
-      <div class="item">
-       <strong>${escapeHTML(t.ticket_code)}</strong>
-       <p>حوری: ${escapeHTML(t.hoori_name)}</p>
-       <p class="muted">تاریخ: ${escapeHTML(t.issue_date||"—")}</p>
-       <button class="danger" onclick="deleteTicket('${String(t.id)}')">حذف بلیت</button>
-      </div>`).join("")
-    :'<div class="message">بلیتی وجود ندارد.</div>';
-  }
-
- }catch(error){
-  $("publicTickets").innerHTML='<div class="message error">خطا: '+
-   escapeHTML(error.message)+'</div>';
-  $("recentTickets").textContent="دریافت بلیت‌ها ناموفق بود.";
- }
-}
-
-async function registerTicket(event){
- event.preventDefault();
-
- const firstName=$("firstName").value.trim();
- const lastName=$("lastName").value.trim();
- const id=$("hooriSelect").value;
- const selected=hooris.find(h=>String(h.id)===String(id));
-
- if(!selected){
-  return message("registerMsg","یک حوری انتخاب کن.","error");
- }
-
- const button=this.querySelector('button[type="submit"]');
- button.disabled=true;
- message("registerMsg","در حال ثبت بلیت...");
-
- try{
-  const payload={
-   first_name:firstName,
-   last_name:lastName,
-   ticket_code:makeTicketCode(),
-   hoori_name:selected.name,
-   issue_date:new Date().toISOString().slice(0,10)
-  };
-
-  const {data,error}=await db
-   .from("hoori_tickets")
-   .insert(payload)
-   .select("id,ticket_code,hoori_name,issue_date")
-   .single();
-
-  if(error)throw error;
-
-  $("ticketResult").innerHTML=`
-   <div class="ticket">
-    <span class="badge">بلیت صادر شد</span>
-    <h2>HOORI</h2>
-    <p>نام: ${escapeHTML(firstName)} ${escapeHTML(lastName)}</p>
-    <p>حوری: ${escapeHTML(data.hoori_name)}</p>
-    <div class="ticket-code">${escapeHTML(data.ticket_code)}</div>
-    <p class="muted">تاریخ: ${escapeHTML(data.issue_date||"")}</p>
-    <button class="primary" onclick="window.print()">چاپ بلیت</button>
-   </div>`;
-
-  message("registerMsg","بلیت با موفقیت ثبت شد.","success");
-  this.reset();
-  await loadTickets();
-
- }catch(error){
-  message("registerMsg","ثبت ناموفق بود: "+error.message,"error");
- }finally{
-  button.disabled=false;
- }
-}
-
-async function searchTicket(event){
- event.preventDefault();
-
- const code=$("searchText").value.trim();
- $("searchResult").innerHTML='<div class="message">در حال جستجو...</div>';
-
- try{
-  const {data,error}=await db
-   .from("hoori_tickets")
-   .select("ticket_code,hoori_name,issue_date")
-   .eq("ticket_code",code)
-   .maybeSingle();
-
-  if(error)throw error;
-
-  if(!data){
-   $("searchResult").innerHTML='<div class="message error">بلیت پیدا نشد.</div>';
-   return;
-  }
-
-  $("searchResult").innerHTML=`
-   <div class="ticket">
-    <h2>نتیجه جستجو</h2>
-    <div class="ticket-code">${escapeHTML(data.ticket_code)}</div>
-    <p>حوری: ${escapeHTML(data.hoori_name)}</p>
-    <p>تاریخ: ${escapeHTML(data.issue_date||"—")}</p>
-   </div>`;
-
- }catch(error){
-  $("searchResult").innerHTML='<div class="message error">خطا: '+
-   escapeHTML(error.message)+'</div>';
- }
-}
-
-async function deleteTicket(id){
- if(!admin||!confirm("این بلیت حذف شود؟"))return;
-
- try{
-  const {error}=await db.from("hoori_tickets").delete().eq("id",id);
-  if(error)throw error;
-
-  await loadTickets();
-  alert("بلیت حذف شد.");
-
- }catch(error){
-  alert("حذف ناموفق بود: "+error.message);
- }
-}
-
-$("loginForm").addEventListener("submit",async function(event){
- event.preventDefault();
-
- if($("password").value!=="Hoori1405"){
-  return message("loginMsg","رمز مدیریت اشتباه است.","error");
- }
-
- admin=true;
- $("loginBox").classList.add("hidden");
- $("adminPanel").classList.remove("hidden");
- $("password").value="";
- message("loginMsg","");
-
- await refreshAll();
+/* دکمه‌های تغییر صفحه */
+document.querySelectorAll("[data-page]").forEach(button => {
+  button.addEventListener("click", () => {
+    go(button.dataset.page);
+  });
 });
 
-function logout(){
- admin=false;
- $("adminPanel").classList.add("hidden");
- $("loginBox").classList.remove("hidden");
- $("password").value="";
- go("home");
+/* بارگذاری حوری‌ها */
+
+async function loadHooris() {
+  $("hooriList").textContent = "در حال دریافت...";
+  $("hooriSelect").innerHTML =
+    '<option value="">در حال دریافت...</option>';
+
+  try {
+    const { data, error } = await db
+      .from("hooris")
+      .select("id,name")
+      .order("name");
+
+    if (error) throw error;
+
+    hooris = data || [];
+
+    $("homeHooriCount").textContent = hooris.length;
+    $("adminHooriCount").textContent = hooris.length;
+
+    if (hooris.length === 0) {
+      $("hooriList").innerHTML =
+        '<div class="empty">هنوز حوری‌ای ثبت نشده است.</div>';
+    } else {
+      $("hooriList").innerHTML = hooris.map(h => `
+        <div class="item">
+          <strong>${esc(h.name)}</strong>
+        </div>
+      `).join("");
+    }
+
+    $("hooriSelect").innerHTML =
+      '<option value="">یک حوری انتخاب کن</option>' +
+      hooris.map(h =>
+        `<option value="${esc(h.id)}">${esc(h.name)}</option>`
+      ).join("");
+
+    $("suggestedSelect").innerHTML =
+      '<option value="">انتخاب حوری پیشنهادی</option>' +
+      hooris.map(h =>
+        `<option value="${esc(h.id)}">${esc(h.name)}</option>`
+      ).join("");
+
+    if (suggestedId !== null) {
+      $("suggestedSelect").value = String(suggestedId);
+    }
+
+    renderAdminHooris();
+
+    await loadSuggested();
+
+  } catch (error) {
+    $("hooriList").innerHTML =
+      '<div class="message error">دریافت حوری‌ها ناموفق بود: ' +
+      esc(errorText(error)) + '</div>';
+
+    $("hooriSelect").innerHTML =
+      '<option value="">خطا در دریافت فهرست</option>';
+
+    $("suggestedSelect").innerHTML =
+      '<option value="">خطا در دریافت فهرست</option>';
+
+    showError("suggestedHoori", error);
+  }
 }
 
-async function refreshAll(){
- await loadHooris();
- await loadTickets();
+/* نمایش حوری‌های پنل مدیریت */
+
+function renderAdminHooris() {
+  if (!admin) return;
+
+  if (!hooris.length) {
+    $("adminHooris").innerHTML =
+      '<div class="empty">فهرست حوری‌ها خالی است.</div>';
+    return;
+  }
+
+  $("adminHooris").innerHTML = hooris.map(h => `
+    <div class="item">
+      <strong>${esc(h.name)}</strong>
+      <br>
+      <button class="danger" type="button"
+        data-delete-hoori="${esc(h.id)}">
+        حذف حوری
+      </button>
+    </div>
+  `).join("");
 }
 
-$("addHooriForm").addEventListener("submit",addHoori);
-$("registerForm").addEventListener("submit",registerTicket);
-$("searchForm").addEventListener("submit",searchTicket);
-$("saveSuggestedBtn").addEventListener("click",saveSuggested);
-$("clearSuggestedBtn").addEventListener("click",clearSuggested);
+/* دریافت حوری پیشنهادی */
 
-/* راه‌اندازی سایت *
+async function loadSuggested() {
+  try {
+    const { data, error } = await db
+      .from("hoori_settings")
+      .select("id,suggested_hoori_id")
+      .eq("id", 1)
+      .maybeSingle();
+
+    if (error) throw error;
+
+    suggestedId = data?.suggested_hoori_id ?? null;
+
+    if (suggestedId !== null) {
+      $("suggestedSelect").value = String(suggestedId);
+    }
+
+    const found = hooris.find(
+      h => String(h.id) === String(suggestedId)
+    );
+
+    if (found) {
+      $("suggestedHoori").innerHTML = `
+        <div class="item">
+          <span class="badge">⭐ حوری منتخب</span>
+          <div class="suggested-name">${esc(found.name)}</div>
+        </div>
+      `;
+    } else {
+      $("suggestedHoori").innerHTML =
+        '<div class="empty">هنوز حوری پیشنهادی انتخاب نشده است.</div>';
+    }
+
+  } catch (error) {
+    $("suggestedHoori").innerHTML =
+      '<div class="message error">دریافت حوری پیشنهادی ناموفق بود: ' +
+      esc(errorText(error)) + '</div>';
+
+    console.error(error);
+  }
+}
+
+/* دریافت بلیت‌ها */
+
+async function loadTickets() {
+  $("publicTickets").textContent = "در حال دریافت...";
+  $("recentTickets").textContent = "در حال دریافت...";
+
+  try {
+    const { data, error } = await db
+      .from("hoori_tickets")
+      .select("id,ticket_code,hoori_name,issue_date,created_at,first_name,last_name")
+      .order("created_at", { ascending: false })
+      .limit(100);
+
+    if (error) throw error;
+
+    tickets = data || [];
+
+    $("homeTicketCount").textContent = tickets.length;
+    $("adminTicketCount").textContent = tickets.length;
+
+    renderPublicTickets();
+    renderRecentTickets();
+
+    if (admin) renderAdminTickets();
+
+  } catch (error) {
+    const message =
+      "دریافت بلیت‌ها ناموفق بود: " + errorText(error);
+
+    $("publicTickets").innerHTML =
+      '<div class="message error">' + esc(message) + '</div>';
+
+    $("recentTickets").innerHTML =
+      '<div class="message error">' + esc(message) + '</div>';
+
+    console.error(error);
+  }
+}
+
+function renderPublicTickets() {
+  if (!tickets.length) {
+    $("publicTickets").innerHTML =
+      '<div class="empty">هنوز بلیتی ثبت نشده است.</div>';
+    return;
+  }
+
+  $("publicTickets").innerHTML = tickets.map(t => `
+    <div class="item">
+      <strong>کد بلیت: ${esc(t.ticket_code)}</strong>
+      <br>
+      <span>حوری: ${esc(t.hoori_name)}</span>
+      <br>
+      <span class="muted">تاریخ: ${esc(t.issue_date || "")}</span>
+    </div>
+  `).join("");
+}
+
+function renderRecentTickets() {
+  const recent = tickets.slice(0, 5);
+
+  if (!recent.length) {
+    $("recentTickets").innerHTML =
+      '<div class="empty">هنوز بلیتی ثبت نشده است.</div>';
+    return;
+  }
+
+  $("recentTickets").innerHTML = recent.map(t => `
+    <div class="item">
+      <strong>${esc(t.ticket_code)}</strong>
+      <br>
+      <span>حوری: ${esc(t.hoori_name)}</span>
+    </div>
+  `).join("");
+}
+
+function renderAdminTickets() {
+  if (!admin) return;
+
+  if (!tickets.length) {
+    $("adminTickets").innerHTML =
+      '<div class="empty">هنوز بلیتی ثبت نشده است.</div>';
+    return;
+  }
+
+  $("adminTickets").innerHTML = tickets.map(t => `
+    <div class="item">
+      <strong>کد: ${esc(t.ticket_code)}</strong>
+      <br>
+      نام: ${esc(t.first_name || "—")}
+      ${esc(t.last_name || "")}
+      <br>
+      حوری: ${esc(t.hoori_name)}
+      <br>
+      <button class="danger" type="button"
+        data-delete-ticket="${esc(t.id)}">
+        حذف بلیت
+      </button>
+    </div>
+  `).join("");
+}
+
+/* صدور بلیت */
+
+function makeTicketCode() {
+  const random = Math.random().toString(36).slice(2, 8).toUpperCase();
+  return "HR-" + Date.now().toString().slice(-7) + "-" + random;
+}
+
+$("registerForm").addEventListener("submit", async event => {
+  event.preventDefault();
+  clearMessage("registerMsg");
+  $("ticketResult").innerHTML = "";
+
+  const firstName = $("firstName").value.trim();
+  const lastName = $("lastName").value.trim();
+  const selectedId = $("hooriSelect").value;
+
+  const selected = hooris.find(
+    h => String(h.id) === String(selectedId)
+  );
+
+  if (!firstName || !lastName || !selected) {
+    showMessage("registerMsg", "همه اطلاعات را درست وارد کن.");
+    return;
+  }
+
+  const button = event.submitter;
+  if (button) button.disabled = true;
+
+  try {
+    const ticketCode = makeTicketCode();
+
+    const ticket = {
+      ticket_code: ticketCode,
+      hoori_name: selected.name,
+      issue_date: new Date().toISOString().slice(0, 10),
+      first_name: firstName,
+      last_name: lastName
+    };
+
+    let result = await db
+      .from("hoori_tickets")
+      .insert(ticket)
+      .select("id,ticket_code,hoori_name,issue_date")
+      .single();
+
+    /*
+      اگر ستون نام یا نام خانوادگی هنوز در جدول وجود نداشته باشد،
+      یک بار دیگر با ستون‌های اصلی جدول امتحان می‌کنیم.
+    */
+    if (
+      result.error &&
+      /first_name|last_name|column/i.test(result.error.message || "")
+    ) {
+      result = await db
+        .from("hoori_tickets")
+        .insert({
+          ticket_code: ticketCode,
+          hoori_name: selected.name,
+          issue_date: ticket.issue_date
+        })
+        .select("id,ticket_code,hoori_name,issue_date")
+        .single();
+    }
+
+    if (result.error) throw result.error;
+
+    const saved = result.data;
+
+    $("ticketResult").innerHTML = `
+      <div class="ticket">
+        <span class="badge">بلیت صادر شد</span>
+        <h2>HOORI</h2>
+        <p>نام: ${esc(firstName)} ${esc(lastName)}</p>
+        <p>حوری: ${esc(selected.name)}</p>
+        <div class="ticket-code">${esc(saved.ticket_code)}</div>
+        <p>تاریخ: ${esc(saved.issue_date || ticket.issue_date)}</p>
+        <button type="button" id="printTicket">چاپ بلیت</button>
+      </div>
+    `;
+
+    $("printTicket").addEventListener("click", () => window.print());
+
+    $("registerForm").reset();
+    showMessage("registerMsg", "بلیت با موفقیت ثبت شد.", "success");
+
+    await loadTickets();
+
+  } catch (error) {
+    showError("registerMsg", error);
+  } finally {
+    if (button) button.disabled = false;
+  }
+});
+
+/* جستجوی بلیت */
+
+$("searchForm").addEventListener("submit", async event => {
+  event.preventDefault();
+  clearMessage("searchResult");
+
+  const code = $("searchText").value.trim();
+
+  if (!code) {
+    showMessage("searchResult", "کد بلیت را وارد کن.");
+    return;
+  }
+
+  $("searchResult").textContent = "در حال جستجو...";
+
+  try {
+    const { data, error } = await db
+      .from("hoori_tickets")
+      .select("ticket_code,hoori_name,issue_date,first_name,last_name")
+      .eq("ticket_code", code)
+      .maybeSingle();
+
+    if (error) throw error;
+
+    if (!data) {
+      $("searchResult").innerHTML =
+        '<div class="message error">بلیتی با این کد پیدا نشد.</div>';
+      return;
+    }
+
+    $("searchResult").innerHTML = `
+      <div class="ticket">
+        <span class="badge">بلیت پیدا شد</span>
+        <h2>HOORI</h2>
+        <p>نام: ${esc(data.first_name || "—")}
+        ${esc(data.last_name || "")}</p>
+        <p>حوری: ${esc(data.hoori_name)}</p>
+        <div class="ticket-code">${esc(data.ticket_code)}</div>
+        <p>تاریخ: ${esc(data.issue_date || "")}</p>
+      </div>
+    `;
+
+  } catch (error) {
+    showError("searchResult", error);
+  }
+});
+
+/* ورود مدیریت */
+
+$("loginForm").addEventListener("submit", async event => {
+  event.preventDefault();
+
+  /*
+    این رمز صرفاً برای کنترل ظاهری پنل است.
+    برای سایت عمومی، احراز هوی
