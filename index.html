@@ -7,200 +7,193 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
-:root{
-  --black:#101010;
-  --dark:#191919;
-  --gold:#d4af37;
-  --white:#ffffff;
-  --gray:#777;
-  --border:#e8dfc8;
-  --red:#c62828;
+:root {
+  --gold: #c9a54b;
+  --gold-light: #f3dfaa;
+  --dark: #111111;
+  --white: #ffffff;
+  --gray: #f5f5f5;
 }
-*{box-sizing:border-box}
-body{
-  margin:0;
-  font-family:Tahoma,Arial,sans-serif;
-  background:var(--black);
-  color:white;
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: Tahoma, Arial, sans-serif;
+  background: var(--dark);
+  color: white;
 }
-button,input,select{font:inherit}
-button{cursor:pointer}
-header{
-  padding:32px 15px;
-  text-align:center;
-  background:linear-gradient(135deg,#222,#090909);
-  border-bottom:2px solid var(--gold);
+header {
+  padding: 35px 15px;
+  text-align: center;
+  border-bottom: 2px solid var(--gold);
+  background: linear-gradient(135deg, #29231a, #080808);
 }
-.logo{
-  font-size:38px;
-  font-weight:bold;
-  letter-spacing:3px;
-  color:var(--gold);
+.logo {
+  color: var(--gold-light);
+  font-size: 38px;
+  font-weight: bold;
+  letter-spacing: 3px;
 }
-header p{color:#ccc}
-nav{
-  display:flex;
-  justify-content:center;
-  flex-wrap:wrap;
-  gap:9px;
-  padding:14px;
-  background:#151515;
-  position:sticky;
-  top:0;
-  z-index:5;
+nav {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 14px;
+  background: #191919;
+  position: sticky;
+  top: 0;
+  z-index: 10;
 }
-button{
-  padding:11px 16px;
-  border-radius:10px;
-  border:1px solid var(--gold);
-  background:transparent;
-  color:var(--gold);
-  transition:.2s;
+button {
+  padding: 12px 16px;
+  border-radius: 9px;
+  border: 1px solid var(--gold);
+  background: transparent;
+  color: var(--gold-light);
+  font-family: inherit;
+  cursor: pointer;
 }
-button:hover{
-  background:var(--gold);
-  color:#111;
+button:hover {
+  background: var(--gold);
+  color: #111;
 }
-button:disabled{opacity:.5;cursor:wait}
-main{
-  max-width:1050px;
-  min-height:65vh;
-  margin:auto;
-  padding:20px 14px;
+main {
+  max-width: 1000px;
+  min-height: 65vh;
+  margin: auto;
+  padding: 18px;
 }
-.page{display:none}
-.page.active{display:block}
-.card{
-  padding:22px;
-  margin-bottom:18px;
-  border:1px solid #333;
-  border-radius:17px;
-  background:var(--dark);
+.page { display: none; }
+.page.active { display: block; }
+.card {
+  background: #1b1b1b;
+  border: 1px solid #38332a;
+  border-radius: 16px;
+  padding: 22px;
+  margin-bottom: 18px;
 }
-.hero{
-  text-align:center;
-  padding:55px 15px;
-  background:radial-gradient(ellipse at top,#3b3020,#191919 70%);
+.hero {
+  padding: 55px 18px;
+  text-align: center;
+  background: radial-gradient(ellipse at top, #40351f, #191919 70%);
 }
-.hero h1{font-size:clamp(27px,5vw,42px);color:var(--gold)}
-h2,h3{color:var(--gold)}
-.muted{color:#aaa;line-height:2}
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
-  gap:14px;
+h1, h2, h3 { color: var(--gold-light); }
+.muted { color: #b9b9b9; line-height: 2; }
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 14px;
 }
-.stat{
-  padding:22px;
-  border:1px solid var(--gold);
-  border-radius:14px;
-  text-align:center;
-  background:#fffaf0;
-  color:#222;
+input, select {
+  display: block;
+  width: 100%;
+  padding: 13px;
+  margin: 9px 0 17px;
+  border: 1px solid #c9a54b;
+  border-radius: 9px;
+  background: #101010;
+  color: white;
+  font-family: inherit;
 }
-.stat strong{
-  display:block;
-  font-size:30px;
-  color:#9b7920;
-  margin-top:10px;
+label { display: block; }
+.item {
+  padding: 16px;
+  margin: 12px 0;
+  border: 1px solid #63532f;
+  border-radius: 12px;
+  background: #131313;
+  overflow-wrap: anywhere;
 }
-input,select{
-  width:100%;
-  padding:13px;
-  margin:8px 0 16px;
-  border:1px solid #777;
-  border-radius:9px;
-  background:#090909;
-  color:white;
+.message {
+  padding: 13px;
+  margin: 12px 0;
+  background: #292929;
+  border-radius: 9px;
+  overflow-wrap: anywhere;
+  line-height: 1.9;
 }
-label{display:block;margin-top:8px}
-.item{
-  padding:16px;
-  margin:12px 0;
-  border:1px solid #4c432e;
-  border-radius:12px;
-  background:#111;
+.hidden { display: none !important; }
+.stat {
+  background: #fffaf0;
+  color: #222;
+  padding: 22px;
+  text-align: center;
+  border: 1px solid var(--gold);
+  border-radius: 13px;
 }
-.msg{
-  padding:13px;
-  margin:12px 0;
-  border-radius:9px;
-  background:#282828;
-  line-height:1.9;
-  overflow-wrap:anywhere;
+.stat strong {
+  display: block;
+  font-size: 30px;
+  color: #9b7920;
+  margin-top: 12px;
 }
-.hidden{display:none!important}
-.ticket{
-  padding:22px;
-  margin-top:18px;
-  border:2px dashed var(--gold);
-  border-radius:14px;
-  background:#111;
+.ticket {
+  padding: 22px;
+  margin-top: 18px;
+  border: 2px dashed var(--gold);
+  border-radius: 13px;
+  background: #101010;
 }
-.ticketcode{
-  text-align:center;
-  direction:ltr;
-  font-size:24px;
-  font-weight:bold;
-  color:var(--gold);
-  margin:20px 0;
+.ticket-code {
+  direction: ltr;
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  color: var(--gold-light);
+  margin: 20px 0;
 }
-.danger{
-  color:white!important;
-  background:var(--red)!important;
-  border-color:var(--red)!important;
+.danger {
+  background: #b32626 !important;
+  color: white !important;
+  border-color: #b32626 !important;
 }
-footer{
-  text-align:center;
-  padding:25px;
-  color:#888;
-  border-top:1px solid #333;
+footer {
+  padding: 25px;
+  text-align: center;
+  color: #999;
+  border-top: 1px solid #333;
 }
 
-/* پنل مدیریت سفید و طلایی */
-#admin{color:#222}
-#admin .card{
-  background:#fff;
-  color:#222;
-  border:1px solid #e6d6a5;
-  box-shadow:0 5px 20px #0002;
+/* پنل سفید و طلایی */
+#admin { color: #222; }
+#admin .card {
+  background: #fff;
+  color: #222;
+  border: 1px solid #e4d5a9;
+  box-shadow: 0 5px 18px #0002;
 }
-#admin h2,#admin h3{color:#92701b}
-#admin label{color:#333}
-#admin input,#admin select{
-  background:#fff;
-  color:#222;
-  border-color:#d4af37;
+#admin h2, #admin h3 { color: #92701b; }
+#admin label { color: #333; }
+#admin input, #admin select {
+  background: #fff;
+  color: #222;
+  border-color: var(--gold);
 }
-#admin .item{
-  background:#fffdf7;
-  color:#222;
-  border:1px solid #eadcb2;
+#admin .item {
+  background: #fffdf7;
+  color: #222;
+  border-color: #e4d5a9;
 }
-#admin button:not(.danger){
-  background:#d4af37;
-  color:#171717;
+#admin button:not(.danger) {
+  background: var(--gold);
+  color: #171717;
 }
-#admin button:hover{background:#b99426}
-#admin .danger{color:white!important;background:#c62828!important}
-
-@media(max-width:500px){
-  .logo{font-size:31px}
-  nav button{padding:10px 11px;font-size:13px}
-  .card{padding:16px}
+#admin .danger { background: #b32626 !important; }
+@media(max-width:500px) {
+  .logo { font-size: 31px; }
+  nav button { font-size: 12px; padding: 10px; }
+  main { padding: 12px; }
+  .card { padding: 16px; }
 }
-@media print{
-  body *{visibility:hidden}
-  #ticketResult,#ticketResult *{visibility:visible}
-  #ticketResult{position:absolute;left:0;top:0;width:100%}
-  #ticketResult .ticket{background:white;color:black}
-  #ticketResult h2,#ticketResult .ticketcode{color:black}
-  #ticketResult button{display:none}
+@media print {
+  body * { visibility: hidden; }
+  #ticketResult, #ticketResult * { visibility: visible; }
+  #ticketResult { position: absolute; top: 0; left: 0; width: 100%; }
 }
 </style>
 </head>
-<body>
 
+<body>
 <header>
   <div class="logo">HOORI</div>
   <p>سامانه هوشمند مدیریت حوری و بلیت</p>
@@ -212,14 +205,13 @@ footer{
   <button onclick="go('register')">ثبت بلیت</button>
   <button onclick="go('tickets')">فهرست بلیت‌ها</button>
   <button onclick="go('search')">جستجوی بلیت</button>
-  <button onclick="go('admin')">پنل مدیریت</button>
+  <button onclick="go('admin')">مدیریت</button>
 </nav>
 
 <main>
-
 <section id="home" class="page active">
   <div class="card hero">
-    <h1>به Hoori خوش آمدید</h1>
+    <h1>به HOORI خوش آمدید</h1>
     <p class="muted">سامانه ثبت و پیگیری بلیت</p>
     <button onclick="go('hooris')">مشاهده حوری‌ها</button>
     <button onclick="go('register')">ثبت بلیت جدید</button>
@@ -227,13 +219,13 @@ footer{
   <div class="grid">
     <div class="card">
       <h3>💛 حوری‌ها</h3>
-      <p class="muted">مشاهده فهرست حوری‌های ثبت‌شده</p>
-      <button onclick="go('hooris')">مشاهده فهرست</button>
+      <p class="muted">فهرست حوری‌های ثبت‌شده</p>
+      <button onclick="go('hooris')">مشاهده</button>
     </div>
     <div class="card">
       <h3>🎟️ بلیت‌ها</h3>
-      <p class="muted">مشاهده کد بلیت‌ها و حوری مربوط به آن‌ها</p>
-      <button onclick="go('tickets')">فهرست عمومی</button>
+      <p class="muted">مشاهده کد بلیت و نام حوری</p>
+      <button onclick="go('tickets')">فهرست بلیت‌ها</button>
     </div>
   </div>
 </section>
@@ -248,7 +240,7 @@ footer{
 <section id="register" class="page">
   <div class="card">
     <h2>🎟️ ثبت بلیت</h2>
-    <div id="registerMsg" class="msg hidden"></div>
+    <div id="registerMsg" class="message hidden"></div>
     <form id="registerForm">
       <label for="firstName">نام</label>
       <input id="firstName" maxlength="80" required>
@@ -256,7 +248,7 @@ footer{
       <input id="lastName" maxlength="80" required>
       <label for="hooriSelect">انتخاب حوری</label>
       <select id="hooriSelect" required>
-        <option value="">در حال بارگذاری...</option>
+        <option value="">انتخاب کنید</option>
       </select>
       <button type="submit">ثبت بلیت</button>
     </form>
@@ -267,8 +259,8 @@ footer{
 <section id="tickets" class="page">
   <div class="card">
     <h2>🎟️ فهرست عمومی بلیت‌ها</h2>
-    <p class="muted">در این فهرست فقط کد بلیت و نام حوری نمایش داده می‌شود.</p>
-    <button onclick="loadPublicTickets()">به‌روزرسانی فهرست</button>
+    <p class="muted">کد بلیت و نام حوری نمایش داده می‌شود؛ نام و نام خانوادگی افراد عمومی نیست.</p>
+    <button onclick="loadPublicTickets()">به‌روزرسانی</button>
     <div id="publicTickets">در حال بارگذاری...</div>
   </div>
 </section>
@@ -295,8 +287,7 @@ footer{
 
   <div id="adminPanel" class="hidden">
     <div class="card">
-      <h2>پنل مدیریت</h2>
-      <p>خوش آمدید به بخش مدیریت Hoori</p>
+      <h2>پنل مدیریت HOORI</h2>
       <div class="grid">
         <div class="stat">تعداد حوری‌ها<strong id="hooriCount">۰</strong></div>
         <div class="stat">تعداد بلیت‌ها<strong id="ticketCount">۰</strong></div>
@@ -313,7 +304,7 @@ footer{
         <input id="newHoori" maxlength="100" required>
         <button type="submit">افزودن</button>
       </form>
-      <div id="addHooriMsg" class="msg hidden"></div>
+      <div id="addHooriMsg" class="message hidden"></div>
     </div>
 
     <div class="card">
@@ -322,7 +313,7 @@ footer{
     </div>
 
     <div class="card">
-      <h2>➕ ثبت بلیت از مدیریت</h2>
+      <h2>➕ افزودن بلیت</h2>
       <form id="addTicketForm">
         <label for="adminFirst">نام</label>
         <input id="adminFirst" required>
@@ -332,7 +323,7 @@ footer{
         <select id="adminHooriSelect" required></select>
         <button type="submit">ثبت بلیت</button>
       </form>
-      <div id="addTicketMsg" class="msg hidden"></div>
+      <div id="addTicketMsg" class="message hidden"></div>
     </div>
 
     <div class="card">
@@ -341,8 +332,8 @@ footer{
     </div>
   </div>
 </section>
-
 </main>
+
 <footer>HOORI © 2026</footer>
 
 <script>
@@ -360,44 +351,39 @@ function go(id){
  if(id==="admin"&&admin)refreshAll();
  window.scrollTo({top:0,behavior:"smooth"});
 }
-function esc(x){
- return String(x??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-}
 function msg(id,text){
- const el=document.getElementById(id);
- el.textContent=text;
- el.classList.remove("hidden");
+ const e=document.getElementById(id);
+ e.textContent=text;
+ e.classList.remove("hidden");
 }
 function code(){
  const a=new Uint8Array(5);
  crypto.getRandomValues(a);
  return "H-"+Array.from(a,x=>x.toString(16).padStart(2,"0")).join("").toUpperCase();
 }
+function esc(x){
+ return String(x??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+}
 
 async function loadHooris(){
- const list=document.getElementById("hooriList");
+ const box=document.getElementById("hooriList");
  const s=document.getElementById("hooriSelect");
  const a=document.getElementById("adminHooriSelect");
  const {data,error}=await db.from("hooris").select("*").order("id");
- if(error){list.textContent="خطا در دریافت حوری‌ها: "+error.message;return;}
- list.innerHTML="";
+ if(error){box.textContent="خطا در دریافت حوری‌ها: "+error.message;return;}
+ box.innerHTML="";
  s.innerHTML='<option value="">انتخاب کنید</option>';
  a.innerHTML='<option value="">انتخاب کنید</option>';
- if(!data.length)list.textContent="هنوز حوری‌ای ثبت نشده است.";
+ if(!data.length)box.textContent="هنوز حوری‌ای ثبت نشده است.";
  data.forEach(h=>{
-  const n=String(h.name??"");
-  const d=document.createElement("div");
-  d.className="item";
-  const title=document.createElement("h3");
-  title.textContent=n;
-  const b=document.createElement("button");
-  b.textContent="انتخاب";
-  b.onclick=()=>{s.value=n;go("register");};
-  d.append(title,b);
-  list.appendChild(d);
+  const name=String(h.name??"");
+  const d=document.createElement("div");d.className="item";
+  const title=document.createElement("h3");title.textContent=name;
+  const b=document.createElement("button");b.textContent="انتخاب";
+  b.onclick=()=>{s.value=name;go("register");};
+  d.append(title,b);box.appendChild(d);
   [s,a].forEach(sel=>{
-   const op=document.createElement("option");
-   op.value=n;op.textContent=n;sel.appendChild(op);
+   const op=document.createElement("option");op.value=name;op.textContent=name;sel.appendChild(op);
   });
  });
  if(admin)renderAdminHooris(data);
@@ -408,19 +394,14 @@ async function loadPublicTickets(){
  box.textContent="در حال بارگذاری...";
  const {data,error}=await db.from("hoori_tickets")
   .select("ticket_code,hoori_name").order("created_at",{ascending:false});
- if(error){box.textContent="خطا در دریافت فهرست: "+error.message;return;}
+ if(error){box.textContent="خطا: "+error.message;return;}
  box.innerHTML="";
  if(!data.length){box.textContent="هنوز بلیتی ثبت نشده است.";return;}
  data.forEach(t=>{
-  const d=document.createElement("div");
-  d.className="item";
-  const h=document.createElement("h3");
-  h.textContent="حوری: "+(t.hoori_name||"");
-  const c=document.createElement("p");
-  c.className="ticketcode";
-  c.textContent=t.ticket_code||"";
-  d.append(h,c);
-  box.appendChild(d);
+  const d=document.createElement("div");d.className="item";
+  const h=document.createElement("h3");h.textContent="حوری: "+(t.hoori_name||"");
+  const c=document.createElement("p");c.className="ticket-code";c.textContent=t.ticket_code||"";
+  d.append(h,c);box.appendChild(d);
  });
 }
 
@@ -440,7 +421,7 @@ document.getElementById("registerForm").addEventListener("submit",async e=>{
  if(error){msg("registerMsg","خطا در ثبت بلیت: "+error.message);return;}
  msg("registerMsg","بلیت با موفقیت ثبت شد.");
  document.getElementById("ticketResult").innerHTML=
-  '<div class="ticket"><h2>بلیت شما</h2><p>نام: '+esc(first+" "+last)+'</p><p>حوری: '+esc(hoori)+'</p><div class="ticketcode">'+esc(ticket)+'</div><button onclick="window.print()">چاپ بلیت</button></div>';
+  '<div class="ticket"><h2>بلیت شما</h2><p>نام: '+esc(first+" "+last)+'</p><p>حوری: '+esc(hoori)+'</p><div class="ticket-code">'+esc(ticket)+'</div><button onclick="window.print()">چاپ بلیت</button></div>';
  e.target.reset();
  loadPublicTickets();
 });
@@ -459,16 +440,13 @@ function logout(){
  document.getElementById("adminPanel").classList.add("hidden");
  document.getElementById("password").value="";
 }
-
 document.getElementById("addHooriForm").addEventListener("submit",async e=>{
  e.preventDefault();if(!admin)return;
  const name=document.getElementById("newHoori").value.trim();
  const {error}=await db.from("hooris").insert({name});
  if(error){msg("addHooriMsg","خطا: "+error.message);return;}
- e.target.reset();msg("addHooriMsg","حوری اضافه شد.");
- refreshAll();
+ e.target.reset();msg("addHooriMsg","حوری اضافه شد.");refreshAll();
 });
-
 function renderAdminHooris(data){
  const box=document.getElementById("adminHooris");box.innerHTML="";
  data.forEach(h=>{
@@ -485,7 +463,6 @@ async function deleteHoori(id,name){
  if(error){alert("خطا: "+error.message);return;}
  refreshAll();
 }
-
 document.getElementById("addTicketForm").addEventListener("submit",async e=>{
  e.preventDefault();if(!admin)return;
  const first=document.getElementById("adminFirst").value.trim();
@@ -496,10 +473,8 @@ document.getElementById("addTicketForm").addEventListener("submit",async e=>{
   hoori_name:hoori,issue_date:new Date().toISOString().slice(0,10)
  });
  if(error){msg("addTicketMsg","خطا: "+error.message);return;}
- e.target.reset();msg("addTicketMsg","بلیت ثبت شد.");
- refreshAll();
+ e.target.reset();msg("addTicketMsg","بلیت ثبت شد.");refreshAll();
 });
-
 async function refreshAll(){
  if(!admin)return;
  await loadHooris();
@@ -525,7 +500,6 @@ async function deleteTicket(id,ticket){
  if(error){alert("خطا: "+error.message);return;}
  refreshAll();
 }
-
 async function searchTicket(){
  const q=document.getElementById("searchText").value.trim();
  const box=document.getElementById("searchResult");box.innerHTML="";
@@ -536,7 +510,7 @@ async function searchTicket(){
  data.forEach(t=>{
   const d=document.createElement("div");d.className="ticket";
   const p=document.createElement("p");p.textContent="حوری: "+(t.hoori_name||"");
-  const c=document.createElement("div");c.className="ticketcode";c.textContent=t.ticket_code;
+  const c=document.createElement("div");c.className="ticket-code";c.textContent=t.ticket_code;
   d.append(p,c);box.appendChild(d);
  });
 }
