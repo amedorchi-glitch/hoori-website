@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Hoori.com</title>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <style>
 *{box-sizing:border-box}
 body{margin:0;background:#090909;color:#fff;font-family:Tahoma,Arial,sans-serif}
@@ -14,6 +16,7 @@ header p{color:#c7b98f;font-size:12px}
 nav{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;padding:12px;background:#111}
 button{font-family:inherit;cursor:pointer;touch-action:manipulation}
 nav button,.btn{border:1px solid #c5a047;background:#d7b65e;color:#171107;border-radius:10px;padding:12px 14px;font-size:13px;font-weight:bold}
+button:disabled{opacity:.6;cursor:wait}
 main{max-width:760px;margin:auto;padding:15px}
 .page{display:none}
 .page.active{display:block}
@@ -98,6 +101,7 @@ body *{visibility:hidden!important}
 <div class="stat"><strong id="homeTickets">۰</strong><span>تعداد بلیت‌ها</span></div>
 <div class="stat"><strong id="homePeople">۰</strong><span>افراد ثبت‌شده</span></div>
 </div>
+<div id="statsMsg" class="msg"></div>
 </div>
 </section>
 
@@ -149,6 +153,7 @@ body *{visibility:hidden!important}
 <div class="stat"><strong id="peopleTickets">۰</strong><span>بلیت‌ها</span></div>
 <div class="stat"><strong id="peopleCount">۰</strong><span>افراد مختلف</span></div>
 </div>
+<div id="peopleMsg" class="msg"></div>
 <div id="peopleList"></div>
 </div>
 </section>
@@ -156,6 +161,7 @@ body *{visibility:hidden!important}
 <section id="account" class="page">
 <div class="card">
 <h2>👤 حساب من</h2>
+<p>برای جست‌وجوی بلیت، نام و نام خانوادگی ثبت‌شده را وارد کن.</p>
 <form id="accountForm">
 <label for="accountFirst">نام</label>
 <input id="accountFirst" required>
@@ -177,16 +183,25 @@ body *{visibility:hidden!important}
 
 </main>
 
-<footer>Hoori.com<br>ساخته شده توسط <strong>Error</strong> 💛</footer><script>
+<footer>Hoori.com<br>ساخته شده توسط <strong>Error</strong> 💛</footer>
+
+<script>
+/*
+  از کلید عمومی Publishable استفاده می‌شود.
+  هرگز کلید sb_secret را در سایت قرار نده.
+*/
+const SUPABASE_URL = "https://mttcthmicgnryolaxxdy.supabase.co";
+const SUPABASE_KEY = "sb_publishable_P6QG6ILA-DN1_GpHwGnz2w_mn5DPwT7";
+
+const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+let ticketsCache = [];
+let loading = false;
+
 function go(id) {
+  document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
   const page = document.getElementById(id);
-
   if (!page) return;
-
-  document.querySelectorAll(".page").forEach(p => {
-    p.classList.remove("active");
-  });
-
   page.classList.add("active");
   window.scrollTo(0, 0);
 
@@ -196,6 +211,7 @@ function go(id) {
 
 function showMessage(id, text, type = "ok") {
   const element = document.getElementById(id);
+  if (!element) return;
   element.textContent = text;
   element.className = "msg show " + type;
 }
@@ -214,8 +230,55 @@ function escapeHTML(value) {
   })[c]);
 }
 
-let ticketsCache = [];
-let localMode = false;
+function makeCode() {
+  return "HR-" + Date.now().toString().slice(-9) +
+         "-" + Math.random().toString(36).slice(2, 6).toUpperCase();
+}
+
+function todayISO() {
+  const d = new Date();
+  return [
+    d.getFullYear(),
+    String(d.getMonth() + 1).padStart(2, "0"),
+    String(d.getDate()).padStart(2, "0")
+  ].join("-");
+}
+
+function displayDate(value) {
+  if (!value) return "";
+  const d = new Date(value + "T12:00:00");
+  if (Number.isNaN(d.getTime())) return String(value);
+  return new Intl.DateTimeFormat("fa-IR", {
+    year: "numeric", month: "2-digit", day: "2-digit"
+  }).format(d);
+}
+
+/* تبدیل رکورد دیتابیس به قالب مورد استفاده سایت */
+function normalizeTicket(row) {
+  return {
+    first: row.first_name || "",
+    last: row.last_name || "",
+    hoori: row.hoori_name || "",
+    id: row.ticket_code || String(row.id),
+    date: displayDate(row.issue_date),
+    dbId: row.id
+  };
+}
+
+async function loadTickets() {
+  const { data, error } = await db
+    .from("hoori_tickets")
+    .select("id,user_id,ticket_code,hoori_name,issue_date,created_at,first_name,last_name")
+    .order("created_at", { ascending: false });
+
+  if (error) {
+    console.error("Supabase read error:", error);
+    throw error;
+  }
+
+  ticketsCache = (data || []).map(normalizeTicket);
+  return ticketsCache;
+}
 
 function chooseHoori(name) {
   if (!name) return;
@@ -224,45 +287,14 @@ function chooseHoori(name) {
   if (select) select.value = name;
 
   document.querySelectorAll(".hoori").forEach(button => {
-    button.classList.toggle(
-      "selected",
-      button.textContent.includes(name)
-    );
+    button.classList.toggle("selected", button.textContent.includes(name));
   });
 
   try {
     localStorage.setItem("hoori_selected_new", name);
   } catch (e) {}
 
-  showMessage(
-    "optionMsg",
-    "گزینه «" + name + "» انتخاب شد 💛"
-  );
-}
-
-function loadLocalTickets() {
-  try {
-    return JSON.parse(
-      localStorage.getItem("hoori_tickets_new") || "[]"
-    );
-  } catch (e) {
-    return [];
-  }
-}
-
-function saveLocalTickets(tickets) {
-  localStorage.setItem(
-    "hoori_tickets_new",
-    JSON.stringify(tickets)
-  );
-}
-
-function makeCode() {
-  return "HR-" + Date.now().toString().slice(-9);
-}
-
-function today() {
-  return new Date().toLocaleDateString("fa-IR");
+  showMessage("optionMsg", "گزینه «" + name + "» انتخاب شد 💛");
 }
 
 function makeTicket(ticket) {
@@ -273,205 +305,193 @@ function makeTicket(ticket) {
         <h2>HOORI.COM</h2>
         <small>EXCLUSIVE GOLDEN VIP PASS</small>
       </div>
-
       <div class="vip-body">
         <div class="label">نام دارنده بلیت</div>
-        <div class="ticket-name">
-          ${escapeHTML(ticket.first)} ${escapeHTML(ticket.last)}
-        </div>
-
+        <div class="ticket-name">${escapeHTML(ticket.first)} ${escapeHTML(ticket.last)}</div>
         <div class="ticket-grid">
-          <div>
-            <div class="label">حوری انتخابی</div>
-            <strong>${escapeHTML(ticket.hoori)}</strong>
-          </div>
-          <div>
-            <div class="label">تاریخ صدور</div>
-            <strong>${escapeHTML(ticket.date)}</strong>
-          </div>
+          <div><div class="label">حوری انتخابی</div><strong>${escapeHTML(ticket.hoori)}</strong></div>
+          <div><div class="label">تاریخ صدور</div><strong>${escapeHTML(ticket.date)}</strong></div>
         </div>
       </div>
-
       <div class="vip-foot">
-        <div>
-          <div class="label">TICKET ID</div>
-          <div class="ticket-code">${escapeHTML(ticket.id)}</div>
-        </div>
+        <div><div class="label">TICKET ID</div><div class="ticket-code">${escapeHTML(ticket.id)}</div></div>
         <div class="stamp">HOORI<br>VIP PASS</div>
       </div>
     </div>
-
     <div class="no-print" style="text-align:center">
-      <button type="button" class="btn" onclick="window.print()">
-        🖨 چاپ یا ذخیره PDF
-      </button>
+      <button type="button" class="btn" onclick="window.print()">🖨 چاپ یا ذخیره PDF</button>
     </div>
   `;
 }
 
-document.getElementById("ticketForm").addEventListener(
-  "submit",
-  async function(event) {
-    event.preventDefault();
-
-    const first = document.getElementById("firstName").value.trim();
-    const last = document.getElementById("lastName").value.trim();
-    const hoori = document.getElementById("hooriSelect").value;
-
-    if (!first || !last || !hoori) {
-      showMessage("formMsg", "لطفاً همه قسمت‌ها رو پر کن.", "err");
-      return;
-    }
-
-    const button = this.querySelector('button[type="submit"]');
-    button.disabled = true;
-    button.textContent = "در حال ثبت...";
-
-    const ticket = {
-      first,
-      last,
-      hoori,
-      id: makeCode(),
-      date: today()
-    };
-
-    try {
-      const tickets = loadLocalTickets();
-      tickets.unshift(ticket);
-      saveLocalTickets(tickets);
-
-      ticketsCache = tickets;
-      makeTicket(ticket);
-
-      showMessage(
-        "formMsg",
-        "بلیت ساخته شد! 👑",
-        "ok"
-      );
-
-      this.reset();
-
-      document.getElementById("hooriSelect").value = "";
-      document.querySelectorAll(".hoori").forEach(b => {
-        b.classList.remove("selected");
-      });
-
-      renderStats();
-    } catch (error) {
-      showMessage("formMsg", "خطا در ساخت بلیت.", "err");
-    } finally {
-      button.disabled = false;
-      button.textContent = "👑 ساخت بلیت";
-    }
-  }
-);
-
-function renderStats() {
-  const tickets = loadLocalTickets();
-  const people = new Set(
-    tickets.map(t => (t.first + "|" + t.last).toLowerCase())
-  );
-
-  document.getElementById("homeTickets").textContent =
-    faNum(tickets.length);
-
-  document.getElementById("homePeople").textContent =
-    faNum(people.size);
+function countPeople(tickets) {
+  return new Set(tickets.map(t =>
+    (t.first + "|" + t.last).toLocaleLowerCase()
+  )).size;
 }
 
-function renderPeople() {
-  const tickets = loadLocalTickets();
-  const list = document.getElementById("peopleList");
+async function renderStats() {
+  try {
+    const tickets = await loadTickets();
+    document.getElementById("homeTickets").textContent = faNum(tickets.length);
+    document.getElementById("homePeople").textContent = faNum(countPeople(tickets));
+    document.getElementById("statsMsg").className = "msg";
+  } catch (error) {
+    showMessage("statsMsg", "دریافت آمار ناموفق بود. اتصال و دسترسی دیتابیس را بررسی کن.", "err");
+  }
+}
 
-  document.getElementById("peopleTickets").textContent =
-    faNum(tickets.length);
+document.getElementById("ticketForm").addEventListener("submit", async function(event) {
+  event.preventDefault();
 
-  const people = new Map();
+  const first = document.getElementById("firstName").value.trim();
+  const last = document.getElementById("lastName").value.trim();
+  const hoori = document.getElementById("hooriSelect").value;
 
-  tickets.forEach(ticket => {
-    const key = (ticket.first + "|" + ticket.last).toLowerCase();
-
-    if (!people.has(key)) {
-      people.set(key, {
-        first: ticket.first,
-        last: ticket.last,
-        tickets: []
-      });
-    }
-
-    people.get(key).tickets.push(ticket);
-  });
-
-  document.getElementById("peopleCount").textContent =
-    faNum(people.size);
-
-  list.replaceChildren();
-
-  if (people.size === 0) {
-    list.innerHTML = '<div class="empty">هنوز بلیتی ثبت نشده است.</div>';
+  if (!first || !last || !hoori) {
+    showMessage("formMsg", "لطفاً همه قسمت‌ها رو پر کن.", "err");
     return;
   }
 
-  people.forEach(person => {
-    const box = document.createElement("div");
-    box.className = "person";
+  const button = this.querySelector('button[type="submit"]');
+  button.disabled = true;
+  button.textContent = "در حال ثبت در دیتابیس...";
 
-    const name = document.createElement("strong");
-    name.textContent = person.first + " " + person.last;
-    box.appendChild(name);
+  const code = makeCode();
 
-    person.tickets.forEach(ticket => {
-      const row = document.createElement("div");
-      row.textContent =
-        "کد: " + ticket.id +
-        " | " + ticket.hoori +
-        " | " + ticket.date;
+  try {
+    const { data, error } = await db
+      .from("hoori_tickets")
+      .insert({
+        ticket_code: code,
+        first_name: first,
+        last_name: last,
+        hoori_name: hoori,
+        issue_date: todayISO()
+      })
+      .select("id,user_id,ticket_code,hoori_name,issue_date,created_at,first_name,last_name")
+      .single();
 
-      box.appendChild(row);
-    });
+    if (error) throw error;
 
-    list.appendChild(box);
-  });
-}
+    const ticket = normalizeTicket(data);
+    ticketsCache.unshift(ticket);
+    makeTicket(ticket);
 
-document.getElementById("accountForm").addEventListener(
-  "submit",
-  function(event) {
-    event.preventDefault();
+    showMessage("formMsg", "بلیت با موفقیت در دیتابیس ذخیره شد! 👑", "ok");
 
-    const first = document.getElementById("accountFirst").value
-      .trim().toLowerCase();
+    this.reset();
+    document.getElementById("hooriSelect").value = "";
+    document.querySelectorAll(".hoori").forEach(b => b.classList.remove("selected"));
 
-    const last = document.getElementById("accountLast").value
-      .trim().toLowerCase();
-
-    const result = document.getElementById("accountResult");
-
-    const found = loadLocalTickets().filter(ticket =>
-      ticket.first.toLowerCase() === first &&
-      ticket.last.toLowerCase() === last
+    await renderStats();
+  } catch (error) {
+    console.error("Supabase insert error:", error);
+    showMessage(
+      "formMsg",
+      "ثبت ناموفق بود. اتصال اینترنت، ستون‌های جدول و دسترسی INSERT را بررسی کن. اطلاعات خطا در کنسول مرورگر است.",
+      "err"
     );
+  } finally {
+    button.disabled = false;
+    button.textContent = "👑 ساخت بلیت";
+  }
+});
 
-    result.replaceChildren();
+async function renderPeople() {
+  const list = document.getElementById("peopleList");
+  list.innerHTML = '<div class="empty">در حال دریافت اطلاعات...</div>';
 
-    if (found.length === 0) {
-      result.innerHTML =
-        '<div class="empty">بلیتی با این نام پیدا نشد.</div>';
+  try {
+    const tickets = await loadTickets();
+
+    document.getElementById("peopleTickets").textContent = faNum(tickets.length);
+    document.getElementById("peopleCount").textContent = faNum(countPeople(tickets));
+    document.getElementById("peopleMsg").className = "msg";
+    list.replaceChildren();
+
+    if (!tickets.length) {
+      list.innerHTML = '<div class="empty">هنوز بلیتی ثبت نشده است.</div>';
       return;
     }
 
-    found.forEach(ticket => {
+    const people = new Map();
+
+    tickets.forEach(ticket => {
+      const key = (ticket.first + "|" + ticket.last).toLocaleLowerCase();
+
+      if (!people.has(key)) {
+        people.set(key, {
+          first: ticket.first,
+          last: ticket.last,
+          tickets: []
+        });
+      }
+
+      people.get(key).tickets.push(ticket);
+    });
+
+    people.forEach(person => {
       const box = document.createElement("div");
       box.className = "person";
-      box.textContent =
-        "کد بلیت: " + ticket.id +
-        " | " + ticket.hoori +
-        " | " + ticket.date;
 
+      const name = document.createElement("strong");
+      name.textContent = person.first + " " + person.last;
+      box.appendChild(name);
+
+      person.tickets.forEach(ticket => {
+        const row = document.createElement("div");
+        row.textContent = "کد: " + ticket.id + " | " + ticket.hoori + " | " + ticket.date;
+        box.appendChild(row);
+      });
+
+      list.appendChild(box);
+    });
+  } catch (error) {
+    console.error("Supabase people read error:", error);
+    list.innerHTML = "";
+    showMessage("peopleMsg", "دریافت افراد ناموفق بود. اتصال و دسترسی SELECT را بررسی کن.", "err");
+  }
+}
+
+document.getElementById("accountForm").addEventListener("submit", async function(event) {
+  event.preventDefault();
+
+  const first = document.getElementById("accountFirst").value.trim().toLocaleLowerCase();
+  const last = document.getElementById("accountLast").value.trim().toLocaleLowerCase();
+  const result = document.getElementById("accountResult");
+
+  result.innerHTML = '<div class="empty">در حال جست‌وجو...</div>';
+
+  try {
+    const { data, error } = await db
+      .from("hoori_tickets")
+      .select("id,ticket_code,hoori_name,issue_date,first_name,last_name")
+      .ilike("first_name", first)
+      .ilike("last_name", last)
+      .order("created_at", { ascending: false });
+
+    if (error) throw error;
+
+    result.replaceChildren();
+
+    if (!data || data.length === 0) {
+      result.innerHTML = '<div class="empty">بلیتی با این نام پیدا نشد.</div>';
+      return;
+    }
+
+    data.forEach(row => {
+      const ticket = normalizeTicket(row);
+      const box = document.createElement("div");
+      box.className = "person";
+      box.textContent = "کد بلیت: " + ticket.id + " | " + ticket.hoori + " | " + ticket.date;
       result.appendChild(box);
     });
+  } catch (error) {
+    console.error("Supabase account search error:", error);
+    result.innerHTML = '<div class="empty">جست‌وجو ناموفق بود. دسترسی SELECT را بررسی کن.</div>';
   }
-);
+});
 
 try {
   const saved = localStorage.getItem("hoori_selected_new");
@@ -480,14 +500,12 @@ try {
     document.getElementById("hooriSelect").value = saved;
 
     document.querySelectorAll(".hoori").forEach(button => {
-      button.classList.toggle(
-        "selected",
-        button.textContent.includes(saved)
-      );
+      button.classList.toggle("selected", button.textContent.includes(saved));
     });
   }
 } catch (e) {}
 
 renderStats();
-    </script></body>
+</script>
+</body>
 </html>
