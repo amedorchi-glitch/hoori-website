@@ -3,21 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>HOORI | سامانه هوری</title>
+<meta name="theme-color" content="#fffdf8">
+<title>HOORI | Luxury Ticket System</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&display=swap');
-
 :root {
-  --gold: #b99548;
-  --gold-dark: #8f6b28;
-  --gold-light: #e9d7a5;
-  --cream: #fbf9f3;
-  --white: #ffffff;
+  --gold: #c5a45d;
+  --gold-dark: #95752e;
+  --gold-light: #f0dfb2;
+  --cream: #fcfaf5;
   --text: #29261f;
-  --muted: #898477;
+  --muted: #928b7c;
   --border: #eee5d2;
-  --shadow: 0 12px 35px rgba(117, 87, 30, .08);
+  --shadow: 0 12px 40px rgba(126, 96, 35, .08);
+  --radius: 22px;
 }
 
 * {
@@ -30,99 +33,153 @@ html {
 
 body {
   margin: 0;
-  background:
-    radial-gradient(ellipse at top right, #f5ead0 0, transparent 35%),
-    linear-gradient(135deg, #fff 0%, #faf8f2 100%);
+  min-height: 100vh;
   color: var(--text);
   font-family: 'Vazirmatn', Tahoma, Arial, sans-serif;
-  min-height: 100vh;
+  background:
+    radial-gradient(ellipse at 90% 0%, #f5e8c9 0, transparent 35%),
+    radial-gradient(ellipse at 0% 40%, #fff5df 0, transparent 25%),
+    linear-gradient(145deg, #ffffff, #faf8f1);
 }
 
 button, input, select {
   font: inherit;
 }
 
+button {
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 3px solid #c5a45d70;
+  outline-offset: 3px;
+}
+
+/* HEADER */
+
 header {
   position: relative;
   overflow: hidden;
+  padding: 45px 15px 38px;
   text-align: center;
-  padding: 43px 16px 35px;
-  background: rgba(255,255,255,.92);
+  background: rgba(255,255,255,.88);
   border-bottom: 1px solid var(--gold-light);
-  box-shadow: 0 5px 25px #8f6b2809;
 }
 
 header::before,
 header::after {
   content: "✦";
   position: absolute;
-  top: 35px;
   color: var(--gold);
-  font-size: 25px;
-  opacity: .65;
+  font-size: 35px;
+  opacity: .45;
+  animation: floatStar 4s ease-in-out infinite;
 }
 
 header::before {
   right: 12%;
+  top: 30px;
 }
 
 header::after {
   left: 12%;
+  bottom: 25px;
+  animation-delay: 1s;
 }
 
 .logo {
-  display: inline-block;
-  color: var(--gold-dark);
-  font-size: clamp(37px, 8vw, 58px);
-  font-weight: 900;
-  letter-spacing: 7px;
   margin: 0;
-  text-shadow: 0 3px 20px #b9954825;
+  font-size: clamp(42px, 9vw, 68px);
+  font-weight: 900;
+  letter-spacing: 8px;
+  background: linear-gradient(
+    110deg,
+    #8c6928,
+    #e5cb85,
+    #a27c31,
+    #d8bb70
+  );
+  background-size: 250% auto;
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+  animation: goldShine 5s linear infinite;
 }
 
 .logo-line {
-  width: 95px;
+  width: 120px;
   height: 3px;
-  margin: 12px auto;
+  margin: 13px auto;
   border-radius: 10px;
-  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--gold),
+    #f5e4b5,
+    var(--gold),
+    transparent
+  );
+  background-size: 200% auto;
+  animation: goldShine 4s linear infinite;
 }
 
 header p {
   margin: 0;
   color: var(--muted);
-  font-size: 14px;
+  font-size: 13px;
+  letter-spacing: 2px;
+}
+
+.header-badge {
+  display: inline-block;
+  margin-top: 17px;
+  padding: 6px 16px;
+  color: var(--gold-dark);
+  border: 1px solid var(--gold-light);
+  border-radius: 30px;
+  background: #fffdf8;
+  font-size: 11px;
   letter-spacing: 1px;
 }
+
+/* NAVIGATION */
 
 nav {
   position: sticky;
   top: 0;
-  z-index: 10;
+  z-index: 100;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   gap: 9px;
-  padding: 13px 10px;
-  background: rgba(255,255,255,.93);
-  backdrop-filter: blur(14px);
+  padding: 12px;
+  background: rgba(255,255,255,.92);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
   border-bottom: 1px solid #eee5d280;
+  box-shadow: 0 5px 20px #92732b08;
 }
 
 button {
-  padding: 11px 17px;
-  border: 1px solid #e8d8b5;
-  border-radius: 12px;
-  background: white;
+  padding: 11px 16px;
+  border: 1px solid var(--border);
+  border-radius: 13px;
   color: var(--gold-dark);
-  cursor: pointer;
-  transition: transform .2s, box-shadow .2s, background .2s;
+  background: #fff;
+  transition:
+    transform .25s,
+    box-shadow .25s,
+    background .25s,
+    border-color .25s;
 }
 
 button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 7px 18px #b9954820;
-  background: #fffaf0;
+  border-color: var(--gold-light);
+  box-shadow: 0 8px 20px #b9954820;
 }
 
 button:active {
@@ -130,36 +187,50 @@ button:active {
 }
 
 .primary {
-  color: white;
+  color: #fff;
   border: 0;
-  background: linear-gradient(135deg, #d1b16a, #9b762f);
-  box-shadow: 0 5px 14px #b9954830;
+  background: linear-gradient(125deg, #d7bd7b, #a58137);
+  box-shadow: 0 5px 17px #b9954830;
 }
 
 .primary:hover {
-  background: linear-gradient(135deg, #dfc17e, #a98439);
-  color: white;
+  color: #fff;
+  background: linear-gradient(125deg, #e2ca8c, #b08b41);
 }
 
+.secondary {
+  background: #fffaf0;
+  border-color: var(--gold-light);
+}
+
+.danger {
+  color: #a64c43;
+  border-color: #efd5d0;
+  background: #fff8f7;
+}
+
+/* LAYOUT */
+
 main {
-  max-width: 950px;
-  margin: 30px auto;
-  padding: 0 16px;
+  width: 100%;
+  max-width: 1050px;
   min-height: 55vh;
+  margin: 32px auto;
+  padding: 0 18px;
 }
 
 .page {
-  animation: appear .35s ease;
+  animation: pageIn .45s ease both;
 }
 
 .hidden {
   display: none !important;
 }
 
-@keyframes appear {
+@keyframes pageIn {
   from {
     opacity: 0;
-    transform: translateY(8px);
+    transform: translateY(14px);
   }
   to {
     opacity: 1;
@@ -167,105 +238,235 @@ main {
   }
 }
 
+@keyframes cardIn {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes floatStar {
+  0%, 100% {
+    transform: translateY(0) rotate(0);
+  }
+  50% {
+    transform: translateY(-8px) rotate(15deg);
+  }
+}
+
+@keyframes goldShine {
+  to {
+    background-position: 250% center;
+  }
+}
+
+@keyframes softGlow {
+  0%, 100% {
+    box-shadow: 0 8px 25px #b9954810;
+  }
+  50% {
+    box-shadow: 0 12px 35px #b9954828;
+  }
+}
+
+/* CARDS */
+
 .card {
   position: relative;
-  background: rgba(255,255,255,.94);
+  margin-bottom: 22px;
+  padding: 25px;
+  overflow: hidden;
   border: 1px solid var(--border);
-  border-radius: 20px;
-  padding: 24px;
-  margin-bottom: 20px;
+  border-radius: var(--radius);
+  background: rgba(255,255,255,.93);
   box-shadow: var(--shadow);
-  transition: box-shadow .25s, transform .25s;
+  animation: cardIn .55s ease both;
+  transition: border-color .3s, box-shadow .3s;
 }
 
 .card:hover {
-  box-shadow: 0 15px 40px rgba(117, 87, 30, .12);
+  border-color: #e5d4a8;
+  box-shadow: 0 17px 45px rgba(126, 96, 35, .12);
+}
+
+.card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 75px;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--gold));
+  opacity: .75;
 }
 
 h2 {
   display: flex;
   align-items: center;
   gap: 10px;
+  margin: 0 0 21px;
   color: var(--gold-dark);
   font-size: 20px;
-  margin: 0 0 20px;
+  font-weight: 800;
 }
 
 h2::before {
   content: "";
-  display: inline-block;
   width: 4px;
   height: 24px;
+  flex-shrink: 0;
   border-radius: 5px;
   background: linear-gradient(var(--gold-light), var(--gold-dark));
 }
 
+/* WELCOME */
+
+.welcome-card {
+  padding: 32px 25px;
+  background:
+    radial-gradient(ellipse at 100% 0%, #f4e5be80, transparent 48%),
+    #fff;
+}
+
+.welcome-card h2 {
+  font-size: 25px;
+}
+
+.welcome-description {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 2.3;
+}
+
+.eyebrow {
+  color: var(--gold-dark);
+  font-size: 11px;
+  letter-spacing: 2px;
+  font-weight: 800;
+}
+
+/* STATISTICS */
+
 .stats {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 15px;
+  gap: 16px;
 }
 
 .stat {
   position: relative;
   overflow: hidden;
-  text-align: center;
   padding: 25px 12px;
-  background: linear-gradient(145deg, #fffdf8, #f8f1e2);
+  text-align: center;
   border: 1px solid #ecdfc3;
-  border-radius: 17px;
+  border-radius: 19px;
+  background: linear-gradient(145deg, #fffefb, #f8f1e2);
+  transition: transform .3s, box-shadow .3s;
+}
+
+.stat:hover {
+  transform: translateY(-5px);
+  animation: softGlow 2s ease-in-out infinite;
+}
+
+.stat-icon {
+  display: block;
+  margin-bottom: 9px;
+  font-size: 23px;
 }
 
 .stat strong {
   display: block;
   color: var(--gold-dark);
-  font-size: 34px;
+  font-size: 36px;
   font-weight: 900;
-  margin-bottom: 8px;
 }
 
-.stat span {
+.stat span:last-child {
   color: var(--muted);
+  font-size: 12px;
+}
+
+/* FORMS */
+
+label {
+  display: block;
+  margin-top: 13px;
+  color: #786747;
   font-size: 13px;
+  font-weight: 700;
 }
 
 input, select {
   display: block;
   width: 100%;
+  margin: 9px 0 17px;
   padding: 14px;
-  margin: 9px 0 18px;
   color: var(--text);
-  background: #fffefa;
   border: 1px solid #e8dfcc;
-  border-radius: 12px;
+  border-radius: 13px;
   outline: none;
-  transition: border .2s, box-shadow .2s;
+  background: #fffefa;
+  transition: border .25s, box-shadow .25s, background .25s;
 }
 
 input:focus, select:focus {
   border-color: var(--gold);
-  box-shadow: 0 0 0 4px #b9954814;
+  background: #fff;
+  box-shadow: 0 0 0 4px #b9954815;
 }
 
 input::placeholder {
   color: #aaa394;
 }
 
-label {
-  display: block;
-  font-size: 13px;
-  font-weight: 600;
-  color: #766749;
+.action-button {
+  width: 100%;
+  margin-top: 4px;
+  padding: 14px;
+  font-weight: 700;
 }
 
+.muted {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 2.2;
+}
+
+.error {
+  margin-top: 13px;
+  padding: 13px;
+  color: #9b3737;
+  background: #fff2f0;
+  border: 1px solid #f0d2ce;
+  border-radius: 12px;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font-size: 13px;
+}
+
+.success {
+  color: #187744;
+  line-height: 2;
+  font-size: 13px;
+}
+
+/* GENERAL ITEMS */
+
 .item {
+  margin: 12px 0;
   padding: 16px;
-  margin: 11px 0;
-  border: 1px solid #eee5d2;
-  border-radius: 13px;
+  border: 1px solid var(--border);
+  border-radius: 15px;
   background: linear-gradient(110deg, #fff, #fdfaf3);
   overflow-wrap: anywhere;
-  transition: border-color .2s, transform .2s;
+  transition: border-color .25s, transform .25s;
+  animation: cardIn .4s ease both;
 }
 
 .item:hover {
@@ -277,69 +478,387 @@ label {
   color: var(--gold-dark);
 }
 
-.error {
-  padding: 14px;
-  margin-top: 12px;
-  color: #a00000;
-  background: #fff1f1;
-  border: 1px solid #edc7c7;
-  border-radius: 12px;
-  white-space: pre-wrap;
+/* VIP TICKET */
+
+.ticket-card {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 90px;
+  margin: 17px 0;
+  overflow: hidden;
+  border: 1px solid #d8c28d;
+  border-radius: 19px;
+  background: #fff;
+  box-shadow: 0 9px 25px #a7823510;
+  animation: cardIn .45s ease both;
+  transition: transform .3s, box-shadow .3s;
+}
+
+.ticket-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 35px #a7823520;
+}
+
+.ticket-main {
+  position: relative;
+  min-width: 0;
+  padding: 20px;
+  background:
+    radial-gradient(ellipse at 100% 0%, #f7ebcb90, transparent 50%),
+    linear-gradient(135deg, #fff, #fffdf8);
+}
+
+.ticket-main::before {
+  content: "HOORI";
+  position: absolute;
+  left: 12px;
+  top: 35px;
+  color: #c4a45c;
+  font-size: 24px;
+  font-weight: 900;
+  opacity: .08;
+  letter-spacing: 3px;
+  pointer-events: none;
+}
+
+.ticket-brand {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-bottom: 16px;
+}
+
+.ticket-emblem {
+  display: grid;
+  width: 35px;
+  height: 35px;
+  place-items: center;
+  flex-shrink: 0;
+  color: var(--gold-dark);
+  border: 1px solid #dfca91;
+  border-radius: 11px;
+  background: linear-gradient(145deg, #fff, #f5e8c8);
+}
+
+.ticket-brand-name {
+  color: var(--gold-dark);
+  font-size: 15px;
+  font-weight: 900;
+  letter-spacing: 2px;
+}
+
+.ticket-vip {
+  display: block;
+  color: #a18a55;
+  font-size: 9px;
+  letter-spacing: 2px;
+}
+
+.ticket-divider {
+  height: 1px;
+  margin: 13px 0;
+  background: repeating-linear-gradient(
+    90deg,
+    #e6d4a8 0,
+    #e6d4a8 5px,
+    transparent 5px,
+    transparent 9px
+  );
+}
+
+.ticket-label {
+  margin-bottom: 4px;
+  color: #92856b;
+  font-size: 10px;
+}
+
+.ticket-name {
+  position: relative;
+  color: #846426;
+  font-size: 21px;
+  font-weight: 900;
   overflow-wrap: anywhere;
 }
 
-.success {
-  color: #187744;
-  line-height: 2;
+.ticket-details {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 12px;
+  margin-top: 15px;
 }
 
-.muted {
+.ticket-value {
+  color: #373126;
+  font-size: 12px;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+.ticket-code {
+  font-size: 15px;
+  letter-spacing: 1px;
+}
+
+.ticket-side {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  padding: 12px 5px;
+  text-align: center;
+  border-right: 1px dashed #bda05c;
+  background: linear-gradient(160deg, #f5e6be, #e6d09a 55%, #f9f0d8);
+}
+
+.ticket-side::before,
+.ticket-side::after {
+  content: "";
+  position: absolute;
+  right: -9px;
+  width: 17px;
+  height: 17px;
+  border: 1px solid #e7d7af;
+  border-radius: 50%;
+  background: #fff;
+}
+
+.ticket-side::before {
+  top: -9px;
+}
+
+.ticket-side::after {
+  bottom: -9px;
+}
+
+.ticket-side-symbol {
+  color: #92702e;
+  font-size: 27px;
+}
+
+.ticket-side-label {
+  color: #7d622c;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  writing-mode: vertical-rl;
+}
+
+.ticket-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.ticket-actions button {
+  padding: 8px 13px;
+  font-size: 11px;
+  border-radius: 10px;
+}
+
+/* SUGGESTED HOORI */
+
+.suggested-box {
+  position: relative;
+  padding: 24px;
+  overflow: hidden;
+  border: 1px solid #e5d4a8;
+  border-radius: 17px;
+  text-align: center;
+  background: linear-gradient(135deg, #fffef9, #f7efd9);
+}
+
+.suggested-symbol {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--gold);
+  font-size: 32px;
+  animation: floatStar 4s ease-in-out infinite;
+}
+
+.suggested-name {
+  color: var(--gold-dark);
+  font-size: 23px;
+  font-weight: 900;
+}
+
+/* EMPTY STATES */
+
+.empty {
+  padding: 28px 12px;
+  text-align: center;
   color: var(--muted);
   font-size: 13px;
-  line-height: 2;
+  line-height: 2.3;
 }
 
-#connection {
-  line-height: 2;
+.empty-icon {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 30px;
+  opacity: .75;
 }
+
+/* FOOTER */
 
 footer {
   margin-top: 45px;
-  padding: 28px 15px;
+  padding: 30px 15px;
   text-align: center;
   color: var(--muted);
-  background: #fff;
   border-top: 1px solid var(--border);
-  font-size: 12px;
+  background: rgba(255,255,255,.85);
+  font-size: 11px;
+  line-height: 2.2;
 }
 
 footer strong {
   color: var(--gold-dark);
-  letter-spacing: 3px;
+  font-size: 17px;
+  letter-spacing: 4px;
 }
+
+/* PRINT */
+
+#printArea {
+  display: none;
+}
+
+@media print {
+  body {
+    background: #fff !important;
+  }
+
+  body * {
+    visibility: hidden !important;
+  }
+
+  #printArea,
+  #printArea * {
+    visibility: visible !important;
+  }
+
+  #printArea {
+    display: block !important;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    width: 100%;
+    padding: 15px;
+    background: white;
+  }
+
+  .print-ticket {
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 25px;
+    color: #29261f;
+    border: 2px solid #c5a45d;
+    border-radius: 15px;
+    background: #fffdf8;
+    break-inside: avoid;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .print-brand {
+    color: #95752e;
+    text-align: center;
+    font-size: 27px;
+    font-weight: 900;
+    letter-spacing: 4px;
+  }
+
+  .print-subtitle {
+    margin: 7px 0 20px;
+    text-align: center;
+    color: #95752e;
+    font-size: 12px;
+  }
+
+  .print-gold-line {
+    height: 2px;
+    margin: 15px 0;
+    background: #c5a45d;
+  }
+
+  .print-ticket h2 {
+    justify-content: center;
+    font-size: 23px;
+  }
+
+  .print-ticket h2::before {
+    display: none;
+  }
+
+  .print-field {
+    margin: 14px 0;
+    padding: 12px;
+    border: 1px solid #e6d5aa;
+    border-radius: 9px;
+  }
+
+  .print-label {
+    display: block;
+    margin-bottom: 5px;
+    color: #95752e;
+    font-size: 11px;
+  }
+
+  .print-value {
+    font-size: 17px;
+    font-weight: 800;
+    overflow-wrap: anywhere;
+  }
+
+  .print-footer {
+    margin-top: 20px;
+    text-align: center;
+    color: #95752e;
+    font-size: 11px;
+  }
+
+  @page {
+    size: auto;
+    margin: 12mm;
+  }
+}
+
+/* MOBILE */
 
 @media (max-width: 600px) {
   header {
-    padding: 32px 12px 27px;
+    padding: 32px 12px 28px;
   }
 
   header::before {
     right: 5%;
+    font-size: 25px;
   }
 
   header::after {
     left: 5%;
+    font-size: 25px;
+  }
+
+  .logo {
+    letter-spacing: 5px;
   }
 
   nav {
     gap: 7px;
-    padding: 10px 7px;
+    padding: 9px 7px;
   }
 
   nav button {
-    flex: 1 1 27%;
-    padding: 11px 6px;
-    font-size: 12px;
+    flex: 1 1 28%;
+    padding: 11px 5px;
+    font-size: 11px;
   }
 
   main {
@@ -348,25 +867,72 @@ footer strong {
   }
 
   .card {
-    padding: 18px;
-    border-radius: 16px;
+    padding: 19px;
+    border-radius: 18px;
   }
 
   h2 {
     font-size: 18px;
   }
 
+  .welcome-card h2 {
+    font-size: 22px;
+  }
+
   .stat {
-    padding: 21px 8px;
+    padding: 20px 7px;
   }
 
   .stat strong {
-    font-size: 28px;
+    font-size: 29px;
+  }
+
+  .ticket-card {
+    grid-template-columns: minmax(0, 1fr) 58px;
+    border-radius: 15px;
+  }
+
+  .ticket-main {
+    padding: 15px 12px;
+  }
+
+  .ticket-brand {
+    gap: 7px;
+  }
+
+  .ticket-brand-name {
+    font-size: 13px;
+  }
+
+  .ticket-name {
+    font-size: 18px;
+  }
+
+  .ticket-side-symbol {
+    font-size: 23px;
+  }
+
+  .ticket-details {
+    gap: 9px;
+  }
+
+  .ticket-value {
+    font-size: 11px;
+  }
+
+  .ticket-code {
+    font-size: 13px;
+  }
+
+  .ticket-actions button {
+    flex: 1 1 auto;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     animation-duration: .01ms !important;
     transition-duration: .01ms !important;
     scroll-behavior: auto !important;
@@ -381,32 +947,45 @@ footer strong {
   <h1 class="logo">HOORI</h1>
   <div class="logo-line"></div>
   <p>سامانه مدیریت هوری</p>
+  <div class="header-badge">✦ LUXURY TICKET EXPERIENCE ✦</div>
 </header>
 
 <nav>
   <button onclick="showPage('home')">⌂ خانه</button>
-  <button onclick="showPage('hooris')">✦ فهرست هوری‌ها</button>
+  <button onclick="showPage('hooris')">✦ هوری‌ها</button>
   <button onclick="showPage('register')">＋ ثبت بلیت</button>
-  <button onclick="showPage('tickets')">▤ فهرست بلیت‌ها</button>
+  <button onclick="showPage('tickets')">🎟 بلیت‌ها</button>
   <button onclick="showPage('admin')">♛ مدیریت</button>
 </nav>
 
 <main>
 
+<!-- HOME -->
+
 <section id="home" class="page">
-  <div class="card">
-    <h2>خوش آمدید</h2>
-    <div id="connection">در حال اتصال...</div>
+
+  <div class="card welcome-card">
+    <span class="eyebrow">WELCOME TO HOORI</span>
+    <h2>به دنیای هوری خوش آمدید ✨</h2>
+    <p class="welcome-description">
+      سامانه مدیریت و صدور بلیت هوری با تجربه‌ای لوکس،
+      ساده و حرفه‌ای.
+    </p>
+    <div id="connection" class="muted">در حال بررسی اتصال...</div>
   </div>
 
   <div class="card">
     <h2>آمار سامانه</h2>
+
     <div class="stats">
       <div class="stat">
+        <span class="stat-icon">✦</span>
         <strong id="hooriCount">—</strong>
         <span>تعداد هوری‌ها</span>
       </div>
+
       <div class="stat">
+        <span class="stat-icon">🎟</span>
         <strong id="ticketCount">—</strong>
         <span>تعداد بلیت‌ها</span>
       </div>
@@ -414,28 +993,40 @@ footer strong {
   </div>
 
   <div class="card">
-    <h2>هوری پیشنهادی</h2>
-    <div id="suggested">در حال دریافت اطلاعات...</div>
+    <h2>هوری منتخب</h2>
+    <div id="suggested">
+      <div class="empty">در حال دریافت اطلاعات...</div>
+    </div>
   </div>
 
   <div class="card">
-    <h2>آخرین بلیت‌ها</h2>
-    <div id="latest">در حال دریافت اطلاعات...</div>
+    <h2>آخرین بلیت‌های صادرشده</h2>
+    <div id="latest">
+      <div class="empty">در حال دریافت اطلاعات...</div>
+    </div>
   </div>
 
   <div id="homeError"></div>
 </section>
 
+<!-- HOORIS -->
+
 <section id="hooris" class="page hidden">
   <div class="card">
-    <h2>فهرست هوری‌ها</h2>
-    <div id="hooriList">در حال دریافت...</div>
+    <h2>فهرست هوری‌ها ✦</h2>
+    <p class="muted">تمام هوری‌های ثبت‌شده در سامانه.</p>
+    <div id="hooriList">
+      <div class="empty">در حال دریافت اطلاعات...</div>
+    </div>
   </div>
 </section>
 
+<!-- REGISTER TICKET -->
+
 <section id="register" class="page hidden">
   <div class="card">
-    <h2>ثبت بلیت جدید</h2>
+    <span class="eyebrow">VIP TICKET CREATOR</span>
+    <h2>صدور بلیت جدید 🎟</h2>
 
     <label for="ticketHoori">نام هوری</label>
     <select id="ticketHoori">
@@ -443,60 +1034,109 @@ footer strong {
     </select>
 
     <label for="ticketCode">کد بلیت</label>
-    <input id="ticketCode" placeholder="کد بلیت را وارد کن">
+    <input
+      id="ticketCode"
+      placeholder="کد بلیت را وارد کن"
+      autocomplete="off"
+    >
 
     <label for="ticketDate">تاریخ صدور</label>
     <input id="ticketDate" type="date">
 
-    <button class="primary" onclick="registerTicket()">ثبت بلیت ✦</button>
+    <button class="primary action-button" onclick="registerTicket()">
+      ✦ ثبت و صدور بلیت
+    </button>
+
     <div id="registerMessage"></div>
   </div>
 </section>
 
+<!-- TICKETS -->
+
 <section id="tickets" class="page hidden">
   <div class="card">
-    <h2>فهرست بلیت‌ها</h2>
-    <input id="ticketSearch" placeholder="جست‌وجوی کد یا نام هوری..." oninput="filterTickets()">
-    <div id="ticketList">در حال دریافت...</div>
+    <h2>گالری بلیت‌های VIP</h2>
+
+    <p class="muted">
+      بلیت‌ها با طراحی اختصاصی نمایش داده می‌شوند.
+      برای چاپ هر بلیت، دکمه چاپ همان بلیت را انتخاب کن.
+    </p>
+
+    <input
+      id="ticketSearch"
+      placeholder="🔎 جست‌وجوی کد بلیت یا نام هوری..."
+      oninput="filterTickets()"
+    >
+
+    <div id="ticketList">
+      <div class="empty">در حال دریافت بلیت‌ها...</div>
+    </div>
   </div>
 </section>
 
+<!-- ADMIN -->
+
 <section id="admin" class="page hidden">
+
   <div class="card">
-    <h2>ورود مدیریت</h2>
+    <span class="eyebrow">ADMINISTRATION</span>
+    <h2>پنل مدیریت 👑</h2>
+
     <p class="muted">
-      برای مدیریت اطلاعات، رمز را وارد کن.
-      توجه: رمزگذاری داخل مرورگر امنیت واقعی ایجاد نمی‌کند؛
-      برای استفاده عمومی باید احراز هویت امن در سمت سرور فعال باشد.
+      برای مدیریت اطلاعات سامانه وارد شو.
+      توجه: رمز داخل کد مرورگر، امنیت واقعی ایجاد نمی‌کند.
+      برای انتشار عمومی باید احراز هویت امن در سمت سرور فعال باشد.
     </p>
 
     <label for="adminPassword">رمز مدیریت</label>
-    <input id="adminPassword" type="password" placeholder="رمز مدیریت">
+    <input
+      id="adminPassword"
+      type="password"
+      placeholder="رمز مدیریت را وارد کن"
+      autocomplete="current-password"
+    >
 
-    <button class="primary" onclick="adminLogin()">ورود به پنل مدیریت</button>
+    <button class="primary action-button" onclick="adminLogin()">
+      ورود به پنل مدیریت
+    </button>
+
     <div id="adminMessage"></div>
   </div>
 
   <div id="adminPanel" class="hidden">
-    <div class="card">
-      <h2>افزودن هوری جدید</h2>
-      <label for="newHooriName">نام هوری</label>
-      <input id="newHooriName" placeholder="نام هوری جدید">
 
-      <button class="primary" onclick="addHoori()">افزودن هوری ＋</button>
+    <div class="card">
+      <h2>افزودن هوری جدید ✨</h2>
+
+      <label for="newHooriName">نام هوری</label>
+      <input
+        id="newHooriName"
+        placeholder="نام هوری جدید"
+        autocomplete="off"
+      >
+
+      <button class="primary action-button" onclick="addHoori()">
+        ＋ افزودن هوری
+      </button>
+
       <div id="addHooriMessage"></div>
     </div>
 
     <div class="card">
       <h2>انتخاب هوری پیشنهادی</h2>
-      <label for="suggestSelect">هوری پیشنهادی</label>
+
+      <label for="suggestSelect">هوری منتخب</label>
       <select id="suggestSelect">
         <option value="">انتخاب هوری</option>
       </select>
 
-      <button class="primary" onclick="saveSuggested()">ذخیره انتخاب ✦</button>
+      <button class="primary action-button" onclick="saveSuggested()">
+        ✦ ذخیره هوری پیشنهادی
+      </button>
+
       <div id="suggestMessage"></div>
     </div>
+
   </div>
 </section>
 
@@ -504,339 +1144,4 @@ footer strong {
 
 <footer>
   <strong>HOORI</strong>
-  <div>سامانه مدیریت هوری ©</div>
-</footer>
-
-<script>
-'use strict';
-
-const API = 'https://mttcthmicgnryolaxxdy.supabase.co/rest/v1';
-const KEY = 'sb_publishable_P6QG6ILA-DN1_GpHwGnz2w_mn5DPwT7';
-
-let hooris = [];
-let tickets = [];
-let adminUnlocked = false;
-
-const $ = id => document.getElementById(id);
-
-function safe(value) {
-  return String(value ?? '').replace(/[&<>"']/g, c => ({
-    '&': '&amp;',
-    '<': '&lt;',
-    '>': '&gt;',
-    '"': '&quot;',
-    "'": '&#39;'
-  })[c]);
-}
-
-function message(id, text, error = false) {
-  const el = $(id);
-  el.className = error ? 'error' : 'success';
-  el.textContent = text;
-}
-
-async function api(table, options = {}) {
-  const params = new URLSearchParams(options.query || {});
-  const url = API + '/' + table + (params.size ? '?' + params.toString() : '');
-
-  const headers = {
-    apikey: KEY,
-    Authorization: 'Bearer ' + KEY,
-    Accept: 'application/json'
-  };
-
-  if (options.body !== undefined) {
-    headers['Content-Type'] = 'application/json';
-    headers['Prefer'] = options.prefer || 'return=minimal';
-  }
-
-  const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), 12000);
-
-  try {
-    const response = await fetch(url, {
-      method: options.method || 'GET',
-      headers,
-      body: options.body === undefined ? undefined : JSON.stringify(options.body),
-      signal: controller.signal
-    });
-
-    const text = await response.text();
-    let data = null;
-
-    try {
-      data = text ? JSON.parse(text) : null;
-    } catch {}
-
-    if (!response.ok) {
-      throw new Error(
-        (data && (data.message || data.error_description || data.hint)) ||
-        text ||
-        ('خطای HTTP ' + response.status)
-      );
-    }
-
-    return data;
-  } catch (error) {
-    if (error.name === 'AbortError') {
-      throw new Error('اتصال بیش از ۱۲ ثانیه طول کشید.');
-    }
-
-    if (error instanceof TypeError) {
-      throw new Error('اتصال به Supabase برقرار نشد؛ اینترنت یا دسترسی API را بررسی کن.');
-    }
-
-    throw error;
-  } finally {
-    clearTimeout(timer);
-  }
-}
-
-window.showPage = function(id) {
-  document.querySelectorAll('.page').forEach(p => p.classList.add('hidden'));
-  $(id).classList.remove('hidden');
-
-  if (id === 'hooris') loadHooris();
-  if (id === 'tickets') loadTickets();
-};
-
-function updateSelects() {
-  ['ticketHoori', 'suggestSelect'].forEach(id => {
-    const el = $(id);
-    const old = el.value;
-
-    el.innerHTML = '<option value="">انتخاب هوری</option>';
-
-    hooris.forEach(h => {
-      const option = document.createElement('option');
-      option.value = h.id;
-      option.textContent = h.name;
-      el.appendChild(option);
-    });
-
-    if (old) el.value = old;
-  });
-}
-
-async function loadHooris() {
-  try {
-    hooris = await api('hooris', {
-      query: {
-        select: 'id,name',
-        order: 'id.asc'
-      }
-    });
-
-    $('hooriCount').textContent = hooris.length;
-
-    $('hooriList').innerHTML = hooris.length
-      ? hooris.map(h => `<div class="item">✦ ${safe(h.name)}</div>`).join('')
-      : 'هنوز هوری‌ای ثبت نشده است.';
-
-    updateSelects();
-  } catch (e) {
-    $('hooriCount').textContent = 'خطا';
-    $('hooriList').innerHTML = `<div class="error">${safe(e.message)}</div>`;
-    message('homeError', 'خطای دریافت هوری‌ها: ' + e.message, true);
-    throw e;
-  }
-}
-
-function renderTickets(list) {
-  $('ticketList').innerHTML = list.length
-    ? list.map(t => `
-      <div class="item">
-        <b>کد بلیت:</b> ${safe(t.ticket_code)}<br>
-        <b>نام هوری:</b> ${safe(t.hoori_name)}<br>
-        <b>تاریخ:</b> ${safe(t.issue_date || 'ثبت نشده')}
-      </div>
-    `).join('')
-    : 'بلیتی ثبت نشده است.';
-}
-
-async function loadTickets() {
-  try {
-    tickets = await api('hoori_tickets', {
-      query: {
-        select: 'id,ticket_code,hoori_name,issue_date,created_at',
-        order: 'created_at.desc'
-      }
-    });
-
-    $('ticketCount').textContent = tickets.length;
-    renderTickets(tickets);
-
-    $('latest').innerHTML = tickets.length
-      ? tickets.slice(0, 5).map(t =>
-          `<div class="item">✦ ${safe(t.ticket_code)} — ${safe(t.hoori_name)}</div>`
-        ).join('')
-      : 'بلیتی ثبت نشده است.';
-  } catch (e) {
-    $('ticketCount').textContent = 'خطا';
-    $('ticketList').innerHTML = `<div class="error">${safe(e.message)}</div>`;
-    $('latest').innerHTML = `<div class="error">${safe(e.message)}</div>`;
-    message('homeError', 'خطای دریافت بلیت‌ها: ' + e.message, true);
-  }
-}
-
-window.filterTickets = function() {
-  const q = $('ticketSearch').value.toLowerCase().trim();
-
-  renderTickets(tickets.filter(t =>
-    String(t.ticket_code || '').toLowerCase().includes(q) ||
-    String(t.hoori_name || '').toLowerCase().includes(q)
-  ));
-};
-
-async function loadSuggested() {
-  try {
-    const data = await api('hoori_settings', {
-      query: {
-        select: 'suggested_hoori_id',
-        id: 'eq.1',
-        limit: '1'
-      }
-    });
-
-    const id = data[0]?.suggested_hoori_id;
-    const found = hooris.find(h => String(h.id) === String(id));
-
-    $('suggested').textContent = found
-      ? found.name
-      : 'هنوز هوری پیشنهادی انتخاب نشده است.';
-
-    if (id != null) $('suggestSelect').value = String(id);
-  } catch (e) {
-    $('suggested').innerHTML = `<div class="error">${safe(e.message)}</div>`;
-  }
-}
-
-window.registerTicket = async function() {
-  const id = $('ticketHoori').value;
-  const code = $('ticketCode').value.trim();
-  const date = $('ticketDate').value;
-
-  if (!id || !code || !date) {
-    message('registerMessage', 'همه فیلدها را تکمیل کن.', true);
-    return;
-  }
-
-  const selected = hooris.find(h => String(h.id) === String(id));
-
-  if (!selected) {
-    message('registerMessage', 'هوری انتخاب‌شده پیدا نشد.', true);
-    return;
-  }
-
-  try {
-    await api('hoori_tickets', {
-      method: 'POST',
-      body: {
-        ticket_code: code,
-        hoori_name: selected.name,
-        issue_date: date
-      }
-    });
-
-    message('registerMessage', 'بلیت با موفقیت ثبت شد.');
-    $('ticketCode').value = '';
-
-    await loadTickets();
-  } catch (e) {
-    message('registerMessage', 'ثبت انجام نشد: ' + e.message, true);
-  }
-};
-
-window.adminLogin = function() {
-  if ($('adminPassword').value === 'Hoori1405') {
-    adminUnlocked = true;
-    $('adminPanel').classList.remove('hidden');
-    message('adminMessage', 'ورود انجام شد.');
-  } else {
-    message('adminMessage', 'رمز اشتباه است.', true);
-  }
-};
-
-window.addHoori = async function() {
-  if (!adminUnlocked) return;
-
-  const name = $('newHooriName').value.trim();
-
-  if (!name) {
-    message('addHooriMessage', 'نام هوری را وارد کن.', true);
-    return;
-  }
-
-  try {
-    await api('hooris', {
-      method: 'POST',
-      body: { name }
-    });
-
-    $('newHooriName').value = '';
-    message('addHooriMessage', 'هوری با موفقیت اضافه شد.');
-
-    await loadHooris();
-  } catch (e) {
-    message('addHooriMessage', e.message, true);
-  }
-};
-
-window.saveSuggested = async function() {
-  if (!adminUnlocked) return;
-
-  const id = $('suggestSelect').value;
-
-  if (!id) {
-    message('suggestMessage', 'یک هوری انتخاب کن.', true);
-    return;
-  }
-
-  try {
-    await api('hoori_settings', {
-      method: 'POST',
-      query: { on_conflict: 'id' },
-      body: {
-        id: 1,
-        suggested_hoori_id: Number(id)
-      },
-      prefer: 'resolution=merge-duplicates,return=minimal'
-    });
-
-    message('suggestMessage', 'هوری پیشنهادی ذخیره شد.');
-    await loadSuggested();
-  } catch (e) {
-    message('suggestMessage', e.message, true);
-  }
-};
-
-async function init() {
-  $('connection').textContent = 'در حال بررسی اتصال...';
-
-  try {
-    await loadHooris();
-
-    await Promise.all([
-      loadTickets(),
-      loadSuggested()
-    ]);
-
-    $('connection').innerHTML =
-      '<span class="success">✦ اتصال برقرار شد.</span>';
-  } catch (e) {
-    $('connection').innerHTML =
-      `<div class="error">${safe(e.message)}</div>`;
-
-    message('homeError', e.message, true);
-  }
-}
-
-window.addEventListener('error', e => {
-  message('homeError', 'خطای JavaScript: ' + e.message, true);
-});
-
-init();
-</script>
-
-</body>
-</html>
+  <div>Luxury Ticket Management</div>
