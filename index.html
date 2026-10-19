@@ -3,1195 +3,428 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#11100d">
+<title>HOORI | Premium Ticket</title>
 
-<title>HOORI | سامانه بلیت</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&display=swap');
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+:root{
+    --gold:#e7c574;
+    --gold2:#b58a35;
+    --black:#11100d;
+    --panel:#191813;
+    --cream:#f8f5ec;
+    --muted:#a7a398;
+    --border:rgba(231,197,116,.18);
 }
-
-html{
-    scroll-behavior:smooth;
-}
-
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
 body{
     font-family:'Vazirmatn',sans-serif;
-    background:#f8f6f0;
-    color:#171717;
+    background:var(--black);
+    color:#f8f5ec;
     min-height:100vh;
 }
-
-/* ================= HEADER ================= */
-
-header{
-    position:sticky;
-    top:0;
-    z-index:1000;
-    background:rgba(255,255,255,.94);
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{
+    outline:2px solid var(--gold);outline-offset:3px
+}
+button:disabled{opacity:.5;cursor:not-allowed}
+::selection{background:var(--gold);color:#111}
+a{color:inherit;text-decoration:none}
+.topbar{
+    position:sticky;top:0;z-index:50;
+    background:rgba(17,16,13,.93);
     backdrop-filter:blur(18px);
-    border-bottom:1px solid #e7dcc2;
+    border-bottom:1px solid var(--border);
 }
-
 .nav{
-    max-width:1250px;
-    margin:auto;
-    height:76px;
-    padding:0 20px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
+    max-width:1350px;margin:auto;padding:15px 25px;
+    display:flex;align-items:center;justify-content:space-between;gap:20px
 }
-
-.logo{
-    display:flex;
-    align-items:center;
-    gap:12px;
-    cursor:pointer;
+.brand{display:flex;align-items:center;gap:12px;cursor:pointer}
+.brand-mark{
+    width:45px;height:45px;display:grid;place-items:center;
+    border:1px solid var(--gold);color:var(--gold);
+    font-size:24px;font-weight:900;transform:rotate(45deg);
+    border-radius:12px
 }
-
-.logo-icon{
-    width:46px;
-    height:46px;
-    border-radius:14px;
-    background:linear-gradient(135deg,#b98518,#f5d77b,#b47b10);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    color:white;
-    font-size:22px;
-    font-weight:900;
-    box-shadow:0 8px 25px rgba(180,125,15,.25);
+.brand-mark span{transform:rotate(-45deg)}
+.brand-name{font-size:25px;letter-spacing:3px;font-weight:900}
+.brand-name span{color:var(--gold)}
+.navlinks{display:flex;align-items:center;gap:6px}
+.navlinks button{
+    border:0;background:transparent;color:#d0cec5;
+    padding:11px 14px;border-radius:10px;font-size:13px;
+    transition:.2s
 }
-
-.logo-text{
-    font-size:25px;
-    font-weight:900;
-    letter-spacing:2px;
+.navlinks button:hover,.navlinks button.active{
+    color:var(--gold);background:rgba(231,197,116,.08)
 }
-
-.logo-text span{
-    color:#b58520;
+.navlinks .nav-admin{border:1px solid var(--border);color:var(--gold)}
+.mobile-toggle{
+    display:none;border:1px solid var(--border);color:var(--gold);
+    background:transparent;border-radius:10px;padding:9px 12px
 }
-
-.nav-links{
-    display:flex;
-    gap:7px;
-    align-items:center;
-}
-
-.nav-btn{
-    border:0;
-    background:transparent;
-    padding:11px 15px;
-    border-radius:12px;
-    font-family:inherit;
-    font-weight:600;
-    cursor:pointer;
-    transition:.25s;
-}
-
-.nav-btn:hover,
-.nav-btn.active{
-    background:#f4ead2;
-    color:#a87510;
-}
-
-.admin-btn{
-    background:#171717;
-    color:white;
-    padding:11px 18px;
-    border-radius:12px;
-}
-
-.admin-btn:hover{
-    background:#a87510;
-    color:white;
-}
-
-/* ================= HERO ================= */
-
+main{max-width:1350px;margin:auto;padding:25px}
+.page{display:none;animation:appear .35s ease}
+.page.active{display:block}
+@keyframes appear{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 .hero{
-    max-width:1250px;
-    margin:35px auto;
-    padding:0 20px;
+    min-height:500px;border:1px solid var(--border);border-radius:30px;
+    position:relative;overflow:hidden;display:flex;align-items:center;
+    padding:65px;background:
+    radial-gradient(ellipse at 85% 20%,rgba(206,166,74,.17),transparent 38%),
+    radial-gradient(ellipse at 15% 90%,rgba(206,166,74,.1),transparent 35%),
+    linear-gradient(125deg,#171610,#100f0c 65%,#211b0e);
 }
-
-.hero-box{
-    min-height:460px;
-    border-radius:34px;
-    position:relative;
-    overflow:hidden;
-    background:
-        radial-gradient(circle at 15% 20%,rgba(255,218,120,.18),transparent 28%),
-        radial-gradient(circle at 90% 80%,rgba(181,128,20,.15),transparent 30%),
-        linear-gradient(135deg,#171717,#27231a);
-    color:white;
-    display:flex;
-    align-items:center;
-    padding:70px;
-    box-shadow:0 25px 70px rgba(0,0,0,.14);
+.hero:before,.hero:after{
+    content:"";position:absolute;border:1px solid rgba(231,197,116,.12);
+    border-radius:50%;pointer-events:none
 }
-
-.hero-box:after{
-    content:"";
-    position:absolute;
-    width:500px;
-    height:500px;
-    border:1px solid rgba(231,191,83,.18);
-    border-radius:50%;
-    left:-160px;
-    bottom:-250px;
+.hero:before{width:490px;height:490px;left:-140px;top:-160px}
+.hero:after{width:350px;height:350px;left:-70px;top:-90px}
+.hero-content{position:relative;z-index:2;max-width:720px}
+.eyebrow{
+    display:inline-flex;align-items:center;gap:10px;color:var(--gold);
+    font-size:12px;letter-spacing:2px;border:1px solid var(--border);
+    background:rgba(231,197,116,.05);padding:9px 15px;border-radius:30px;
+    margin-bottom:25px
 }
-
-.hero-content{
-    max-width:700px;
-    position:relative;
-    z-index:2;
+.eyebrow:before{content:"";width:6px;height:6px;border-radius:50%;background:var(--gold)}
+.hero h1{font-size:clamp(42px,6vw,78px);font-weight:900;line-height:1.25;margin-bottom:20px}
+.hero h1 span{color:var(--gold)}
+.hero p{color:#b8b5a9;line-height:2.2;max-width:590px;font-size:15px}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
+.btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    border:1px solid transparent;border-radius:12px;padding:13px 20px;
+    font-weight:800;font-size:13px;transition:.25s
 }
-
-.badge{
-    display:inline-flex;
-    padding:8px 15px;
-    border-radius:30px;
-    background:rgba(231,191,83,.12);
-    border:1px solid rgba(231,191,83,.35);
-    color:#efd071;
-    font-size:13px;
-    margin-bottom:22px;
+.btn-gold{background:linear-gradient(135deg,#f2d992,#bc8e35);color:#17140d}
+.btn-gold:hover{transform:translateY(-2px);box-shadow:0 8px 25px #c29a3b30}
+.btn-outline{border-color:var(--border);background:transparent;color:var(--gold)}
+.btn-outline:hover{background:#e7c57412}
+.btn-dark{background:#27251e;color:#f5f0df;border-color:#38352a}
+.btn-danger{background:#361b18;color:#ffaaa0;border-color:#5b2924}
+.btn-block{width:100%}
+.hero-side{
+    position:absolute;left:5%;top:50%;transform:translateY(-50%) rotate(-8deg);
+    width:230px;height:300px;border:1px solid #e7c57470;border-radius:15px;
+    padding:18px;background:linear-gradient(140deg,#252116,#0c0b09);
+    box-shadow:0 30px 80px #0008;opacity:.88
 }
-
-.hero h1{
-    font-size:clamp(38px,6vw,70px);
-    line-height:1.15;
-    margin-bottom:20px;
-    font-weight:900;
-}
-
-.hero h1 span{
-    color:#e8c45e;
-}
-
-.hero p{
-    color:#cfcfcf;
-    line-height:2;
-    font-size:16px;
-    max-width:600px;
-}
-
-.hero-buttons{
-    display:flex;
-    gap:12px;
-    flex-wrap:wrap;
-    margin-top:30px;
-}
-
-.primary{
-    border:0;
-    cursor:pointer;
-    background:linear-gradient(135deg,#b77d0d,#e8c45e);
-    color:#171717;
-    font-family:inherit;
-    font-weight:800;
-    padding:14px 25px;
-    border-radius:14px;
-    transition:.25s;
-}
-
-.primary:hover{
-    transform:translateY(-3px);
-    box-shadow:0 12px 30px rgba(213,167,54,.25);
-}
-
-.secondary{
-    border:1px solid #665a3e;
-    background:transparent;
-    color:white;
-    cursor:pointer;
-    font-family:inherit;
-    font-weight:700;
-    padding:14px 25px;
-    border-radius:14px;
-}
-
-/* ================= STATS ================= */
-
+.hero-side:before{content:"";position:absolute;inset:8px;border:1px solid #e7c5742b;border-radius:9px}
+.hero-side .hs-logo{text-align:center;color:var(--gold);font-size:42px;font-weight:900;margin-top:15px}
+.hero-side .hs-line{height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:15px 0}
+.hero-side .hs-text{text-align:center;font-size:10px;letter-spacing:4px;color:#d6cba9}
+.hero-side .hs-bottom{text-align:center;color:var(--gold);font-size:11px;margin-top:22px}
 .stats{
-    max-width:1250px;
-    margin:0 auto 50px;
-    padding:0 20px;
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:16px;
+    display:grid;grid-template-columns:repeat(4,1fr);gap:15px;margin:22px 0 45px
 }
-
 .stat{
-    background:white;
-    border:1px solid #eadfc7;
-    border-radius:20px;
-    padding:25px;
-    text-align:center;
-    box-shadow:0 8px 30px rgba(0,0,0,.035);
+    padding:23px;background:linear-gradient(135deg,#1d1b15,#15140f);
+    border:1px solid var(--border);border-radius:18px;position:relative;overflow:hidden
 }
-
-.stat-icon{
-    font-size:25px;
-    margin-bottom:10px;
-}
-
-.stat-number{
-    font-size:29px;
-    font-weight:900;
-    color:#a87510;
-}
-
-.stat-title{
-    color:#777;
-    font-size:13px;
-    margin-top:4px;
-}
-
-/* ================= MAIN ================= */
-
-main{
-    max-width:1250px;
-    margin:auto;
-    padding:0 20px 80px;
-}
-
-.page{
-    display:none;
-}
-
-.page.active{
-    display:block;
-    animation:fade .35s ease;
-}
-
-@keyframes fade{
-    from{opacity:0;transform:translateY(10px)}
-    to{opacity:1;transform:translateY(0)}
-}
-
-.section-title{
-    margin-bottom:25px;
-}
-
-.section-title h2{
-    font-size:28px;
-    margin-bottom:6px;
-}
-
-.section-title p{
-    color:#777;
-}
-
-/* ================= HOORI CARDS ================= */
-
-.hoori-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:20px;
-}
-
+.stat:after{content:"";position:absolute;left:-25px;bottom:-45px;width:90px;height:90px;border:1px solid #e7c57412;border-radius:50%}
+.stat-top{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:12px}
+.stat-icon{color:var(--gold);font-size:21px}
+.stat strong{display:block;font-size:30px;color:var(--gold);margin-top:12px}
+.stat small{color:#888579;font-size:11px}
+.section-head{display:flex;justify-content:space-between;align-items:end;gap:15px;margin:25px 0}
+.section-head h2{font-size:27px;font-weight:900}
+.section-head p{color:var(--muted);font-size:13px;margin-top:6px}
+.kicker{color:var(--gold);font-size:10px;letter-spacing:2px;margin-bottom:7px}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
 .hoori-card{
-    background:white;
-    border:1px solid #e8dec8;
-    border-radius:24px;
-    overflow:hidden;
-    transition:.3s;
-    box-shadow:0 10px 35px rgba(0,0,0,.04);
+    background:linear-gradient(150deg,#201e17,#15140f);
+    border:1px solid var(--border);border-radius:22px;overflow:hidden;transition:.3s
 }
-
-.hoori-card:hover{
-    transform:translateY(-7px);
-    box-shadow:0 18px 45px rgba(0,0,0,.09);
+.hoori-card:hover{transform:translateY(-5px);border-color:#e7c57475;box-shadow:0 15px 40px #0004}
+.hoori-art{
+    height:175px;display:grid;place-items:center;position:relative;overflow:hidden;
+    background:radial-gradient(circle at center,#594723 0,#2b2414 40%,#17150f 75%)
 }
-
-.hoori-cover{
-    height:180px;
-    background:
-        radial-gradient(circle at 30% 20%,rgba(255,255,255,.25),transparent 20%),
-        linear-gradient(135deg,#9d6d0d,#e6c15e,#80600f);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    color:white;
-    font-size:58px;
-    font-weight:900;
+.hoori-art:before,.hoori-art:after{
+    content:"";position:absolute;border:1px solid #e7c57438;border-radius:50%
 }
-
-.hoori-body{
-    padding:22px;
+.hoori-art:before{width:180px;height:180px}
+.hoori-art:after{width:135px;height:135px}
+.hoori-art span{z-index:1;font-size:54px;color:var(--gold);font-weight:900}
+.hoori-card-body{padding:20px}
+.hoori-card h3{font-size:19px}
+.hoori-card p{color:var(--muted);font-size:12px;line-height:2;margin:9px 0 18px;min-height:42px;white-space:pre-wrap}
+.card-bottom{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.price{font-weight:900;color:var(--gold);font-size:14px}
+.muted{color:var(--muted)}
+.panel{
+    background:linear-gradient(145deg,#1b1a14,#14130f);
+    border:1px solid var(--border);border-radius:22px;padding:25px;margin-bottom:20px
 }
-
-.hoori-name{
-    font-size:21px;
-    font-weight:800;
-    margin-bottom:8px;
+.panel h3{font-size:17px;margin-bottom:18px}
+.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.field{display:flex;flex-direction:column;gap:8px}
+.field.full{grid-column:1/-1}
+.field label{font-size:12px;color:#d3cfbf;font-weight:700}
+.field input,.field select,.field textarea,.search-input{
+    width:100%;background:#100f0c;color:#f5f0df;border:1px solid #373327;
+    border-radius:11px;padding:13px 14px;outline:none;min-width:0
 }
-
-.hoori-desc{
-    color:#777;
-    font-size:13px;
-    line-height:1.8;
-    margin-bottom:18px;
-}
-
-.hoori-footer{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-}
-
-.price{
-    font-weight:900;
-    color:#a87510;
-}
-
-.small-btn{
-    border:0;
-    background:#f5ecd8;
-    color:#93650b;
-    padding:9px 14px;
-    border-radius:10px;
-    cursor:pointer;
-    font-family:inherit;
-    font-weight:700;
-}
-
-/* ================= FORMS ================= */
-
-.form-box{
-    background:white;
-    border:1px solid #e7dcc2;
-    border-radius:25px;
-    padding:30px;
-    max-width:800px;
-    margin:auto;
-    box-shadow:0 12px 40px rgba(0,0,0,.04);
-}
-
-.form-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:18px;
-}
-
-.field{
-    display:flex;
-    flex-direction:column;
-    gap:8px;
-}
-
-.field.full{
-    grid-column:1/-1;
-}
-
-.field label{
-    font-size:13px;
-    font-weight:700;
-}
-
-.field input,
-.field select,
-.field textarea{
-    width:100%;
-    border:1px solid #ddd2b9;
-    background:#fcfaf5;
-    padding:13px 14px;
-    border-radius:12px;
-    outline:none;
-    font-family:inherit;
-    transition:.2s;
-}
-
-.field input:focus,
-.field select:focus,
-.field textarea:focus{
-    border-color:#c29329;
-    box-shadow:0 0 0 3px rgba(194,147,41,.1);
-}
-
-textarea{
-    min-height:110px;
-    resize:vertical;
-}
-
-/* ================= TICKETS ================= */
-
-.ticket-list{
-    display:grid;
-    gap:16px;
-}
-
-.ticket{
-    background:white;
-    border:1px solid #e4d8bc;
-    border-radius:22px;
-    padding:22px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:20px;
-    position:relative;
-    overflow:hidden;
-}
-
-.ticket:before{
-    content:"";
-    width:5px;
-    height:100%;
-    background:linear-gradient(#b17b12,#e8c45e);
-    position:absolute;
-    right:0;
-    top:0;
-}
-
-.ticket-info{
-    padding-right:10px;
-}
-
-.ticket-name{
-    font-size:19px;
-    font-weight:800;
-}
-
-.ticket-meta{
-    color:#777;
-    font-size:13px;
-    margin-top:7px;
-}
-
-.ticket-badge{
-    padding:8px 13px;
-    border-radius:20px;
-    background:#f4ead1;
-    color:#966b13;
-    font-size:12px;
-    font-weight:800;
-}
-
-/* ================= SEARCH ================= */
-
-.search-box{
-    display:flex;
-    gap:10px;
-    margin-bottom:22px;
-}
-
-.search-box input{
-    flex:1;
-    padding:14px;
-    border:1px solid #ddd2b9;
-    border-radius:13px;
-    font-family:inherit;
-    outline:none;
-}
-
-/* ================= ADMIN ================= */
-
-.admin-login{
-    max-width:430px;
-    margin:30px auto;
-}
-
-.admin-panel{
-    display:none;
-}
-
-.dashboard{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:16px;
-    margin-bottom:25px;
-}
-
-.dashboard-card{
-    background:#191919;
-    color:white;
-    border-radius:20px;
-    padding:23px;
-}
-
-.dashboard-card small{
-    color:#aaa;
-}
-
-.dashboard-card strong{
-    display:block;
-    font-size:30px;
-    color:#e7c35e;
-    margin-top:8px;
-}
-
-.admin-section{
-    background:white;
-    border:1px solid #e5dac2;
-    border-radius:22px;
-    padding:25px;
-    margin-bottom:18px;
-}
-
-.admin-section h3{
-    margin-bottom:18px;
-}
-
-/* ================= EMPTY ================= */
-
+.field input:focus,.field select:focus,.field textarea:focus,.search-input:focus{border-color:var(--gold)}
+.field textarea{min-height:100px;resize:vertical}
+.field select option{background:#171610}
+.field input::placeholder,.field textarea::placeholder,.search-input::placeholder{color:#716d60}
+.help{font-size:11px;line-height:1.8;color:#8d897c}
+.search-row{display:flex;gap:10px;margin-bottom:18px}
+.search-row .search-input{flex:1}
+.ticket-list{display:grid;gap:20px}
 .empty{
-    text-align:center;
-    padding:55px 20px;
-    background:white;
-    border:1px dashed #d9cba9;
-    border-radius:20px;
-    color:#777;
+    padding:55px 20px;text-align:center;border:1px dashed #51472e;
+    border-radius:18px;color:#969182;background:#191811
 }
+.empty .empty-icon{font-size:38px;margin-bottom:12px;color:var(--gold)}
+.empty h3{color:#ded6c2;margin-bottom:8px}
+.empty p{font-size:12px;line-height:2}
 
-/* ================= FOOTER ================= */
-
-footer{
-    background:#171717;
-    color:white;
-    padding:40px 20px;
-    text-align:center;
+/* PREMIUM TICKET */
+.ticket-wrap{max-width:950px;width:100%;margin:auto}
+.ticket{
+    display:grid;grid-template-columns:minmax(0,1fr) 230px;
+    position:relative;isolation:isolate;overflow:hidden;border-radius:18px;
+    background:#f7f0dd;color:#282316;
+    border:1px solid #d2b86e;box-shadow:0 18px 55px #0005
 }
-
-.footer-logo{
-    color:#e5c15c;
-    font-size:27px;
-    font-weight:900;
-    letter-spacing:2px;
+.ticket:before{
+    content:"";position:absolute;inset:8px;border:1px solid #c5a24f88;
+    border-radius:12px;pointer-events:none;z-index:-1
 }
-
-footer p{
-    color:#999;
-    font-size:13px;
-    margin-top:10px;
+.ticket-main{padding:27px 30px 25px;position:relative}
+.ticket-top{display:flex;align-items:center;justify-content:space-between;gap:15px}
+.ticket-brand{display:flex;align-items:center;gap:11px}
+.ticket-brand-mark{
+    width:42px;height:42px;border:1px solid #a98129;display:grid;place-items:center;
+    color:#a98129;font-weight:900;font-size:24px;transform:rotate(45deg)
 }
-
-/* ================= RESPONSIVE ================= */
-
-@media(max-width:900px){
-    .nav-links{
-        display:none;
-    }
-
-    .hero-box{
-        padding:45px 28px;
-    }
-
-    .stats{
-        grid-template-columns:repeat(2,1fr);
-    }
-
-    .hoori-grid{
-        grid-template-columns:repeat(2,1fr);
-    }
+.ticket-brand-mark span{transform:rotate(-45deg)}
+.ticket-brand-name{font-size:22px;letter-spacing:2px;font-weight:900}
+.ticket-brand-name span{color:#a98129}
+.ticket-label{
+    font-size:10px;letter-spacing:2px;color:#8c6b23;border:1px solid #cdb36b;
+    padding:7px 10px;border-radius:30px;white-space:nowrap
 }
-
-@media(max-width:600px){
-    .nav{
-        height:68px;
+.ticket-rule{height:1px;background:linear-gradient(90deg,transparent,#c5a24f,transparent);margin:22px 0}
+.ticket-caption{font-size:10px;color:#92762e;letter-spacing:2px;margin-bottom:7px}
+.ticket-holder{font-size:clamp(22px,4vw,35px);font-weight:900;overflow-wrap:anywhere}
+.ticket-details{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 15px;margin-top:25px}
+.ticket-detail small{display:block;color:#8b8065;font-size:10px;margin-bottom:6px}
+.ticket-detail strong{font-size:13px;overflow-wrap:anywhere}
+.ticket-footer{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:25px}
+.ticket-code{font-size:10px;letter-spacing:1px;color:#78612a;direction:ltr}
+.ticket-side{
+    position:relative;border-right:2px dashed #c8b16f;
+    padding:25px 17px;display:flex;flex-direction:column;align-items:center;
+    justify-content:center;text-align:center;
+    background:linear-gradient(155deg,#e7d49a,#f8f0d7 55%,#dfc681)
+}
+.ticket-side:before,.ticket-side:after{
+    content:"";position:absolute;right:-11px;width:20px;height:20px;
+    border-radius:50%;background:#11100d;border:1px solid #c7a750
+}
+.ticket-side:before{top:-11px}
+.ticket-side:after{bottom:-11px}
+.vip-seal{
+    width:75px;height:75px;border:1px solid #a47b24;outline:1px solid #a47b2470;
+    outline-offset:5px;border-radius:50%;display:grid;place-items:center;
+    color:#916a1d;font-weight:900;font-size:25px;margin-bottom:22px
+}
+.ticket-side h3{font-size:17px;color:#624816}
+.ticket-side p{font-size:10px;color:#7e693b;line-height:2;margin-top:7px}
+.qr-box{
+    width:100px;height:100px;background:white;border:5px solid white;
+    margin:20px 0 12px;display:grid;place-items:center;overflow:hidden
+}
+.qr-box img{width:100%;height:100%;object-fit:contain}
+.qr-fallback{font-size:9px;color:#5d4b26;line-height:1.8}
+.ticket-side .ticket-code{font-size:9px;overflow-wrap:anywhere}
+.ticket-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:15px}
+.ticket-actions button{padding:10px 13px;font-size:11px}
+.ticket-note{font-size:10px;color:#80775f;line-height:1.9;margin-top:15px}
+.badge{
+    display:inline-block;padding:5px 9px;border-radius:30px;
+    font-size:10px;background:#2b271b;color:var(--gold);border:1px solid var(--border)
+}
+.admin-layout{display:grid;grid-template-columns:225px minmax(0,1fr);gap:20px}
+.admin-sidebar{
+    background:#191811;border:1px solid var(--border);border-radius:20px;
+    padding:18px;height:max-content;position:sticky;top:95px
+}
+.admin-sidebar .side-title{color:var(--gold);font-size:11px;letter-spacing:1px;padding:9px 10px 15px}
+.admin-sidebar button{
+    display:block;width:100%;text-align:right;background:transparent;color:#bdb8a7;
+    border:0;padding:12px;border-radius:10px;font-size:12px;margin-bottom:4px
+}
+.admin-sidebar button:hover,.admin-sidebar button.active{background:#302919;color:var(--gold)}
+.admin-content{min-width:0}
+.admin-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:18px}
+.admin-stat{background:#201e16;border:1px solid var(--border);padding:17px;border-radius:15px}
+.admin-stat small{display:block;color:#9c9787;font-size:11px}
+.admin-stat strong{display:block;color:var(--gold);font-size:25px;margin-top:9px}
+.table-wrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:450px}
+th,td{text-align:right;padding:14px 12px;border-bottom:1px solid #373327;font-size:12px}
+th{color:var(--gold);font-weight:800}
+td{color:#d5d0c1}
+td .btn{padding:7px 10px;font-size:10px}
+.login-box{max-width:440px;margin:40px auto}
+.login-icon{
+    width:65px;height:65px;margin:0 auto 20px;display:grid;place-items:center;
+    border:1px solid var(--gold);border-radius:18px;color:var(--gold);font-size:27px
+}
+.login-box h2{text-align:center;margin-bottom:8px}
+.login-box>p{text-align:center;color:var(--muted);font-size:12px;line-height:2;margin-bottom:24px}
+.admin-tab{display:none}
+.admin-tab.active{display:block;animation:appear .3s}
+.toast-container{position:fixed;bottom:20px;left:20px;z-index:200;display:grid;gap:10px}
+.toast{
+    background:#242219;color:#f5f0df;border:1px solid var(--border);
+    border-radius:12px;padding:14px 18px;min-width:230px;max-width:calc(100vw - 40px);
+    box-shadow:0 10px 30px #0006;font-size:12px;animation:appear .25s
+}
+.toast.success{border-color:#627c46}
+.toast.error{border-color:#91443b}
+footer{border-top:1px solid var(--border);padding:35px 20px;text-align:center;color:#827d6e}
+.footer-brand{font-size:24px;letter-spacing:4px;color:var(--gold);font-weight:900}
+footer p{font-size:11px;margin-top:10px}
+.mobile-bottom{display:none}
+.hidden{display:none!important}
+@media(max-width:1000px){
+    .hero{padding:45px}
+    .hero-side{left:3%;opacity:.35}
+    .hero-content{max-width:680px}
+    .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .admin-layout{grid-template-columns:180px minmax(0,1fr)}
+}
+@media(max-width:760px){
+    .nav{padding:12px 16px}
+    .mobile-toggle{display:block}
+    .navlinks{
+        display:none;position:absolute;top:69px;right:12px;left:12px;
+        background:#191811;border:1px solid var(--border);border-radius:16px;
+        padding:10px;flex-direction:column;align-items:stretch;box-shadow:0 20px 50px #0009
     }
-
-    .logo-text{
-        font-size:21px;
+    .navlinks.open{display:flex}
+    .navlinks button{text-align:right}
+    main{padding:17px 14px 45px}
+    .hero{min-height:440px;padding:35px 23px;border-radius:22px}
+    .hero h1{font-size:43px}
+    .hero p{font-size:13px}
+    .hero-side{left:-100px;opacity:.18}
+    .stats{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:15px 0 35px}
+    .stat{padding:17px}
+    .stat strong{font-size:25px}
+    .section-head h2{font-size:23px}
+    .grid{grid-template-columns:1fr}
+    .form-grid{grid-template-columns:1fr}
+    .field.full{grid-column:auto}
+    .panel{padding:19px}
+    .admin-layout{grid-template-columns:1fr}
+    .admin-sidebar{position:static;display:flex;overflow-x:auto;gap:5px;padding:10px}
+    .admin-sidebar .side-title{display:none}
+    .admin-sidebar button{white-space:nowrap;width:auto;margin:0;padding:10px}
+    .admin-stats{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
+    .admin-stat{padding:12px}
+    .admin-stat strong{font-size:21px}
+    .ticket{grid-template-columns:minmax(0,1fr) 115px;border-radius:13px}
+    .ticket-main{padding:19px 16px}
+    .ticket-side{padding:20px 8px}
+    .ticket-brand-name{font-size:17px}
+    .ticket-brand-mark{width:31px;height:31px;font-size:18px}
+    .ticket-label{font-size:8px;padding:6px}
+    .ticket-details{gap:15px 8px}
+    .ticket-detail strong{font-size:11px}
+    .ticket-holder{font-size:22px}
+    .vip-seal{width:54px;height:54px;font-size:19px;margin-bottom:15px}
+    .ticket-side h3{font-size:13px}
+    .qr-box{width:75px;height:75px}
+    .ticket-footer{align-items:flex-start;flex-direction:column}
+    .ticket-actions button{flex:1}
+    .mobile-bottom{
+        display:flex;position:fixed;bottom:0;right:0;left:0;z-index:45;
+        background:#171610f5;backdrop-filter:blur(15px);
+        border-top:1px solid var(--border);padding:8px 5px calc(8px + env(safe-area-inset-bottom));
+        justify-content:space-around
     }
-
-    .hero{
-        margin-top:18px;
+    .mobile-bottom button{
+        border:0;background:transparent;color:#9f9a89;font-size:10px;
+        display:flex;flex-direction:column;align-items:center;gap:3px;padding:5px 8px
     }
-
-    .hero-box{
-        min-height:430px;
-        border-radius:25px;
-        padding:35px 23px;
+    .mobile-bottom button span{font-size:18px}
+    .mobile-bottom button.active{color:var(--gold)}
+    body{padding-bottom:65px}
+}
+@media(max-width:390px){
+    .ticket{grid-template-columns:minmax(0,1fr) 95px}
+    .ticket-main{padding:16px 12px}
+    .ticket-brand-name{font-size:15px}
+    .ticket-label{letter-spacing:0}
+    .ticket-details{grid-template-columns:1fr 1fr}
+    .ticket-side .ticket-code{font-size:8px}
+    .hero h1{font-size:37px}
+}
+@media print{
+    @page{size:auto;margin:10mm}
+    body{background:#fff!important;color:#000!important;padding:0!important}
+    body *{visibility:hidden!important}
+    #printArea,#printArea *{visibility:visible!important}
+    #printArea{
+        display:block!important;position:absolute;top:0;right:0;left:0;
+        width:100%;margin:0;padding:0
     }
-
-    .hero h1{
-        font-size:39px;
-    }
-
-    .stats{
-        grid-template-columns:1fr 1fr;
-        padding:0 15px;
-    }
-
-    .hoori-grid{
-        grid-template-columns:1fr;
-    }
-
-    main{
-        padding:0 15px 60px;
-    }
-
-    .form-grid{
-        grid-template-columns:1fr;
-    }
-
-    .field.full{
-        grid-column:auto;
-    }
-
-    .ticket{
-        align-items:flex-start;
-        flex-direction:column;
-    }
-
-    .dashboard{
-        grid-template-columns:1fr;
-    }
+    .ticket-wrap{max-width:none}
+    .ticket{box-shadow:none!important;print-color-adjust:exact;-webkit-print-color-adjust:exact}
+    .ticket-actions,.ticket-note{display:none!important}
+    .topbar,footer,.mobile-bottom,.toast-container{display:none!important}
 }
 </style>
 </head>
 
 <body>
 
-<header>
-<div class="nav">
-
-    <div class="logo" onclick="go('home')">
-        <div class="logo-icon">H</div>
-        <div class="logo-text">HOO<span>RI</span></div>
+<header class="topbar">
+    <div class="nav">
+        <div class="brand" onclick="go('home')">
+            <div class="brand-mark"><span>H</span></div>
+            <div class="brand-name">HOO<span>RI</span></div>
+        </div>
+        <button class="mobile-toggle" onclick="toggleMenu()" aria-label="باز کردن منو">☰ منو</button>
+        <nav class="navlinks" id="navlinks">
+            <button class="active" data-page="home" onclick="go('home')">خانه</button>
+            <button data-page="hooris" onclick="go('hooris')">حوری‌ها</button>
+            <button data-page="register" onclick="go('register')">ثبت بلیت</button>
+            <button data-page="tickets" onclick="go('tickets')">بلیت‌ها</button>
+            <button class="nav-admin" data-page="admin" onclick="go('admin')">♛ مدیریت</button>
+        </nav>
     </div>
-
-    <div class="nav-links">
-        <button class="nav-btn active" onclick="go('home')">خانه</button>
-        <button class="nav-btn" onclick="go('hooris')">حوری‌ها</button>
-        <button class="nav-btn" onclick="go('register')">ثبت بلیت</button>
-        <button class="nav-btn" onclick="go('tickets')">بلیت‌ها</button>
-        <button class="nav-btn admin-btn" onclick="go('admin')">مدیریت</button>
-    </div>
-
-</div>
 </header>
-
-
-<!-- ================= HOME ================= -->
-
-<section id="home" class="page active">
-
-<div class="hero">
-<div class="hero-box">
-
-<div class="hero-content">
-
-<div class="badge">✦ سامانه رسمی HOORI</div>
-
-<h1>
-تجربه‌ای متفاوت با
-<span>HOORI</span>
-</h1>
-
-<p>
-محیطی مدرن برای مشاهده حوری‌ها، ثبت بلیت و مدیریت اطلاعات.
-همه‌چیز ساده، سریع و حرفه‌ای طراحی شده است.
-</p>
-
-<div class="hero-buttons">
-<button class="primary" onclick="go('hooris')">
-مشاهده حوری‌ها
-</button>
-
-<button class="secondary" onclick="go('register')">
-ثبت بلیت جدید
-</button>
-</div>
-
-</div>
-
-</div>
-</div>
-
-
-<div class="stats">
-
-<div class="stat">
-<div class="stat-icon">👑</div>
-<div class="stat-number" id="statHoori">0</div>
-<div class="stat-title">حوری فعال</div>
-</div>
-
-<div class="stat">
-<div class="stat-icon">🎟️</div>
-<div class="stat-number" id="statTicket">0</div>
-<div class="stat-title">بلیت ثبت شده</div>
-</div>
-
-<div class="stat">
-<div class="stat-icon">⭐</div>
-<div class="stat-number">VIP</div>
-<div class="stat-title">تجربه ویژه</div>
-</div>
-
-<div class="stat">
-<div class="stat-icon">⚡</div>
-<div class="stat-number">24/7</div>
-<div class="stat-title">دسترسی سریع</div>
-</div>
-
-</div>
-
-</section>
-
-
-<!-- ================= HOORIS ================= -->
 
 <main>
 
-<section id="hooris" class="page">
-
-<div class="section-title">
-<h2>حوری‌ها</h2>
-<p>لیست حوری‌های موجود در HOORI</p>
-</div>
-
-<div id="hooriGrid" class="hoori-grid"></div>
-
-</section>
-
-
-<!-- ================= REGISTER ================= -->
-
-<section id="register" class="page">
-
-<div class="section-title">
-<h2>ثبت بلیت</h2>
-<p>اطلاعات خود را وارد کنید</p>
-</div>
-
-<div class="form-box">
-
-<div class="form-grid">
-
-<div class="field">
-<label>نام و نام خانوادگی</label>
-<input id="fullName" type="text" placeholder="مثلاً محمد رضایی">
-</div>
-
-<div class="field">
-<label>شماره تماس</label>
-<input id="phone" type="text" placeholder="09xxxxxxxxx">
-</div>
-
-<div class="field">
-<label>انتخاب حوری</label>
-<select id="hooriSelect">
-<option value="">انتخاب کنید</option>
-</select>
-</div>
-
-<div class="field">
-<label>نوع بلیت</label>
-<select id="ticketType">
-<option value="عادی">بلیت عادی</option>
-<option value="VIP">بلیت VIP</option>
-</select>
-</div>
-
-<div class="field full">
-<label>توضیحات</label>
-<textarea id="description" placeholder="توضیحات دلخواه..."></textarea>
-</div>
-
-<div class="field full">
-<button class="primary" onclick="registerTicket()">
-🎟️ ثبت بلیت
-</button>
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- ================= TICKETS ================= -->
-
-<section id="tickets" class="page">
-
-<div class="section-title">
-<h2>بلیت‌های ثبت شده</h2>
-<p>بلیت‌های ثبت شده در سیستم</p>
-</div>
-
-<div class="search-box">
-<input id="ticketSearch" oninput="renderTickets()" placeholder="جستجوی نام...">
-</div>
-
-<div id="ticketList" class="ticket-list"></div>
-
-</section>
-
-
-<!-- ================= ADMIN ================= -->
-
-<section id="admin" class="page">
-
-<div class="section-title">
-<h2>پنل مدیریت</h2>
-<p>مدیریت اطلاعات HOORI</p>
-</div>
-
-<div id="adminLogin" class="form-box admin-login">
-
-<div class="field">
-<label>رمز مدیریت</label>
-<input id="adminPassword" type="password" placeholder="رمز مدیریت">
-</div>
-
-<br>
-
-<button class="primary" onclick="loginAdmin()">
-ورود به پنل
-</button>
-
-</div>
-
-
-<div id="adminPanel" class="admin-panel">
-
-<div class="dashboard">
-
-<div class="dashboard-card">
-<small>تعداد حوری‌ها</small>
-<strong id="adminHooriCount">0</strong>
-</div>
-
-<div class="dashboard-card">
-<small>تعداد بلیت‌ها</small>
-<strong id="adminTicketCount">0</strong>
-</div>
-
-<div class="dashboard-card">
-<small>وضعیت سیستم</small>
-<strong>فعال</strong>
-</div>
-
-</div>
-
-
-<div class="admin-section">
-
-<h3>➕ افزودن حوری</h3>
-
-<div class="form-grid">
-
-<div class="field">
-<label>نام حوری</label>
-<input id="newHooriName" placeholder="نام">
-</div>
-
-<div class="field">
-<label>قیمت</label>
-<input id="newHooriPrice" placeholder="مثلاً 500,000">
-</div>
-
-<div class="field full">
-<label>توضیحات</label>
-<textarea id="newHooriDesc" placeholder="توضیحات حوری"></textarea>
-</div>
-
-<div class="field full">
-<button class="primary" onclick="addHoori()">
-افزودن حوری
-</button>
-</div>
-
-</div>
-
-</div>
-
-
-<div class="admin-section">
-
-<h3>👑 لیست حوری‌ها</h3>
-
-<div id="adminHooris"></div>
-
-</div>
-
-
-<div class="admin-section">
-
-<h3>🎟️ مدیریت بلیت‌ها</h3>
-
-<div id="adminTickets"></div>
-
-</div>
-
-<br>
-
-<button class="small-btn" onclick="logoutAdmin()">
-خروج از مدیریت
-</button>
-
-</div>
-
-</section>
-
-</main>
-
-
-<footer>
-
-<div class="footer-logo">HOORI</div>
-
-<p>
-ساخته شده برای یک تجربه متفاوت ✦
-</p>
-
-</footer>
-
-
-<script>
-
-/* ================= DATA ================= */
-
-let hoorIs = JSON.parse(localStorage.getItem("hooriData")) || [
-    {
-        name:"حوری طلایی",
-        price:"500,000",
-        desc:"انتخاب ویژه با امکانات اختصاصی"
-    },
-    {
-        name:"حوری VIP",
-        price:"1,000,000",
-        desc:"بلیت ویژه برای تجربه VIP"
-    },
-    {
-        name:"حوری کلاسیک",
-        price:"300,000",
-        desc:"انتخاب محبوب کاربران"
-    }
-];
-
-let tickets = JSON.parse(localStorage.getItem("ticketData")) || [];
-
-let adminLogged = false;
-
-
-/* ================= SAVE ================= */
-
-function saveData(){
-
-    localStorage.setItem(
-        "hooriData",
-        JSON.stringify(hoorIs)
-    );
-
-    localStorage.setItem(
-        "ticketData",
-        JSON.stringify(tickets)
-    );
-
-}
-
-
-/* ================= NAVIGATION ================= */
-
-function go(page){
-
-    document.querySelectorAll(".page").forEach(p=>{
-        p.classList.remove("active");
-    });
-
-    document.getElementById(page).classList.add("active");
-
-    document.querySelectorAll(".nav-btn").forEach(btn=>{
-        btn.classList.remove("active");
-    });
-
-    window.scrollTo({
-        top:0,
-        behavior:"smooth"
-    });
-
-    renderAll();
-
-}
-
-
-/* ================= HOORI ================= */
-
-function renderHooris(){
-
-    const grid = document.getElementById("hooriGrid");
-
-    if(!grid) return;
-
-    if(hoorIs.length === 0){
-
-        grid.innerHTML = `
-        <div class="empty">
-            هنوز حوری‌ای ثبت نشده است.
-        </div>
-        `;
-
-        return;
-    }
-
-    grid.innerHTML = hoorIs.map((h,index)=>`
-
-        <div class="hoori-card">
-
-            <div class="hoori-cover">
-                H
+<section class="page active" id="home">
+    <div class="hero">
+        <div class="hero-content">
+            <div class="eyebrow">THE PREMIUM EXPERIENCE</div>
+            <h1>فراتر از یک<br><span>بلیت معمولی.</span></h1>
+            <p>به دنیای HOORI خوش آمدی؛ تجربه‌ای متفاوت با طراحی اختصاصی، بلیت‌های ویژه و فضایی که جزئیاتش برای خاص بودن ساخته شده.</p>
+            <div class="hero-actions">
+                <button class="btn btn-gold" onclick="go('register')">✦ ثبت بلیت جدید</button>
+                <button class="btn btn-outline" onclick="go('tickets')">مشاهده بلیت‌ها ←</button>
             </div>
-
-            <div class="hoori-body">
-
-                <div class="hoori-name">
-                    ${escapeHTML(h.name)}
-                </div>
-
-                <div class="hoori-desc">
-                    ${escapeHTML(h.desc)}
-                </div>
-
-                <div class="hoori-footer">
-
-                    <div class="price">
-                        ${escapeHTML(h.price)} تومان
-                    </div>
-
-                    <button
-                    class="small-btn"
-                    onclick="selectHoori(${index})">
-                    انتخاب
-                    </button>
-
-                </div>
-
-            </div>
-
         </div>
-
-    `).join("");
-
-}
-
-
-/* ================= SELECT ================= */
-
-function loadHooriSelect(){
-
-    const select = document.getElementById("hooriSelect");
-
-    if(!select) return;
-
-    select.innerHTML =
-    `<option value="">انتخاب کنید</option>` +
-    hoorIs.map((h,i)=>`
-        <option value="${i}">
-            ${escapeHTML(h.name)}
-        </option>
-    `).join("");
-
-}
-
-
-function selectHoori(index){
-
-    go("register");
-
-    setTimeout(()=>{
-
-        const select =
-        document.getElementById("hooriSelect");
-
-        if(select){
-            select.value = index;
-        }
-
-    },100);
-
-}
-
-
-/* ================= REGISTER TICKET ================= */
-
-function registerTicket(){
-
-    const name =
-    document.getElementById("fullName").value.trim();
-
-    const phone =
-    document.getElementById("phone").value.trim();
-
-    const hooriIndex =
-    document.getElementById("hooriSelect").value;
-
-    const type =
-    document.getElementById("ticketType").value;
-
-    const desc =
-    document.getElementById("description").value.trim();
-
-
-    if(!name){
-        alert("نام و نام خانوادگی را وارد کنید.");
-        return;
-    }
-
-    if(!phone){
-        alert("شماره تماس را وارد کنید.");
-        return;
-    }
-
-    if(hooriIndex === ""){
-        alert("یک حوری انتخاب کنید.");
-        return;
-    }
-
-
-    const ticket = {
-
-        id:Date.now(),
-
-        name:name,
-
-        phone:phone,
-
-        hoori:
-        hoorIs[hooriIndex].name,
-
-        type:type,
-
-        description:desc,
-
-        date:new Date().toLocaleString("fa-IR")
-
-    };
-
-
-    tickets.unshift(ticket);
-
-    saveData();
-
-    document.getElementById("fullName").value="";
-    document.getElementById("phone").value="";
-    document.getElementById("hooriSelect").value="";
-    document.getElementById("description").value="";
-
-    alert("✅ بلیت با موفقیت ثبت شد!");
-
-    renderAll();
-
-    go("tickets");
-
-}
-
-
-/* ================= TICKETS ================= */
-
-function renderTickets(){
-
-    const box =
-    document.getEleme
+        <div class="hero-side" aria-hidden="true">
+            <div class="hs-text">EXCLUSIVE ACCESS</div>
+            <div class="hs-logo">H</div>
+            <div class="hs-line"></div>
+            
