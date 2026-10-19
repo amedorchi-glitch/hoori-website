@@ -1,4 +1,5 @@
 <script>
+document.addEventListener('DOMContentLoaded', () => {
 'use strict';
 
 const API = 'https://mttcthmicgnryolaxxdy.supabase.co/rest/v1';
@@ -487,11 +488,13 @@ function logout() {
 
 $('ticketForm').addEventListener('reset', () => {
     setTimeout(() => {
-        $('issueDate').value = localDate();
-    }, 0);
-});
-
-$('issueDate').value = localDate();
+        if ($('issueDate')) {
+    $('issueDate').value = localDate();
+}
 
 loadAll();
-     </script>
+
+window.go = go;
+window.logout = logout;
+});
+</script>
