@@ -3,48 +3,33 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HOORI | سامانه مدیریت</title>
+
+<title>HOORI</title>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&display=swap');
-
 *{
     box-sizing:border-box;
-    margin:0;
-    padding:0;
 }
 
 body{
-    font-family:Vazirmatn,Tahoma,sans-serif;
-    background:
-        radial-gradient(circle at top right,#fff7dc 0,#fff 35%),
-        #fff;
+    margin:0;
+    font-family:Tahoma,Arial,sans-serif;
+    background:#fff;
     color:#222;
-    min-height:100vh;
 }
 
-button,input,select{
-    font-family:inherit;
-}
-
-button{
-    cursor:pointer;
+header{
+    background:#fff;
+    border-bottom:2px solid #d4af37;
+    padding:15px;
+    position:sticky;
+    top:0;
+    z-index:10;
 }
 
 .header{
-    position:sticky;
-    top:0;
-    z-index:100;
-    background:rgba(255,255,255,.94);
-    backdrop-filter:blur(15px);
-    border-bottom:1px solid #ead9a5;
-    box-shadow:0 5px 25px rgba(180,145,45,.08);
-}
-
-.nav{
-    max-width:1200px;
+    max-width:1000px;
     margin:auto;
-    padding:15px 20px;
     display:flex;
     align-items:center;
     justify-content:space-between;
@@ -52,52 +37,35 @@ button{
 }
 
 .logo{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    font-size:24px;
-    font-weight:900;
-    color:#b18419;
+    font-size:28px;
+    font-weight:bold;
+    color:#b88a00;
 }
 
-.logo span{
-    width:45px;
-    height:45px;
-    display:grid;
-    place-items:center;
-    border-radius:14px;
-    background:linear-gradient(135deg,#fff8d9,#d6ae3c);
-    color:#6c4d00;
-    box-shadow:0 7px 20px rgba(190,145,35,.2);
-}
-
-.nav-buttons{
+nav{
     display:flex;
     flex-wrap:wrap;
-    gap:8px;
+    gap:7px;
 }
 
-.nav-buttons button{
-    border:1px solid #ead9a5;
-    background:#fff;
-    color:#806116;
+nav button{
+    border:1px solid #d4af37;
+    background:white;
+    color:#8a6700;
     padding:10px 14px;
-    border-radius:12px;
-    transition:.2s;
+    border-radius:10px;
+    cursor:pointer;
 }
 
-.nav-buttons button:hover,
-.nav-buttons button.active{
-    background:linear-gradient(135deg,#d9b64d,#a87912);
+nav button:hover{
+    background:#d4af37;
     color:white;
-    border-color:#c79c2e;
-    transform:translateY(-2px);
 }
 
-.container{
-    max-width:1200px;
+main{
+    max-width:1000px;
     margin:auto;
-    padding:35px 20px 70px;
+    padding:25px 15px;
 }
 
 .page{
@@ -109,192 +77,82 @@ button{
 }
 
 .hero{
-    position:relative;
-    overflow:hidden;
-    padding:65px 35px;
-    border-radius:30px;
-    background:
-        linear-gradient(135deg,rgba(255,255,255,.98),rgba(255,248,221,.96));
-    border:1px solid #ead9a5;
-    box-shadow:0 20px 60px rgba(167,126,22,.12);
-}
-
-.hero:before{
-    content:"";
-    position:absolute;
-    width:300px;
-    height:300px;
-    border-radius:50%;
-    background:rgba(216,177,63,.12);
-    top:-160px;
-    left:-100px;
+    padding:50px 25px;
+    text-align:center;
+    border:1px solid #e3cc7b;
+    border-radius:20px;
+    background:linear-gradient(135deg,#fff,#fff8df);
 }
 
 .hero h1{
-    position:relative;
-    font-size:clamp(35px,6vw,70px);
-    font-weight:900;
-    color:#a8780f;
-    margin-bottom:12px;
-}
-
-.hero h2{
-    position:relative;
-    font-size:22px;
-    color:#555;
-    margin-bottom:12px;
+    color:#b88a00;
+    font-size:50px;
+    margin:0;
 }
 
 .hero p{
-    position:relative;
     color:#777;
-    max-width:700px;
     line-height:2;
 }
 
-.gold-line{
-    width:90px;
-    height:5px;
-    border-radius:20px;
-    background:linear-gradient(90deg,#8e6507,#efd477,#a8790d);
-    margin:20px 0;
-}
-
-.section-title{
-    margin:40px 0 20px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:15px;
-}
-
-.section-title h2{
-    color:#86600b;
-}
-
-.stats{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:16px;
-    margin-top:25px;
-}
-
-.stat{
-    padding:24px;
-    background:#fff;
-    border:1px solid #ead9a5;
-    border-radius:20px;
-    box-shadow:0 10px 30px rgba(150,110,20,.08);
-}
-
-.stat small{
-    color:#888;
-}
-
-.stat strong{
-    display:block;
-    margin-top:7px;
-    font-size:30px;
-    color:#a87912;
-}
-
-.cards{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:18px;
-}
-
-.card{
-    background:white;
-    border:1px solid #ead9a5;
-    border-radius:22px;
-    padding:22px;
-    box-shadow:0 10px 35px rgba(150,110,20,.08);
-    transition:.2s;
-}
-
-.card:hover{
-    transform:translateY(-4px);
-    box-shadow:0 18px 45px rgba(150,110,20,.14);
-}
-
-.card h3{
-    color:#9a6d0c;
-    margin-bottom:8px;
-}
-
-.card p{
-    color:#777;
-    line-height:1.9;
-}
-
-.form-card{
-    max-width:700px;
-    margin:auto;
-    background:#fff;
-    border:1px solid #ead9a5;
-    border-radius:25px;
-    padding:28px;
-    box-shadow:0 15px 45px rgba(150,110,20,.1);
-}
-
-label{
-    display:block;
-    margin:14px 0 7px;
-    font-weight:700;
-    color:#70530c;
-}
-
-input,select{
-    width:100%;
-    padding:14px 15px;
-    border:1px solid #dfcf9c;
-    border-radius:13px;
-    outline:none;
-    background:#fffdf6;
-    color:#333;
-    font-size:15px;
-}
-
-input:focus,select:focus{
-    border-color:#b88b1e;
-    box-shadow:0 0 0 3px rgba(184,139,30,.1);
+button{
+    cursor:pointer;
 }
 
 .btn{
-    border:none;
-    border-radius:13px;
-    padding:13px 18px;
-    margin-top:15px;
-    font-weight:800;
-    transition:.2s;
+    border:0;
+    padding:12px 18px;
+    border-radius:10px;
+    margin-top:12px;
+    font-weight:bold;
 }
 
-.btn:hover{
-    transform:translateY(-2px);
+.gold{
+    background:#c49a22;
+    color:white;
 }
 
-.btn-gold{
-    background:linear-gradient(135deg,#d9b64d,#9c7010);
-    color:#fff;
-    box-shadow:0 8px 20px rgba(156,112,16,.2);
+.red{
+    background:#c0392b;
+    color:white;
 }
 
-.btn-white{
-    background:#fff;
-    color:#8b650c;
-    border:1px solid #dec990;
+.card{
+    border:1px solid #e3cc7b;
+    border-radius:15px;
+    padding:20px;
+    margin:12px 0;
+    background:white;
 }
 
-.btn-red{
-    background:#b93838;
-    color:#fff;
+.grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+}
+
+input,
+select{
+    width:100%;
+    padding:13px;
+    margin:8px 0 15px;
+    border:1px solid #d8c78f;
+    border-radius:9px;
+    font-size:15px;
+}
+
+.form{
+    max-width:600px;
+    margin:auto;
+    border:1px solid #e3cc7b;
+    border-radius:18px;
+    padding:25px;
 }
 
 .message{
-    margin-top:15px;
     padding:12px;
-    border-radius:12px;
+    margin-top:12px;
+    border-radius:8px;
     display:none;
 }
 
@@ -302,832 +160,1201 @@ input:focus,select:focus{
     display:block;
 }
 
-.ticket{
-    position:relative;
-    overflow:hidden;
-    background:linear-gradient(135deg,#fff,#fff8df);
-    border:1px solid #e1c978;
-    border-radius:22px;
-    padding:25px;
+.success{
+    background:#e8f7e8;
+    color:#237523;
 }
 
-.ticket.vip{
-    background:linear-gradient(135deg,#fff8d7,#f4dda0,#fff);
+.error{
+    background:#ffe8e8;
+    color:#a52828;
 }
 
-.ticket:after{
-    content:"VIP";
-    position:absolute;
-    top:15px;
-    left:-28px;
-    background:#b48716;
-    color:#fff;
-    padding:5px 35px;
-    transform:rotate(-35deg);
-    font-size:11px;
-    font-weight:900;
-}
-
-.ticket h3{
-    color:#8c650d;
-    margin-bottom:15px;
-}
-
-.ticket p{
-    margin:7px 0;
-    color:#555;
-}
-
-.empty{
+footer{
     text-align:center;
-    padding:40px;
+    padding:30px;
     color:#999;
-    border:1px dashed #d9c58b;
-    border-radius:20px;
+    border-top:1px solid #eee;
+    margin-top:50px;
 }
 
-.admin-box{
-    background:#fff;
-    border:1px solid #ead9a5;
-    border-radius:25px;
-    padding:25px;
-    margin-bottom:20px;
-    box-shadow:0 12px 40px rgba(150,110,20,.08);
-}
+@media(max-width:700px){
 
-.admin-actions{
-    display:flex;
-    flex-wrap:wrap;
-    gap:10px;
-}
-
-.admin-list{
-    margin-top:20px;
-}
-
-.list-row{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:10px;
-    padding:15px;
-    margin-bottom:10px;
-    background:#fffdf6;
-    border:1px solid #eee1bd;
-    border-radius:15px;
-}
-
-.list-row span{
-    color:#6e5310;
-    font-weight:700;
-}
-
-.footer{
-    text-align:center;
-    padding:25px;
-    color:#999;
-    border-top:1px solid #ead9a5;
-}
-
-@media(max-width:850px){
-    .stats{
-        grid-template-columns:repeat(2,1fr);
-    }
-
-    .cards{
-        grid-template-columns:1fr 1fr;
-    }
-
-    .nav{
+    .header{
         flex-direction:column;
     }
 
-    .nav-buttons{
-        justify-content:center;
-    }
-}
-
-@media(max-width:600px){
-    .container{
-        padding:20px 12px 50px;
-    }
-
-    .hero{
-        padding:40px 22px;
-    }
-
-    .stats,
-    .cards{
+    .grid{
         grid-template-columns:1fr;
     }
 
-    .nav-buttons button{
-        padding:8px 10px;
-        font-size:12px;
+    nav{
+        justify-content:center;
     }
 
-    .list-row{
-        flex-direction:column;
-        align-items:stretch;
-    }
 }
 </style>
 </head>
 
 <body>
 
-<header class="header">
-    <div class="nav">
-        <div class="logo">
-            <span>H</span>
-            HOORI
-        </div>
+<header>
 
-        <div class="nav-buttons">
-            <button id="nav-home" onclick="showPage('home')">خانه</button>
-            <button id="nav-hooris" onclick="showPage('hooris')">حوری‌ها</button>
-            <button id="nav-register" onclick="showPage('register')">ثبت تیکت</button>
-            <button id="nav-tickets" onclick="showPage('tickets')">تیکت‌ها</button>
-            <button id="nav-admin" onclick="showPage('admin')">مدیریت</button>
-        </div>
-    </div>
+<div class="header">
+
+<div class="logo">
+HOORI
+</div>
+
+<nav>
+
+<button onclick="showPage('home')">
+خانه
+</button>
+
+<button onclick="showPage('hooris')">
+حوری‌ها
+</button>
+
+<button onclick="showPage('register')">
+ثبت تیکت
+</button>
+
+<button onclick="showPage('tickets')">
+تیکت‌ها
+</button>
+
+<button onclick="showPage('admin')">
+مدیریت
+</button>
+
+</nav>
+
+</div>
+
 </header>
 
-<main class="container">
+
+<main>
+
 
 <!-- HOME -->
+
 <section id="home" class="page active">
 
-    <div class="hero">
-        <h1>HOORI</h1>
-        <div class="gold-line"></div>
-        <h2>سامانه اختصاصی مدیریت و ثبت تیکت</h2>
-        <p>
-            یک محیط ساده، سریع و لوکس برای مدیریت حوری‌ها،
-            ثبت تیکت‌ها و مشاهده اطلاعات.
-        </p>
+<div class="hero">
 
-        <button class="btn btn-gold" onclick="showPage('register')">
-            ثبت تیکت جدید
-        </button>
-    </div>
+<h1>HOORI</h1>
 
-    <div class="stats">
-        <div class="stat">
-            <small>تعداد حوری‌ها</small>
-            <strong id="statHooris">0</strong>
-        </div>
+<p>
+به سامانه HOORI خوش آمدید
+</p>
 
-        <div class="stat">
-            <small>تعداد تیکت‌ها</small>
-            <strong id="statTickets">0</strong>
-        </div>
+<button
+class="btn gold"
+onclick="showPage('register')"
+>
+ثبت تیکت
+</button>
 
-        <div class="stat">
-            <small>تیکت‌های VIP</small>
-            <strong id="statVip">0</strong>
-        </div>
+</div>
 
-        <div class="stat">
-            <small>وضعیت سامانه</small>
-            <strong>فعال</strong>
-        </div>
-    </div>
+<div class="card">
 
-    <div class="section-title">
-        <h2>حوری پیشنهادی</h2>
-    </div>
+<h2>
+حوری پیشنهادی
+</h2>
 
-    <div id="suggestedHome"></div>
+<div id="suggested">
+هنوز حوری پیشنهادی انتخاب نشده.
+</div>
 
-    <div class="section-title">
-        <h2>آخرین تیکت‌ها</h2>
-    </div>
-
-    <div id="latestTickets" class="cards"></div>
+</div>
 
 </section>
+
 
 <!-- HOORIS -->
+
 <section id="hooris" class="page">
 
-    <div class="section-title">
-        <h2>لیست حوری‌ها</h2>
-    </div>
+<h2>
+حوری‌ها
+</h2>
 
-    <div id="hooriList" class="cards"></div>
+<div id="hooriList" class="grid"></div>
 
 </section>
+
 
 <!-- REGISTER -->
+
 <section id="register" class="page">
 
-    <div class="section-title">
-        <h2>ثبت تیکت</h2>
-    </div>
+<h2>
+ثبت تیکت
+</h2>
 
-    <div class="form-card">
+<div class="form">
 
-        <label>نام و نام خانوادگی</label>
-        <input id="fullName" type="text" placeholder="مثلاً: محمد رضایی">
+<label>
+نام و نام خانوادگی
+</label>
 
-        <label>انتخاب حوری</label>
-        <select id="hooriSelect"></select>
+<input
+id="fullName"
+type="text"
+placeholder="نام و نام خانوادگی"
+/>
 
-        <label>نوع تیکت</label>
-        <select id="ticketType">
-            <option value="normal">عادی</option>
-            <option value="vip">VIP</option>
-        </select>
 
-        <button class="btn btn-gold" onclick="registerTicket()">
-            ثبت تیکت
-        </button>
+<label>
+انتخاب حوری
+</label>
 
-        <div id="registerMessage" class="message"></div>
+<select id="hooriSelect">
 
-    </div>
+<option value="">
+انتخاب کنید
+</option>
+
+</select>
+
+
+<label>
+نوع تیکت
+</label>
+
+<select id="ticketType">
+
+<option value="normal">
+عادی
+</option>
+
+<option value="vip">
+VIP
+</option>
+
+</select>
+
+
+<button
+class="btn gold"
+onclick="registerTicket()"
+>
+ثبت تیکت
+</button>
+
+
+<div id="registerMessage" class="message"></div>
+
+</div>
 
 </section>
+
 
 <!-- TICKETS -->
+
 <section id="tickets" class="page">
 
-    <div class="section-title">
-        <h2>تیکت‌ها</h2>
-    </div>
+<h2>
+تیکت‌ها
+</h2>
 
-    <div class="form-card">
-        <label>جستجوی تیکت</label>
-        <input
-            id="ticketSearch"
-            type="text"
-            placeholder="نام یا حوری..."
-            oninput="filterTickets()"
-        >
-    </div>
+<input
+id="search"
+placeholder="جستجو..."
+oninput="renderTickets()"
+/>
 
-    <br>
-
-    <div id="ticketList" class="cards"></div>
+<div id="ticketList"></div>
 
 </section>
 
+
 <!-- ADMIN -->
+
 <section id="admin" class="page">
 
-    <div id="adminLoginBox" class="form-card">
+<div id="loginBox" class="form">
 
-        <h2>ورود به پنل مدیریت</h2>
+<h2>
+ورود مدیریت
+</h2>
 
-        <label>رمز مدیریت</label>
+<input
+id="password"
+type="password"
+placeholder="رمز مدیریت"
+/>
 
-        <input
-            id="adminPassword"
-            type="password"
-            placeholder="رمز مدیریت"
-            onkeydown="if(event.key==='Enter') adminLogin()"
-        >
+<button
+class="btn gold"
+onclick="login()"
+>
+ورود
+</button>
 
-        <button class="btn btn-gold" onclick="adminLogin()">
-            ورود به پنل
-        </button>
+<div id="loginMessage" class="message"></div>
 
-        <div id="loginMessage" class="message"></div>
-
-    </div>
-
-
-    <div id="adminPanel" style="display:none;">
-
-        <div class="admin-box">
-
-            <h2>پنل مدیریت</h2>
-
-            <div class="gold-line"></div>
-
-            <div class="admin-actions">
-                <button class="btn btn-white" onclick="logoutAdmin()">
-                    خروج
-                </button>
-
-                <button class="btn btn-gold" onclick="showPage('register')">
-                    ثبت تیکت
-                </button>
-            </div>
-
-        </div>
+</div>
 
 
-        <div class="admin-box">
+<div id="panel" style="display:none;">
 
-            <h3>➕ افزودن حوری</h3>
+<div class="card">
 
-            <label>نام حوری</label>
-            <input id="newHoori" placeholder="نام حوری">
+<h2>
+پنل مدیریت
+</h2>
 
-            <button class="btn btn-gold" onclick="addHoori()">
-                افزودن حوری
-            </button>
+<button
+class="btn red"
+onclick="logout()"
+>
+خروج
+</button>
 
-            <div id="addHooriMessage" class="message"></div>
-
-        </div>
-
-
-        <div class="admin-box">
-
-            <h3>⭐ حوری پیشنهادی</h3>
-
-            <label>انتخاب حوری</label>
-
-            <select id="suggestedSelect"></select>
-
-            <button class="btn btn-gold" onclick="saveSuggested()">
-                ذخیره پیشنهاد
-            </button>
-
-        </div>
+</div>
 
 
-        <div class="admin-box">
+<div class="card">
 
-            <h3>مدیریت حوری‌ها</h3>
+<h3>
+افزودن حوری
+</h3>
 
-            <div id="adminHooriList" class="admin-list"></div>
+<input
+id="newHoori"
+placeholder="نام حوری"
+/>
 
-        </div>
+<button
+class="btn gold"
+onclick="addHoori()"
+>
+افزودن
+</button>
+
+</div>
 
 
-        <div class="admin-box">
+<div class="card">
 
-            <h3>مدیریت تیکت‌ها</h3>
+<h3>
+حوری پیشنهادی
+</h3>
 
-            <div id="adminTicketList" class="admin-list"></div>
+<select id="suggestSelect"></select>
 
-        </div>
+<button
+class="btn gold"
+onclick="saveSuggested()"
+>
+ذخیره
+</button>
 
-    </div>
+</div>
+
+
+<div class="card">
+
+<h3>
+مدیریت حوری‌ها
+</h3>
+
+<div id="adminHooris"></div>
+
+</div>
+
+
+<div class="card">
+
+<h3>
+مدیریت تیکت‌ها
+</h3>
+
+<div id="adminTickets"></div>
+
+</div>
+
+</div>
 
 </section>
 
 </main>
 
-<footer class="footer">
-    HOORI © تمامی حقوق محفوظ است
+
+<footer>
+
+HOORI ©
+
 </footer>
 
 
 <script>
 
 /* =========================
-   DATA
+   اطلاعات
 ========================= */
 
-const ADMIN_PASSWORD = "Hoori1405";
+const PASSWORD = "Hoori1405";
 
 let hoorIs = [];
+
 let tickets = [];
+
 let suggested = "";
 
 
 /* =========================
-   STORAGE
+   ذخیره اطلاعات
 ========================= */
 
-function loadData(){
+function save(){
 
-    try{
+localStorage.setItem(
+"hoori_hooris",
+JSON.stringify(hoorIs)
+);
 
-        const savedHooris =
-            localStorage.getItem("hoori_hooris");
+localStorage.setItem(
+"hoori_tickets",
+JSON.stringify(tickets)
+);
 
-        const savedTickets =
-            localStorage.getItem("hoori_tickets");
-
-        const savedSuggested =
-            localStorage.getItem("hoori_suggested");
-
-        hoorIs = savedHooris
-            ? JSON.parse(savedHooris)
-            : [];
-
-        tickets = savedTickets
-            ? JSON.parse(savedTickets)
-            : [];
-
-        suggested = savedSuggested || "";
-
-    }catch(error){
-
-        console.log(error);
-
-        hoorIs = [];
-        tickets = [];
-        suggested = "";
-    }
-
-}
-
-
-function saveData(){
-
-    localStorage.setItem(
-        "hoori_hooris",
-        JSON.stringify(hoorIs)
-    );
-
-    localStorage.setItem(
-        "hoori_tickets",
-        JSON.stringify(tickets)
-    );
-
-    localStorage.setItem(
-        "hoori_suggested",
-        suggested
-    );
+localStorage.setItem(
+"hoori_suggested",
+suggested
+);
 
 }
 
 
 /* =========================
-   ESCAPE
+   دریافت اطلاعات
 ========================= */
 
-function esc(text){
+function load(){
 
-    return String(text ?? "")
-        .replaceAll("&","&amp;")
-        .replaceAll("<","&lt;")
-        .replaceAll(">","&gt;")
-        .replaceAll('"',"&quot;")
-        .replaceAll("'","&#039;");
+try{
+
+hoorIs =
+JSON.parse(
+localStorage.getItem("hoori_hooris")
+) || [];
+
+tickets =
+JSON.parse(
+localStorage.getItem("hoori_tickets")
+) || [];
+
+suggested =
+localStorage.getItem("hoori_suggested")
+|| "";
+
+}catch(e){
+
+hoorIs=[];
+tickets=[];
+suggested="";
+
+}
 
 }
 
 
 /* =========================
-   PAGE SYSTEM
+   تغییر صفحه
 ========================= */
 
 function showPage(page){
 
-    document.querySelectorAll(".page")
-        .forEach(function(section){
+const pages =
+document.querySelectorAll(".page");
 
-            section.classList.remove("active");
+pages.forEach(function(item){
 
-        });
+item.classList.remove("active");
 
-
-    const target =
-        document.getElementById(page);
-
-    if(target){
-        target.classList.add("active");
-    }
+});
 
 
-    document.querySelectorAll(".nav-buttons button")
-        .forEach(function(btn){
+const selected =
+document.getElementById(page);
 
-            btn.classList.remove("active");
+if(selected){
 
-        });
+selected.classList.add("active");
 
-
-    const nav =
-        document.getElementById("nav-" + page);
-
-    if(nav){
-        nav.classList.add("active");
-    }
+}
 
 
-    window.scrollTo({
-        top:0,
-        behavior:"smooth"
-    });
+if(page === "hooris"){
 
+renderHooris();
 
-    if(page === "home"){
-        updateHome();
-    }
+}
 
-    if(page === "hooris"){
-        renderHooris();
-    }
+if(page === "register"){
 
-    if(page === "register"){
-        loadSelects();
-    }
+loadSelect();
 
-    if(page === "tickets"){
-        renderTickets();
-    }
+}
 
-    if(page === "admin"){
-        renderAdminLists();
-    }
+if(page === "tickets"){
+
+renderTickets();
+
+}
+
+if(page === "admin"){
+
+renderAdmin();
+
+}
+
+if(page === "home"){
+
+renderSuggested();
+
+}
+
+window.scrollTo(0,0);
 
 }
 
 
 /* =========================
-   HOME
-========================= */
-
-function updateHome(){
-
-    document.getElementById("statHooris")
-        .textContent = hoorIs.length;
-
-    document.getElementById("statTickets")
-        .textContent = tickets.length;
-
-    document.getElementById("statVip")
-        .textContent =
-            tickets.filter(function(t){
-                return t.type === "vip";
-            }).length;
-
-
-    renderSuggested();
-    renderLatest();
-
-}
-
-
-/* =========================
-   SUGGESTED
-========================= */
-
-function renderSuggested(){
-
-    const box =
-        document.getElementById("suggestedHome");
-
-    if(!box) return;
-
-
-    if(!suggested){
-
-        box.innerHTML = `
-            <div class="empty">
-                هنوز حوری پیشنهادی انتخاب نشده است.
-            </div>
-        `;
-
-        return;
-    }
-
-
-    box.innerHTML = `
-        <div class="card">
-            <h3>⭐ ${esc(suggested)}</h3>
-            <p>حوری پیشنهادی فعلی</p>
-        </div>
-    `;
-
-}
-
-
-/* =========================
-   LATEST
-========================= */
-
-function renderLatest(){
-
-    const box =
-        document.getElementById("latestTickets");
-
-    if(!box) return;
-
-
-    const list =
-        tickets.slice(-3).reverse();
-
-
-    if(!list.length){
-
-        box.innerHTML = `
-            <div class="empty">
-                هنوز تیکتی ثبت نشده است.
-            </div>
-        `;
-
-        return;
-    }
-
-
-    box.innerHTML =
-        list.map(function(t){
-
-            return `
-                <div class="ticket ${t.type === "vip" ? "vip" : ""}">
-                    <h3>${esc(t.fullName)}</h3>
-                    <p>حوری: ${esc(t.hoori)}</p>
-                    <p>نوع: ${t.type === "vip" ? "VIP" : "عادی"}</p>
-                </div>
-            `;
-
-        }).join("");
-
-}
-
-
-/* =========================
-   HOORIS
+   نمایش حوری‌ها
 ========================= */
 
 function renderHooris(){
 
-    const box =
-        document.getElementById("hooriList");
+const box =
+document.getElementById("hooriList");
 
-    if(!box) return;
+if(!hoorIs.length){
 
+box.innerHTML =
+"<div class='card'>هنوز حوری‌ای اضافه نشده.</div>";
 
-    if(!hoorIs.length){
+return;
 
-        box.innerHTML = `
-            <div class="empty">
-                هنوز حوری‌ای اضافه نشده است.
-            </div>
-        `;
-
-        return;
-    }
+}
 
 
-    box.innerHTML =
-        hoorIs.map(function(name){
+box.innerHTML =
+hoorIs.map(function(name){
 
-            return `
-                <div class="card">
-                    <h3>👑 ${esc(name)}</h3>
-                    <p>عضو سامانه HOORI</p>
-                </div>
-            `;
+return `
 
-        }).join("");
+<div class="card">
+
+<h3>
+👑 ${name}
+</h3>
+
+<p>
+عضو سامانه HOORI
+</p>
+
+</div>
+
+`;
+
+}).join("");
 
 }
 
 
 /* =========================
-   SELECTS
+   انتخاب حوری
 ========================= */
 
-function loadSelects(){
+function loadSelect(){
 
-    const select =
-        document.getElementById("hooriSelect");
+const select =
+document.getElementById("hooriSelect");
 
-    const suggestedSelect =
-        document.getElementById("suggestedSelect");
-
-
-    if(select){
-
-        if(!hoorIs.length){
-
-            select.innerHTML =
-                `<option value="">ابتدا یک حوری اضافه کنید</option>`;
-
-        }else{
-
-            select.innerHTML =
-                `<option value="">انتخاب کنید</option>` +
-                hoorIs.map(function(name){
-
-                    return `
-                        <option value="${esc(name)}">
-                            ${esc(name)}
-                        </option>
-                    `;
-
-                }).join("");
-
-        }
-
-    }
+select.innerHTML =
+"<option value=''>انتخاب کنید</option>";
 
 
-    if(suggestedSelect){
+hoorIs.forEach(function(name){
 
-        suggestedSelect.innerHTML =
-            `<option value="">بدون پیشنهاد</option>` +
-            hoorIs.map(function(name){
+const option =
+document.createElement("option");
 
-                return `
-                    <option
-                        value="${esc(name)}"
-                        ${suggested === name ? "selected" : ""}
-                    >
-                        ${esc(name)}
-                    </option>
-                `;
+option.value = name;
 
-            }).join("");
+option.textContent = name;
 
-    }
+select.appendChild(option);
+
+});
 
 }
 
 
 /* =========================
-   REGISTER TICKET
+   ثبت تیکت
 ========================= */
 
 function registerTicket(){
 
-    const fullName =
-        document.getElementById("fullName")
-        .value.trim();
+const name =
+document.getElementById("fullName")
+.value
+.trim();
 
-    const hoori =
-        document.getElementById("hooriSelect")
-        .value;
+const hoori =
+document.getElementById("hooriSelect")
+.value;
 
-    const type =
-        document.getElementById("ticketType")
-        .value;
+const type =
+document.getElementById("ticketType")
+.value;
 
-    const message =
-        document.getElementById("registerMessage");
-
-
-    if(!fullName){
-
-        message.textContent =
-            "لطفاً نام و نام خانوادگی را وارد کنید.";
-
-        message.style.background = "#ffe8e8";
-        message.style.color = "#9c2929";
-        message.classList.add("show");
-
-        return;
-    }
+const message =
+document.getElementById("registerMessage");
 
 
-    if(!hoori){
+if(!name){
 
-        message.textContent =
-            "لطفاً یک حوری انتخاب کنید.";
+message.textContent =
+"نام و نام خانوادگی را وارد کنید.";
 
-        message.style.background = "#ffe8e8";
-        message.style.color = "#9c2929";
-        message.classList.add("show");
+message.className =
+"message show error";
 
-        return;
-    }
+return;
 
-
-    const ticket = {
-
-        id:
-            Date.now().toString(),
-
-        fullName:
-            fullName,
-
-        hoori:
-            hoori,
-
-        type:
-            type,
-
-        date:
-            new Date().toLocaleString("fa-IR")
-
-    };
+}
 
 
-    tickets.push(ticket);
+if(!hoori){
 
-    saveData();
+message.textContent =
+"یک حوری انتخاب کنید.";
 
+message.className =
+"message show error";
 
-    message.textContent =
-        "✅ تیکت با موفقیت ثبت شد.";
+return;
 
-    message.style.background = "#eaf8ea";
-    message.style.color = "#267326";
-    message.classList.add("show");
-
-
-    document.getElementById("fullName")
-        .value = "";
+}
 
 
-    updateHome();
+tickets.push({
+
+id:Date.now(),
+
+name:name,
+
+hoori:hoori,
+
+type:type,
+
+date:new Date().toLocaleString("fa-IR")
+
+});
+
+
+save();
+
+
+document.getElementById("fullName")
+.value = "";
+
+
+message.textContent =
+"✅ تیکت با موفقیت ثبت شد.";
+
+message.className =
+"message show success";
+
+
+renderTickets();
 
 }
 
 
 /* =========================
-   TICKETS
+   نمایش تیکت‌ها
 ========================= */
 
-function
+function renderTickets(){
+
+const box =
+document.getElementById("ticketList");
+
+const search =
+document.getElementById("search")
+?.value
+.toLowerCase()
+.trim()
+|| "";
+
+
+const list =
+tickets.filter(function(ticket){
+
+return (
+
+ticket.name
+.toLowerCase()
+.includes(search)
+
+||
+
+ticket.hoori
+.toLowerCase()
+.includes(search)
+
+);
+
+});
+
+
+if(!list.length){
+
+box.innerHTML =
+"<div class='card'>تیکتی وجود ندارد.</div>";
+
+return;
+
+}
+
+
+box.innerHTML =
+list
+.slice()
+.reverse()
+.map(function(ticket){
+
+return `
+
+<div class="card">
+
+<h3>
+${ticket.name}
+</h3>
+
+<p>
+حوری: ${ticket.hoori}
+</p>
+
+<p>
+نوع:
+${ticket.type === "vip" ? "⭐ VIP" : "عادی"}
+</p>
+
+<p>
+${ticket.date}
+</p>
+
+<button
+class="btn gold"
+onclick="printTicket(${ticket.id})"
+>
+چاپ
+</button>
+
+</div>
+
+`;
+
+})
+.join("");
+
+}
+
+
+/* =========================
+   ورود مدیریت
+========================= */
+
+function login(){
+
+const password =
+document.getElementById("password")
+.value;
+
+const message =
+document.getElementById("loginMessage");
+
+
+if(password === PASSWORD){
+
+document.getElementById("loginBox")
+.style.display="none";
+
+document.getElementById("panel")
+.style.display="block";
+
+renderAdmin();
+
+}else{
+
+message.textContent =
+"❌ رمز اشتباه است.";
+
+message.className =
+"message show error";
+
+}
+
+}
+
+
+/* =========================
+   خروج
+========================= */
+
+function logout(){
+
+document.getElementById("panel")
+.style.display="none";
+
+document.getElementById("loginBox")
+.style.display="block";
+
+document.getElementById("password")
+.value="";
+
+}
+
+
+/* =========================
+   افزودن حوری
+========================= */
+
+function addHoori(){
+
+const input =
+document.getElementById("newHoori");
+
+const name =
+input.value.trim();
+
+
+if(!name){
+
+alert("نام حوری را وارد کنید.");
+
+return;
+
+}
+
+
+if(hoorIs.includes(name)){
+
+alert("این حوری قبلاً وجود دارد.");
+
+return;
+
+}
+
+
+hoorIs.push(name);
+
+save();
+
+input.value="";
+
+renderHooris();
+
+loadSelect();
+
+renderAdmin();
+
+alert("✅ حوری اضافه شد.");
+
+}
+
+
+/* =========================
+   پیشنهاد
+========================= */
+
+function saveSuggested(){
+
+const select =
+document.getElementById("suggestSelect");
+
+suggested =
+select.value;
+
+save();
+
+renderSuggested();
+
+alert("✅ ذخیره شد.");
+
+}
+
+
+/* =========================
+   نمایش پیشنهاد
+========================= */
+
+function renderSuggested(){
+
+const box =
+document.getElementById("suggested");
+
+
+if(!suggested){
+
+box.innerHTML =
+"هنوز حوری پیشنهادی انتخاب نشده.";
+
+return;
+
+}
+
+
+box.innerHTML = `
+
+<h3>
+⭐ ${suggested}
+</h3>
+
+`;
+
+}
+
+
+/* =========================
+   پنل مدیریت
+========================= */
+
+function renderAdmin(){
+
+const adminHooris =
+document.getElementById("adminHooris");
+
+const adminTickets =
+document.getElementById("adminTickets");
+
+const suggestSelect =
+document.getElementById("suggestSelect");
+
+
+if(!adminHooris) return;
+
+
+/* حوری‌ها */
+
+if(!hoorIs.length){
+
+adminHooris.innerHTML =
+"حوری‌ای وجود ندارد.";
+
+}else{
+
+adminHooris.innerHTML =
+hoorIs.map(function(name,index){
+
+return `
+
+<div class="card">
+
+<b>
+${name}
+</b>
+
+<br>
+
+<button
+class="btn red"
+onclick="deleteHoori(${index})"
+>
+حذف حوری
+</button>
+
+</div>
+
+`;
+
+}).join("");
+
+}
+
+
+/* پیشنهاد */
+
+suggestSelect.innerHTML =
+"<option value=''>بدون پیشنهاد</option>";
+
+
+hoorIs.forEach(function(name){
+
+const option =
+document.createElement("option");
+
+option.value=name;
+
+option.textContent=name;
+
+if(name === suggested){
+
+option.selected=true;
+
+}
+
+suggestSelect.appendChild(option);
+
+});
+
+
+/* تیکت‌ها */
+
+if(!tickets.length){
+
+adminTickets.innerHTML =
+"تیکتی وجود ندارد.";
+
+}else{
+
+adminTickets.innerHTML =
+tickets
+.slice()
+.reverse()
+.map(function(ticket){
+
+return `
+
+<div class="card">
+
+<b>
+${ticket.name}
+</b>
+
+<p>
+${ticket.hoori}
+</p>
+
+<button
+class="btn red"
+onclick="deleteTicket(${ticket.id})"
+>
+حذف تیکت
+</button>
+
+</div>
+
+`;
+
+})
+.join("");
+
+}
+
+}
+
+
+/* =========================
+   حذف حوری
+========================= */
+
+function deleteHoori(index){
+
+if(!confirm("حذف شود؟")){
+
+return;
+
+}
+
+
+const deleted =
+hoorIs[index];
+
+hoorIs.splice(index,1);
+
+
+if(suggested === deleted){
+
+suggested="";
+
+}
+
+
+save();
+
+renderAdmin();
+
+renderHooris();
+
+loadSelect();
+
+renderSuggested();
+
+}
+
+
+/* =========================
+   حذف تیکت
+========================= */
+
+function deleteTicket(id){
+
+if(!confirm("این تیکت حذف شود؟")){
+
+return;
+
+}
+
+
+tickets =
+tickets.filter(function(ticket){
+
+return ticket.id !== id;
+
+});
+
+
+save();
+
+renderAdmin();
+
+renderTickets();
+
+}
+
+
+/* =========================
+   چاپ
+========================= */
+
+function printTicket(id){
+
+const ticket =
+tickets.find(function(item){
+
+return item.id === id;
+
+});
+
+
+if(!ticket){
+
+return;
+
+}
+
+
+const win =
+window.open("","_blank");
+
+
+if(!win){
+
+alert("اجازه باز شدن صفحه چاپ داده نشد.");
+
+return;
+
+}
+
+
+win.document.write(`
+
+<html lang="fa" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>HOORI</title>
+
+<style>
+
+body{
+font-family:Tahoma;
+padding:40px;
+text-align:center;
+}
+
+.box{
+border:2px solid #d4af37;
+padding:30px;
+border-radius:20px;
+max-width:500px;
+margin:auto;
+}
+
+h1{
+color:#b88a00;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="box">
+
+<h1>HOORI</h1>
+
+<h2>
+${ticket.name}
+</h2>
+
+<p>
+حوری: ${ticket.hoori}
+</p>
+
+<p>
+نوع:
+${ticket.type === "vip" ? "VIP" : "عادی"}
+</p>
+
+<p>
+${ticket.date}
+</p>
+
+</div>
+
+<script>
+
+window.onload=function(){
+
+window.print();
+
+};
+
+<\/script>
+
+</body>
+
+</html>
+
+`);
+
+win.document.close();
+
+}
+
+
+/* =========================
+   شروع برنامه
+========================= */
+
+load();
+
+renderHooris();
+
+loadSelect();
+
+renderTickets();
+
+renderSuggested();
+
+showPage("home");
+
+</script>
+
+</body>
+</html>
