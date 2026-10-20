@@ -2,951 +2,644 @@
 <html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#050505">
-
-<title>HOORI.COM | The Golden World</title>
+<title>HOORI.COM</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
 <style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
-:root{
-    --black:#050505;
-    --black2:#0a0a0a;
-    --panel:#0d0d0d;
-    --gold:#d4af37;
-    --gold2:#f2d675;
-    --gold3:#9c7918;
-    --white:#f7f4eb;
-    --muted:#929292;
-    --line:rgba(212,175,55,.18);
-}
-
-html{
-    scroll-behavior:smooth;
-}
-
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
 body{
-    font-family:"Vazirmatn",sans-serif;
-    background:
-        radial-gradient(circle at 50% -10%,rgba(212,175,55,.12),transparent 35%),
-        radial-gradient(circle at 100% 50%,rgba(212,175,55,.05),transparent 30%),
-        #050505;
-    color:var(--white);
-    min-height:100vh;
-    overflow-x:hidden;
+font-family:Vazirmatn,sans-serif;
+background:#050505;
+color:#eee;
+overflow-x:hidden;
 }
-
-/* GOLD GLOW */
-
-body:before,
-body:after{
-    content:"";
-    position:fixed;
-    width:260px;
-    height:260px;
-    border-radius:50%;
-    filter:blur(100px);
-    pointer-events:none;
-    z-index:-1;
-    opacity:.16;
+:root{
+--gold:#d7b64b;
+--gold2:#ffe58a;
+--dark:#050505;
+--card:#0d0d0d;
+--line:rgba(215,182,75,.2);
+--muted:#888;
 }
-
 body:before{
-    background:#d4af37;
-    top:5%;
-    right:-150px;
+content:"";
+position:fixed;
+width:500px;height:500px;
+background:rgba(215,182,75,.07);
+filter:blur(120px);
+border-radius:50%;
+top:-250px;right:-200px;
+pointer-events:none;
 }
-
-body:after{
-    background:#a37d18;
-    bottom:0;
-    left:-150px;
+.top{
+height:2px;
+background:linear-gradient(90deg,transparent,#d7b64b,#fff0a0,#d7b64b,transparent);
+box-shadow:0 0 20px #d7b64b;
 }
-
-/* TOP LINE */
-
-.top-line{
-    height:2px;
-    background:linear-gradient(
-        90deg,
-        transparent,
-        var(--gold),
-        #fff0a8,
-        var(--gold),
-        transparent
-    );
-    box-shadow:0 0 18px rgba(212,175,55,.7);
-}
-
-/* NAV */
-
 nav{
-    width:min(1180px,94%);
-    margin:auto;
-    height:82px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    border-bottom:1px solid var(--line);
+height:78px;
+width:94%;
+max-width:1200px;
+margin:auto;
+display:flex;
+align-items:center;
+justify-content:space-between;
+border-bottom:1px solid var(--line);
 }
-
 .logo{
-    display:flex;
-    align-items:center;
-    gap:12px;
-    font-weight:900;
-    letter-spacing:1px;
-    font-size:22px;
+display:flex;
+align-items:center;
+gap:12px;
+font-weight:900;
+font-size:21px;
 }
-
-.logo-symbol{
-    width:42px;
-    height:42px;
-    display:grid;
-    place-items:center;
-    border:1px solid var(--gold);
-    color:var(--gold2);
-    border-radius:50%;
-    box-shadow:
-        inset 0 0 20px rgba(212,175,55,.08),
-        0 0 20px rgba(212,175,55,.1);
-    font-size:22px;
+.logo b{
+width:43px;height:43px;
+border:1px solid var(--gold);
+border-radius:50%;
+display:grid;
+place-items:center;
+color:var(--gold2);
+font-size:22px;
+box-shadow:0 0 25px rgba(215,182,75,.1);
 }
-
 .logo small{
-    display:block;
-    font-size:8px;
-    color:#777;
-    letter-spacing:3px;
-    margin-top:2px;
-    font-weight:500;
+display:block;
+font-size:8px;
+letter-spacing:3px;
+color:#666;
 }
-
-.nav-links{
-    display:flex;
-    gap:8px;
+.nav{
+display:flex;
+gap:7px;
 }
-
-.nav-links button{
-    background:transparent;
-    border:1px solid transparent;
-    color:#aaa;
-    padding:10px 14px;
-    border-radius:10px;
-    font-family:inherit;
-    cursor:pointer;
-    transition:.25s;
+.nav button{
+font-family:inherit;
+background:none;
+border:1px solid transparent;
+color:#999;
+padding:10px 13px;
+border-radius:10px;
+cursor:pointer;
+transition:.25s;
 }
-
-.nav-links button:hover{
-    color:var(--gold2);
-    border-color:var(--line);
-    background:rgba(212,175,55,.05);
+.nav button:hover{
+color:var(--gold2);
+border-color:var(--line);
+background:#0d0d0d;
 }
-
-.menu{
-    display:none;
-    color:var(--gold2);
-    font-size:25px;
-}
-
-/* HERO */
-
 .hero{
-    width:min(1180px,94%);
-    margin:auto;
-    min-height:650px;
-    display:grid;
-    grid-template-columns:1.1fr .9fr;
-    align-items:center;
-    gap:50px;
-    position:relative;
+min-height:650px;
+width:94%;
+max-width:1200px;
+margin:auto;
+display:grid;
+grid-template-columns:1.1fr .9fr;
+align-items:center;
+gap:40px;
 }
-
-.hero-content{
-    animation:heroIn 1s ease both;
-}
-
 .badge{
-    display:inline-flex;
-    align-items:center;
-    gap:8px;
-    border:1px solid var(--line);
-    background:rgba(212,175,55,.04);
-    color:var(--gold2);
-    padding:8px 15px;
-    border-radius:100px;
-    font-size:12px;
-    margin-bottom:25px;
-    box-shadow:0 0 25px rgba(212,175,55,.04);
+display:inline-block;
+padding:8px 15px;
+border:1px solid var(--line);
+border-radius:30px;
+color:var(--gold2);
+font-size:11px;
+margin-bottom:25px;
+background:#0a0a0a;
 }
-
-.badge span{
-    width:7px;
-    height:7px;
-    border-radius:50%;
-    background:var(--gold);
-    box-shadow:0 0 10px var(--gold);
-}
-
 .hero h1{
-    font-size:clamp(48px,7vw,88px);
-    line-height:1.05;
-    font-weight:900;
-    letter-spacing:-4px;
-    margin-bottom:25px;
+font-size:clamp(48px,7vw,88px);
+line-height:1.05;
+font-weight:900;
+letter-spacing:-4px;
 }
-
-.hero h1 .gold{
-    background:linear-gradient(
-        110deg,
-        #9b7418,
-        #f8df7b,
-        #c59b2b,
-        #fff1a5,
-        #a67e1b
-    );
-    -webkit-background-clip:text;
-    background-clip:text;
-    color:transparent;
-    background-size:250% auto;
-    animation:goldMove 5s linear infinite;
+.gold{
+color:var(--gold2);
+text-shadow:0 0 30px rgba(215,182,75,.15);
 }
-
 .hero p{
-    max-width:620px;
-    color:#9b9b9b;
-    font-size:17px;
-    line-height:2.2;
-    margin-bottom:35px;
+max-width:600px;
+color:#888;
+line-height:2.2;
+margin:25px 0 30px;
+font-size:15px;
 }
-
-.buttons{
-    display:flex;
-    gap:12px;
-    flex-wrap:wrap;
+.actions{
+display:flex;
+gap:12px;
+flex-wrap:wrap;
 }
-
 .btn{
-    border:none;
-    font-family:inherit;
-    cursor:pointer;
-    padding:15px 25px;
-    border-radius:13px;
-    font-size:14px;
-    font-weight:700;
-    transition:.3s;
+font-family:inherit;
+border:0;
+padding:14px 22px;
+border-radius:12px;
+font-weight:800;
+cursor:pointer;
+transition:.25s;
 }
-
-.btn-gold{
-    background:linear-gradient(
-        135deg,
-        #9e781d,
-        #e4c451,
-        #b18a22
-    );
-    color:#080808;
-    box-shadow:0 8px 35px rgba(212,175,55,.17);
+.goldbtn{
+background:linear-gradient(135deg,#9c791e,#f1d76a,#b48c25);
+color:#080808;
+box-shadow:0 10px 35px rgba(215,182,75,.14);
 }
-
-.btn-gold:hover{
-    transform:translateY(-3px);
-    box-shadow:0 12px 40px rgba(212,175,55,.3);
+.goldbtn:hover{transform:translateY(-3px);box-shadow:0 15px 40px rgba(215,182,75,.3)}
+.darkbtn{
+background:#0d0d0d;
+border:1px solid var(--line);
+color:var(--gold2);
 }
-
-.btn-dark{
-    color:var(--gold2);
-    background:#0d0d0d;
-    border:1px solid var(--line);
+.visual{
+height:450px;
+display:grid;
+place-items:center;
+position:relative;
 }
-
-.btn-dark:hover{
-    border-color:var(--gold);
-    background:#131313;
+.ring{
+position:absolute;
+width:360px;height:360px;
+border:1px solid rgba(215,182,75,.2);
+border-radius:50%;
+animation:spin 18s linear infinite;
 }
-
-/* HERO ART */
-
-.hero-art{
-    height:480px;
-    position:relative;
-    display:grid;
-    place-items:center;
+.ring:after{
+content:"";
+position:absolute;
+width:9px;height:9px;
+background:var(--gold2);
+border-radius:50%;
+top:25px;left:50px;
+box-shadow:0 0 20px var(--gold);
 }
-
-.orbit{
-    position:absolute;
-    width:390px;
-    height:390px;
-    border:1px solid rgba(212,175,55,.18);
-    border-radius:50%;
-    animation:rotate 18s linear infinite;
+.ring2{
+width:270px;height:270px;
+animation:spin 12s linear infinite reverse;
 }
-
-.orbit:before{
-    content:"";
-    position:absolute;
-    width:10px;
-    height:10px;
-    background:var(--gold2);
-    border-radius:50%;
-    top:40px;
-    left:50px;
-    box-shadow:0 0 20px var(--gold);
+.core{
+width:190px;height:190px;
+border-radius:50%;
+border:1px solid rgba(215,182,75,.5);
+display:grid;
+place-items:center;
+background:radial-gradient(circle,#1a1609,#060606 70%);
+box-shadow:0 0 80px rgba(215,182,75,.12);
 }
-
-.orbit2{
-    width:300px;
-    height:300px;
-    animation:rotate 12s linear infinite reverse;
-    border-color:rgba(212,175,55,.12);
+.core span{
+font-size:80px;
+color:var(--gold2);
 }
-
-.gold-core{
-    width:220px;
-    height:220px;
-    border-radius:50%;
-    display:grid;
-    place-items:center;
-    border:1px solid rgba(212,175,55,.5);
-    background:
-        radial-gradient(circle at 35% 30%,rgba(255,230,130,.2),transparent 25%),
-        radial-gradient(circle,#17130a,#070707 65%);
-    box-shadow:
-        0 0 80px rgba(212,175,55,.12),
-        inset 0 0 50px rgba(212,175,55,.05);
-}
-
-.core-symbol{
-    color:var(--gold2);
-    font-size:92px;
-    font-weight:300;
-    text-shadow:0 0 35px rgba(212,175,55,.35);
-}
-
-/* SECTION */
-
 section{
-    width:min(1180px,94%);
-    margin:0 auto;
-    padding:85px 0;
+width:94%;
+max-width:1200px;
+margin:auto;
+padding:75px 0;
 }
-
-.section-head{
-    display:flex;
-    justify-content:space-between;
-    align-items:end;
-    margin-bottom:30px;
-    gap:20px;
+.head{
+margin-bottom:28px;
 }
-
-.eyebrow{
-    color:var(--gold);
-    font-size:11px;
-    letter-spacing:3px;
-    margin-bottom:9px;
+.head small{
+color:var(--gold);
+letter-spacing:3px;
+font-size:10px;
 }
-
-.section-head h2{
-    font-size:32px;
-    font-weight:800;
+.head h2{
+font-size:32px;
+margin-top:7px;
 }
-
-.section-head p{
-    color:#777;
-    font-size:13px;
-}
-
-/* CARDS */
-
+.head p{color:#666;font-size:13px;margin-top:7px}
 .cards{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:18px;
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:17px;
 }
-
 .card{
-    min-height:230px;
-    padding:25px;
-    border:1px solid var(--line);
-    border-radius:22px;
-    background:
-        linear-gradient(145deg,rgba(255,255,255,.025),transparent),
-        #0b0b0b;
-    position:relative;
-    overflow:hidden;
-    transition:.35s;
+min-height:220px;
+padding:25px;
+background:linear-gradient(145deg,#111,#080808);
+border:1px solid var(--line);
+border-radius:20px;
+position:relative;
+overflow:hidden;
+transition:.3s;
 }
-
-.card:before{
-    content:"";
-    position:absolute;
-    width:180px;
-    height:180px;
-    border:1px solid rgba(212,175,55,.12);
-    border-radius:50%;
-    left:-80px;
-    bottom:-100px;
-}
-
-.card:after{
-    content:"";
-    position:absolute;
-    width:100px;
-    height:100px;
-    border:1px solid rgba(212,175,55,.1);
-    border-radius:50%;
-    right:-45px;
-    top:-40px;
-}
-
 .card:hover{
-    transform:translateY(-7px);
-    border-color:rgba(212,175,55,.45);
-    box-shadow:0 20px 50px rgba(0,0,0,.4);
+transform:translateY(-6px);
+border-color:rgba(215,182,75,.5);
 }
-
-.card-number{
-    color:#555;
-    font-size:11px;
-    letter-spacing:2px;
+.card .num{
+color:#555;
+font-size:10px;
+letter-spacing:2px;
 }
-
-.card-icon{
-    width:55px;
-    height:55px;
-    border-radius:15px;
-    border:1px solid var(--line);
-    display:grid;
-    place-items:center;
-    color:var(--gold2);
-    font-size:25px;
-    margin:30px 0 20px;
-    background:rgba(212,175,55,.04);
+.icon{
+width:55px;height:55px;
+border:1px solid var(--line);
+border-radius:15px;
+display:grid;
+place-items:center;
+font-size:25px;
+color:var(--gold2);
+margin:25px 0 18px;
+background:#0b0b0b;
 }
-
-.card h3{
-    font-size:23px;
-    margin-bottom:8px;
+.card h3{font-size:22px}
+.card p{color:#777;font-size:12px;margin-top:7px}
+.feature{
+padding:35px;
+border:1px solid rgba(215,182,75,.35);
+border-radius:25px;
+background:radial-gradient(circle at 90% 0%,rgba(215,182,75,.1),#0b0b0b 45%);
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:30px;
 }
-
-.card p{
-    color:#777;
-    font-size:13px;
+.feature h2{color:var(--gold2);font-size:35px}
+.feature p{color:#777;line-height:2;margin:8px 0 20px}
+.feature .symbol{
+width:140px;height:140px;
+border-radius:50%;
+border:1px solid var(--line);
+display:grid;
+place-items:center;
+font-size:65px;
+color:var(--gold2);
+flex:none;
 }
-
-/* FEATURED */
-
-.featured{
-    border:1px solid rgba(212,175,55,.3);
-    border-radius:28px;
-    padding:35px;
-    background:
-        radial-gradient(circle at 90% 10%,rgba(212,175,55,.12),transparent 25%),
-        #0b0b0b;
-    display:grid;
-    grid-template-columns:1fr auto;
-    align-items:center;
-    overflow:hidden;
-    position:relative;
+.formbox{
+background:#0a0a0a;
+border:1px solid var(--line);
+border-radius:25px;
+padding:30px;
 }
-
-.featured h2{
-    font-size:38px;
-    color:var(--gold2);
-    margin-bottom:10px;
+.grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:13px;
 }
-
-.featured p{
-    color:#888;
-    line-height:2;
-}
-
-.featured-symbol{
-    width:150px;
-    height:150px;
-    border-radius:50%;
-    border:1px solid rgba(212,175,55,.35);
-    display:grid;
-    place-items:center;
-    color:var(--gold2);
-    font-size:70px;
-    box-shadow:0 0 50px rgba(212,175,55,.08);
-}
-
-/* TICKET */
-
-.ticket{
-    border:1px solid var(--line);
-    border-radius:28px;
-    padding:35px;
-    background:#0a0a0a;
-}
-
-.ticket-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:15px;
-}
-
 .input{
-    width:100%;
-    background:#101010;
-    color:#fff;
-    border:1px solid #222;
-    outline:none;
-    padding:15px;
-    border-radius:12px;
-    font-family:inherit;
-    transition:.25s;
+width:100%;
+background:#111;
+border:1px solid #222;
+border-radius:11px;
+padding:14px;
+font-family:inherit;
+color:#fff;
+outline:none;
 }
-
-.input:focus{
-    border-color:var(--gold);
-    box-shadow:0 0 20px rgba(212,175,55,.06);
+.input:focus{border-color:var(--gold)}
+.full{grid-column:1/-1}
+.ticket{
+display:none;
+margin-top:25px;
+padding:28px;
+border:1px solid rgba(215,182,75,.5);
+border-radius:20px;
+background:
+radial-gradient(circle at 100% 0%,rgba(215,182,75,.12),transparent 30%),
+#070707;
 }
-
-.ticket .full{
-    grid-column:1/-1;
+.ticket.show{display:block;animation:up .4s ease}
+.ticket-title{
+font-size:28px;
+font-weight:900;
+color:var(--gold2);
+margin-bottom:20px;
 }
-
-/* CONTACT */
-
+.ticket-row{
+display:flex;
+justify-content:space-between;
+padding:12px 0;
+border-bottom:1px solid #191919;
+color:#999;
+}
+.ticket-row strong{color:#fff}
 .contact{
-    text-align:center;
-    border:1px solid var(--line);
-    border-radius:28px;
-    padding:55px 25px;
-    background:
-        radial-gradient(circle at center,rgba(212,175,55,.07),transparent 55%),
-        #090909;
+text-align:center;
+padding:55px 20px;
+border:1px solid var(--line);
+border-radius:25px;
+background:radial-gradient(circle,#151209,#090909 65%);
 }
-
-.contact h2{
-    font-size:35px;
-    margin-bottom:12px;
-}
-
-.contact p{
-    color:#777;
-    margin-bottom:25px;
-}
-
-/* FOOTER */
-
+.contact h2{font-size:32px}
+.contact p{color:#777;line-height:2;margin:12px 0 22px}
 footer{
-    border-top:1px solid var(--line);
-    padding:30px 5%;
-    text-align:center;
-    color:#555;
-    font-size:11px;
+text-align:center;
+border-top:1px solid var(--line);
+padding:30px;
+color:#555;
+font-size:11px;
 }
-
-footer strong{
-    color:var(--gold);
+footer b{color:var(--gold)}
+.modal{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.85);
+backdrop-filter:blur(10px);
+display:none;
+align-items:center;
+justify-content:center;
+padding:20px;
+z-index:100;
 }
-
-/* MOBILE */
-
+.modal.open{display:flex}
+.panel{
+width:100%;
+max-width:800px;
+max-height:90vh;
+overflow:auto;
+background:#0b0b0b;
+border:1px solid rgba(215,182,75,.35);
+border-radius:25px;
+padding:25px;
+box-shadow:0 20px 100px #000;
+}
+.panel-head{
+display:flex;
+align-items:center;
+justify-content:space-between;
+margin-bottom:25px;
+}
+.panel-head h2{color:var(--gold2)}
+.close{
+background:#151515;
+color:#aaa;
+border:1px solid #222;
+width:38px;height:38px;
+border-radius:10px;
+cursor:pointer;
+}
+.admin-grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:12px;
+margin-bottom:25px;
+}
+.stat{
+background:#101010;
+border:1px solid #202020;
+padding:18px;
+border-radius:15px;
+text-align:center;
+}
+.stat b{
+display:block;
+font-size:25px;
+color:var(--gold2);
+}
+.admin-section{
+border-top:1px solid #222;
+padding-top:22px;
+margin-top:22px;
+}
+.admin-section h3{
+margin-bottom:13px;
+color:#ddd;
+}
+.admin-row{
+display:flex;
+gap:8px;
+margin-bottom:8px;
+align-items:center;
+background:#101010;
+border:1px solid #1b1b1b;
+padding:10px;
+border-radius:11px;
+}
+.admin-row span{flex:1}
+.smallbtn{
+border:1px solid var(--line);
+background:#111;
+color:var(--gold2);
+padding:8px 11px;
+border-radius:8px;
+cursor:pointer;
+font-family:inherit;
+}
+.danger{
+color:#ff7777;
+border-color:rgba(255,80,80,.2);
+}
+.empty{color:#555;font-size:12px}
+.toast{
+position:fixed;
+bottom:25px;
+left:50%;
+transform:translateX(-50%) translateY(100px);
+background:#111;
+border:1px solid var(--gold);
+color:#fff;
+padding:13px 20px;
+border-radius:12px;
+z-index:200;
+transition:.3s;
+box-shadow:0 10px 40px #000;
+}
+.toast.show{transform:translateX(-50%) translateY(0)}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes up{
+from{opacity:0;transform:translateY(15px)}
+to{opacity:1;transform:translateY(0)}
+}
 @media(max-width:800px){
-
-    nav{
-        height:70px;
-    }
-
-    .nav-links{
-        display:none;
-    }
-
-    .menu{
-        display:block;
-    }
-
-    .hero{
-        min-height:auto;
-        padding:70px 0 30px;
-        grid-template-columns:1fr;
-        text-align:center;
-    }
-
-    .hero p{
-        margin-left:auto;
-        margin-right:auto;
-        font-size:14px;
-    }
-
-    .buttons{
-        justify-content:center;
-    }
-
-    .hero-art{
-        height:330px;
-        order:-1;
-    }
-
-    .orbit{
-        width:270px;
-        height:270px;
-    }
-
-    .orbit2{
-        width:210px;
-        height:210px;
-    }
-
-    .gold-core{
-        width:155px;
-        height:155px;
-    }
-
-    .core-symbol{
-        font-size:65px;
-    }
-
-    section{
-        padding:60px 0;
-    }
-
-    .section-head{
-        display:block;
-    }
-
-    .section-head p{
-        margin-top:8px;
-    }
-
-    .cards{
-        grid-template-columns:1fr;
-    }
-
-    .featured{
-        grid-template-columns:1fr;
-        text-align:center;
-        gap:30px;
-    }
-
-    .featured-symbol{
-        margin:auto;
-    }
-
-    .featured h2{
-        font-size:30px;
-    }
-
-    .ticket-grid{
-        grid-template-columns:1fr;
-    }
-
-    .ticket .full{
-        grid-column:auto;
-    }
+.nav{display:none}
+.hero{
+grid-template-columns:1fr;
+text-align:center;
+padding-top:60px;
 }
-
-/* ANIMATIONS */
-
-@keyframes rotate{
-    from{transform:rotate(0deg)}
-    to{transform:rotate(360deg)}
-}
-
-@keyframes heroIn{
-    from{
-        opacity:0;
-        transform:translateY(25px);
-    }
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
-}
-
-@keyframes goldMove{
-    to{
-        background-position:250% center;
-    }
+.hero p{margin-left:auto;margin-right:auto}
+.actions{justify-content:center}
+.visual{height:310px;order:-1}
+.ring{width:260px;height:260px}
+.ring2{width:200px;height:200px}
+.core{width:145px;height:145px}
+.core span{font-size:60px}
+.cards{grid-template-columns:1fr}
+.feature{flex-direction:column;text-align:center}
+.grid{grid-template-columns:1fr}
+.full{grid-column:auto}
+.admin-grid{grid-template-columns:1fr}
+.hero h1{letter-spacing:-2px}
 }
 </style>
 </head>
 
 <body>
 
-<div class="top-line"></div>
+<div class="top"></div>
 
 <nav>
+<div class="logo">
+<b>♱</b>
+<div>
+HOORI.COM
+<small>THE GOLDEN WORLD</small>
+</div>
+</div>
 
-    <div class="logo">
-        <div class="logo-symbol">♱</div>
-        <div>
-            HOORI.COM
-            <small>THE GOLDEN WORLD</small>
-        </div>
-    </div>
-
-    <div class="nav-links">
-        <button onclick="go('home')">خانه</button>
-        <button onclick="go('hoori')">حوری‌ها</button>
-        <button onclick="go('ticket')">درخواست بلیط</button>
-        <button onclick="go('contact')">ارتباط</button>
-        <button onclick="admin()">پنل مدیریت</button>
-    </div>
-
-    <div class="menu">☰</div>
-
+<div class="nav">
+<button onclick="scrollToId('home')">خانه</button>
+<button onclick="scrollToId('hoori')">حوری‌ها</button>
+<button onclick="scrollToId('ticketSection')">درخواست بلیط</button>
+<button onclick="scrollToId('contact')">ارتباط</button>
+<button onclick="openAdmin()">پنل مدیریت</button>
+</div>
 </nav>
 
+<main>
 
-<!-- HERO -->
+<section class="hero" id="home">
 
-<main id="home">
+<div>
+<div class="badge">✦ HOORI · PREMIUM COLLECTION</div>
 
-<section class="hero">
+<h1>
+اسم <span class="gold">خاص،</span><br>
+برای آدم خاص.
+</h1>
 
-    <div class="hero-content">
+<p>
+به دنیای HOORI خوش اومدی؛
+جایی برای اسم‌های خاص، انتخاب‌های متفاوت
+و آدم‌هایی که معمولی بودن براشون کافی نیست.
+</p>
 
-        <div class="badge">
-            <span></span>
-            HOORI · PREMIUM COLLECTION
-        </div>
+<div class="actions">
+<button class="btn goldbtn" onclick="scrollToId('hoori')">
+مشاهده حوری‌ها
+</button>
 
-        <h1>
-            اسم <span class="gold">خاص،</span><br>
-            برای آدم خاص.
-        </h1>
+<button class="btn darkbtn" onclick="scrollToId('ticketSection')">
+ساخت بلیط اختصاصی
+</button>
+</div>
+</div>
 
-        <p>
-            دنیای HOORI جایی برای اسم‌های خاص،
-            انتخاب‌های متفاوت و آدم‌هایی است که
-            معمولی بودن برایشان کافی نیست.
-        </p>
-
-        <div class="buttons">
-            <button class="btn btn-gold" onclick="go('hoori')">
-                مشاهده حوری‌ها
-            </button>
-
-            <button class="btn btn-dark" onclick="go('ticket')">
-                درخواست نام اختصاصی ←
-            </button>
-        </div>
-
-    </div>
-
-
-    <div class="hero-art">
-
-        <div class="orbit"></div>
-        <div class="orbit orbit2"></div>
-
-        <div class="gold-core">
-            <div class="core-symbol">♱</div>
-        </div>
-
-    </div>
+<div class="visual">
+<div class="ring"></div>
+<div class="ring ring2"></div>
+<div class="core"><span>♱</span></div>
+</div>
 
 </section>
 
-
-<!-- HOORI -->
 
 <section id="hoori">
 
-    <div class="section-head">
+<div class="head">
+<small>THE COLLECTION</small>
+<h2>حوری‌ها</h2>
+<p>انتخاب‌های خاص HOORI</p>
+</div>
 
-        <div>
-            <div class="eyebrow">THE COLLECTION</div>
-            <h2>حوری‌ها</h2>
-        </div>
-
-        <p>
-            اسم‌هایی که معمولی نیستند.
-        </p>
-
-    </div>
-
-
-    <div class="cards">
-
-        <div class="card">
-
-            <div class="card-number">01 · GOLDEN</div>
-
-            <div class="card-icon">♱</div>
-
-            <h3>مادر طلایی</h3>
-
-            <p>
-                یک انتخاب ویژه از مجموعه HOORI.
-            </p>
-
-        </div>
-
-
-        <div class="card">
-
-            <div class="card-number">02 · PREMIUM</div>
-
-            <div class="card-icon">✦</div>
-
-            <h3>حوری خاص</h3>
-
-            <p>
-                برای کسانی که اسم متفاوت می‌خواهند.
-            </p>
-
-        </div>
-
-
-        <div class="card">
-
-            <div class="card-number">03 · UNIQUE</div>
-
-            <div class="card-icon">◈</div>
-
-            <h3>حوری پیشنهادی</h3>
-
-            <p>
-                انتخاب‌های پیشنهادی مجموعه HOORI.
-            </p>
-
-        </div>
-
-    </div>
+<div class="cards" id="hooriList"></div>
 
 </section>
 
-
-<!-- FEATURED -->
 
 <section>
 
-    <div class="eyebrow">FEATURED</div>
+<div class="head">
+<small>FEATURED</small>
+<h2>حوری پیشنهادی</h2>
+</div>
 
-    <div class="featured">
-
-        <div>
-
-            <h2>مادر طلایی</h2>
-
-            <p>
-                انتخاب ویژه و نمادین HOORI.
-                <br>
-                یک اسم برای آدم‌هایی که خاص بودن را انتخاب می‌کنند.
-            </p>
-
-            <br>
-
-            <button class="btn btn-gold" onclick="go('ticket')">
-                دریافت بلیط ✦
-            </button>
-
-        </div>
-
-        <div class="featured-symbol">
-            ♱
-        </div>
-
-    </div>
+<div class="cards" id="recommendedList"></div>
 
 </section>
 
 
-<!-- TICKET -->
+<section>
 
-<section id="ticket">
+<div class="feature">
 
-    <div class="section-head">
+<div>
+<h2>مادر طلایی</h2>
+<p>
+یکی از انتخاب‌های ویژه HOORI.
+<br>
+برای آدم‌هایی که خاص بودن رو انتخاب می‌کنن.
+</p>
 
-        <div>
-            <div class="eyebrow">EXCLUSIVE TICKET</div>
-            <h2>درخواست بلیط</h2>
-        </div>
+<button class="btn goldbtn"
+onclick="selectTicket('مادر طلایی')">
+دریافت بلیط ✦
+</button>
+</div>
 
-        <p>
-            بلیط اختصاصی خودت را بساز.
-        </p>
+<div class="symbol">♱</div>
 
-    </div>
-
-
-    <div class="ticket">
-
-        <div class="ticket-grid">
-
-            <input
-                class="input"
-                id="firstName"
-                placeholder="نام"
-            >
-
-            <input
-                class="input"
-                id="lastName"
-                placeholder="نام خانوادگی"
-            >
-
-            <select class="input" id="hooriSelect">
-                <option>مادر طلایی</option>
-                <option>حوری خاص</option>
-                <option>حوری پیشنهادی</option>
-            </select>
-
-            <input
-                class="input"
-                type="date"
-                id="ticketDate"
-            >
-
-            <button
-                class="btn btn-gold full"
-                onclick="makeTicket()"
-            >
-                ✦ ساخت بلیط اختصاصی
-            </button>
-
-        </div>
-
-        <div id="ticketResult"></div>
-
-    </div>
+</div>
 
 </section>
 
 
-<!-- CONTACT -->
+<section id="ticketSection">
+
+<div class="head">
+<small>EXCLUSIVE TICKET</small>
+<h2>درخواست بلیط</h2>
+<p>بلیط اختصاصی خودت رو بساز.</p>
+</div>
+
+<div class="formbox">
+
+<div class="grid">
+
+<input id="firstName" class="input" placeholder="نام">
+
+<input id="lastName" class="input" placeholder="نام خانوادگی">
+
+<select id="ticketHoori" class="input"></select>
+
+<input id="ticketDate" type="date" class="input">
+
+<button class="btn goldbtn full" onclick="createTicket()">
+✦ ساخت بلیط اختصاصی
+</button>
+
+</div>
+
+<div id="ticket" class="ticket"></div>
+
+</div>
+
+</section>
+
 
 <section id="contact">
 
-    <div class="contact">
+<div class="contact">
 
-        <div class="eyebrow">CONTACT</div>
+<small style="color:#d7b64b;letter-spacing:3px">
+CONTACT
+</small>
 
-        <h2>ارتباط با سازنده</h2>
+<h2>ارتباط با سازنده</h2>
 
-        <p>
-            خوشحالیم که داری از HOORI استفاده می‌کنی 🖤
-            <br>
-            برای ارتباط، پیشنهاد یا گزارش مشکل با ما در تماس باش.
-        </p>
+<p>
+خوشحالیم داری از HOORI استفاده می‌کنی 🖤
+<br>
+برای پیشنهاد، مشکل یا ارتباط با سازنده:
+</p>
 
-        <a
-            href="https://t.me/Error_1998"
-            target="_blank"
-            class="btn btn-gold"
-            style="display:inline-block;text-decoration:none"
-        >
-            ارتباط در تلگرام
-        </a>
+<a
+href="https://t.me/Error_1998"
+target="_blank"
+class="btn goldbtn"
+style="display:inline-block;text-decoration:none">
+@Error_1998
+</a>
 
-    </div>
+</div>
 
 </section>
 
@@ -954,163 +647,677 @@ footer strong{
 
 
 <footer>
-    ♱ <strong>HOORI.COM</strong>
-    · THE GOLDEN WORLD
-    <br><br>
-    ساخته شده برای آدم‌های خاص.
+♱ <b>HOORI.COM</b> · THE GOLDEN WORLD
+<br><br>
+ساخته شده برای آدم‌های خاص.
 </footer>
+
+
+<!-- ADMIN -->
+
+<div class="modal" id="adminModal">
+
+<div class="panel">
+
+<div class="panel-head">
+<h2>♱ HOORI.COM / MANAGEMENT</h2>
+<button class="close" onclick="closeAdmin()">×</button>
+</div>
+
+<div class="admin-grid">
+
+<div class="stat">
+<b id="statHoori">0</b>
+حوری
+</div>
+
+<div class="stat">
+<b id="statRec">0</b>
+پیشنهادی
+</div>
+
+<div class="stat">
+<b id="statTicket">0</b>
+بلیط
+</div>
+
+</div>
+
+
+<div class="admin-section">
+
+<h3>➕ افزودن حوری</h3>
+
+<div style="display:flex;gap:8px">
+<input id="newHoori" class="input" placeholder="نام حوری">
+<button class="btn goldbtn" onclick="addHoori()">افزودن</button>
+</div>
+
+<div id="adminHooris" style="margin-top:15px"></div>
+
+</div>
+
+
+<div class="admin-section">
+
+<h3>⭐ افزودن حوری پیشنهادی</h3>
+
+<div style="display:flex;gap:8px">
+<input id="newRec" class="input" placeholder="نام پیشنهادی">
+<button class="btn goldbtn" onclick="addRecommended()">افزودن</button>
+</div>
+
+<div id="adminRecommended" style="margin-top:15px"></div>
+
+</div>
+
+
+<div class="admin-section">
+
+<h3>🎟️ بلیط‌های ثبت شده</h3>
+
+<div id="adminTickets"></div>
+
+</div>
+
+</div>
+</div>
+
+
+<div class="toast" id="toast"></div>
 
 
 <script>
 
-function go(id){
+/* =========================
+   DATA
+========================= */
 
-    const el = document.getElementById(id);
+const defaultHooris = [
+"مادر طلایی",
+"حوری خاص"
+];
 
-    if(el){
-        el.scrollIntoView({
-            behavior:"smooth",
-            block:"start"
-        });
-    }
+let hooris =
+JSON.parse(localStorage.getItem("hoori_names") || "null")
+|| defaultHooris;
 
-}
+let recommended =
+JSON.parse(localStorage.getItem("hoori_recommended") || "null")
+|| ["حوری پیشنهادی"];
 
-
-function makeTicket(){
-
-    const first =
-        document.getElementById("firstName").value.trim();
-
-    const last =
-        document.getElementById("lastName").value.trim();
-
-    const hoori =
-        document.getElementById("hooriSelect").value;
-
-    const date =
-        document.getElementById("ticketDate").value;
-
-    if(!first || !last || !date){
-
-        alert("لطفاً نام، نام خانوادگی و تاریخ را وارد کن.");
-
-        return;
-    }
+let tickets =
+JSON.parse(localStorage.getItem("hoori_tickets") || "[]");
 
 
-    const number =
-        "H-" +
-        Math.floor(100000 + Math.random()*900000);
+function save(){
 
+localStorage.setItem(
+"hoori_names",
+JSON.stringify(hooris)
+);
 
-    document.getElementById("ticketResult").innerHTML = `
+localStorage.setItem(
+"hoori_recommended",
+JSON.stringify(recommended)
+);
 
-        <div style="
-            margin-top:30px;
-            border:1px solid rgba(212,175,55,.45);
-            border-radius:22px;
-            padding:28px;
-            background:
-            radial-gradient(circle at 100% 0%,rgba(212,175,55,.15),transparent 30%),
-            #080808;
-            position:relative;
-            overflow:hidden;
-        ">
-
-            <div style="
-                color:#d4af37;
-                font-size:11px;
-                letter-spacing:3px;
-                margin-bottom:15px;
-            ">
-                HOORI.COM · EXCLUSIVE
-            </div>
-
-            <div style="
-                font-size:30px;
-                font-weight:800;
-                color:#f2d675;
-                margin-bottom:20px;
-            ">
-                بلیط اختصاصی
-            </div>
-
-            <div style="
-                display:grid;
-                gap:10px;
-                color:#aaa;
-                font-size:14px;
-            ">
-
-                <div>
-                    نام:
-                    <strong style="color:#fff">
-                        ${first} ${last}
-                    </strong>
-                </div>
-
-                <div>
-                    حوری:
-                    <strong style="color:#f2d675">
-                        ${hoori}
-                    </strong>
-                </div>
-
-                <div>
-                    تاریخ:
-                    <strong style="color:#fff">
-                        ${date}
-                    </strong>
-                </div>
-
-                <div>
-                    شماره:
-                    <strong style="color:#f2d675">
-                        ${number}
-                    </strong>
-                </div>
-
-            </div>
-
-            <div style="
-                margin-top:25px;
-                padding-top:18px;
-                border-top:1px solid rgba(212,175,55,.15);
-                color:#666;
-                font-size:11px;
-            ">
-                ♱ HOORI · THE GOLDEN WORLD
-            </div>
-
-        </div>
-
-    `;
+localStorage.setItem(
+"hoori_tickets",
+JSON.stringify(tickets)
+);
 
 }
 
 
-function admin(){
+/* =========================
+   UI
+========================= */
 
-    const password = prompt("رمز پنل مدیریت:");
+function toast(text){
 
-    if(password === "Hoori1405"){
+const t=document.getElementById("toast");
 
-        alert(
-            "♱ HOORI.COM\n\n" +
-            "ورود به پنل مدیریت تأیید شد.\n" +
-            "پنل مدیریت در حال توسعه است."
-        );
+t.textContent=text;
+t.classList.add("show");
 
-    }else if(password !== null){
-
-        alert("رمز اشتباه است.");
-
-    }
+setTimeout(()=>{
+t.classList.remove("show");
+},2500);
 
 }
 
-</script>
 
-</body>
-</html>
+function scrollToId(id){
+
+const el=document.getElementById(id);
+
+if(el){
+el.scrollIntoView({
+behavior:"smooth",
+block:"start"
+});
+}
+
+}
+
+
+/* =========================
+   HOORI
+========================= */
+
+function renderHooris(){
+
+const list=document.getElementById("hooriList");
+
+list.innerHTML="";
+
+hooris.forEach((name,i)=>{
+
+list.innerHTML+=`
+
+<div class="card">
+
+<div class="num">
+${String(i+1).padStart(2,"0")} · HOORI
+</div>
+
+<div class="icon">♱</div>
+
+<h3>${escapeHTML(name)}</h3>
+
+<p>
+انتخاب ویژه HOORI
+</p>
+
+</div>
+
+`;
+
+});
+
+
+const select=document.getElementById("ticketHoori");
+
+select.innerHTML="";
+
+hooris.forEach(name=>{
+
+select.innerHTML+=`
+<option value="${escapeAttr(name)}">
+${escapeHTML(name)}
+</option>
+`;
+
+});
+
+renderAdminHooris();
+
+}
+
+
+function renderRecommended(){
+
+const list=document.getElementById("recommendedList");
+
+list.innerHTML="";
+
+recommended.forEach((name,i)=>{
+
+list.innerHTML+=`
+
+<div class="card">
+
+<div class="num">
+${String(i+1).padStart(2,"0")} · RECOMMENDED
+</div>
+
+<div class="icon">✦</div>
+
+<h3>${escapeHTML(name)}</h3>
+
+<p>
+پیشنهاد ویژه HOORI
+</p>
+
+<br>
+
+<button
+class="smallbtn"
+onclick="selectTicket('${escapeAttr(name)}')">
+درخواست بلیط
+</button>
+
+</div>
+
+`;
+
+});
+
+renderAdminRecommended();
+
+}
+
+
+/* =========================
+   TICKET
+========================= */
+
+function selectTicket(name){
+
+scrollToId("ticketSection");
+
+setTimeout(()=>{
+
+const select=document.getElementById("ticketHoori");
+
+let found=false;
+
+for(let i=0;i<select.options.length;i++){
+
+if(select.options[i].value===name){
+select.selectedIndex=i;
+found=true;
+break;
+}
+
+}
+
+if(!found){
+
+hooris.push(name);
+save();
+renderHooris();
+
+select.value=name;
+
+}
+
+},500);
+
+}
+
+
+function createTicket(){
+
+const first=document.getElementById("firstName").value.trim();
+const last=document.getElementById("lastName").value.trim();
+const hoori=document.getElementById("ticketHoori").value;
+const date=document.getElementById("ticketDate").value;
+
+if(!first || !last || !date){
+
+toast("لطفاً همه اطلاعات را وارد کن.");
+
+return;
+
+}
+
+const number=
+"HR-"+Math.floor(100000+Math.random()*900000);
+
+const ticketData={
+id:Date.now(),
+number,
+first,
+last,
+hoori,
+date
+};
+
+tickets.push(ticketData);
+
+save();
+
+renderAdminTickets();
+
+const box=document.getElementById("ticket");
+
+box.classList.add("show");
+
+box.innerHTML=`
+
+<div class="ticket-title">
+♱ بلیط اختصاصی HOORI
+</div>
+
+<div class="ticket-row">
+<span>نام</span>
+<strong>${escapeHTML(first)} ${escapeHTML(last)}</strong>
+</div>
+
+<div class="ticket-row">
+<span>حوری</span>
+<strong>${escapeHTML(hoori)}</strong>
+</div>
+
+<div class="ticket-row">
+<span>تاریخ</span>
+<strong>${escapeHTML(date)}</strong>
+</div>
+
+<div class="ticket-row">
+<span>شماره بلیط</span>
+<strong>${number}</strong>
+</div>
+
+<div style="
+margin-top:20px;
+color:#666;
+font-size:11px;
+">
+✦ HOORI.COM · THE GOLDEN WORLD
+</div>
+
+`;
+
+toast("بلیط با موفقیت ساخته شد ✦");
+
+}
+
+
+/* =========================
+   ADMIN LOGIN
+========================= */
+
+function openAdmin(){
+
+const password=prompt("رمز پنل مدیریت را وارد کن:");
+
+if(password===null)return;
+
+if(password==="Hoori1405"){
+
+document.getElementById("adminModal")
+.classList.add("open");
+
+renderAdmin();
+
+}else{
+
+toast("رمز اشتباه است.");
+
+}
+
+}
+
+
+function closeAdmin(){
+
+document.getElementById("adminModal")
+.classList.remove("open");
+
+}
+
+
+/* =========================
+   ADMIN HOORI
+========================= */
+
+function addHoori(){
+
+const input=document.getElementById("newHoori");
+
+const name=input.value.trim();
+
+if(!name){
+
+toast("نام حوری را وارد کن.");
+
+return;
+
+}
+
+if(hooris.includes(name)){
+
+toast("این حوری قبلاً وجود دارد.");
+
+return;
+
+}
+
+hooris.push(name);
+
+save();
+
+input.value="";
+
+renderHooris();
+
+renderRecommended();
+
+updateStats();
+
+toast("حوری اضافه شد ✦");
+
+}
+
+
+function deleteHoori(index){
+
+if(!confirm("این حوری حذف شود؟"))return;
+
+hooris.splice(index,1);
+
+save();
+
+renderHooris();
+
+renderRecommended();
+
+updateStats();
+
+toast("حوری حذف شد.");
+
+}
+
+
+function addRecommended(){
+
+const input=document.getElementById("newRec");
+
+const name=input.value.trim();
+
+if(!name){
+
+toast("نام پیشنهادی را وارد کن.");
+
+return;
+
+}
+
+if(recommended.includes(name)){
+
+toast("این مورد قبلاً وجود دارد.");
+
+return;
+
+}
+
+recommended.push(name);
+
+save();
+
+input.value="";
+
+renderRecommended();
+
+updateStats();
+
+toast("حوری پیشنهادی اضافه شد ✦");
+
+}
+
+
+function deleteRecommended(index){
+
+if(!confirm("این مورد حذف شود؟"))return;
+
+recommended.splice(index,1);
+
+save();
+
+renderRecommended();
+
+updateStats();
+
+toast("حوری پیشنهادی حذف شد.");
+
+}
+
+
+/* =========================
+   ADMIN RENDER
+========================= */
+
+function renderAdminHooris(){
+
+const box=document.getElementById("adminHooris");
+
+if(!box)return;
+
+box.innerHTML="";
+
+if(!hooris.length){
+
+box.innerHTML='<div class="empty">هیچ حوری وجود ندارد.</div>';
+
+return;
+
+}
+
+hooris.forEach((name,i)=>{
+
+box.innerHTML+=`
+
+<div class="admin-row">
+
+<span>${escapeHTML(name)}</span>
+
+<button
+class="smallbtn danger"
+onclick="deleteHoori(${i})">
+حذف
+</button>
+
+</div>
+
+`;
+
+});
+
+}
+
+
+function renderAdminRecommended(){
+
+const box=document.getElementById("adminRecommended");
+
+if(!box)return;
+
+box.innerHTML="";
+
+if(!recommended.length){
+
+box.innerHTML='<div class="empty">موردی وجود ندارد.</div>';
+
+return;
+
+}
+
+recommended.forEach((name,i)=>{
+
+box.innerHTML+=`
+
+<div class="admin-row">
+
+<span>${escapeHTML(name)}</span>
+
+<button
+class="smallbtn danger"
+onclick="deleteRecommended(${i})">
+حذف
+</button>
+
+</div>
+
+`;
+
+});
+
+}
+
+
+function renderAdminTickets(){
+
+const box=document.getElementById("adminTickets");
+
+if(!box)return;
+
+box.innerHTML="";
+
+if(!tickets.length){
+
+box.innerHTML=
+'<div class="empty">هنوز بلیطی ثبت نشده.</div>';
+
+return;
+
+}
+
+tickets.slice().reverse().forEach(ticket=>{
+
+box.innerHTML+=`
+
+<div class="admin-row">
+
+<span>
+<strong style="color:#d7b64b">
+${ticket.number}
+</strong>
+<br>
+<small style="color:#777">
+${escapeHTML(ticket.first)}
+${escapeHTML(ticket.last)}
+ ·
+${escapeHTML(ticket.hoori)}
+ ·
+${escapeHTML(ticket.date)}
+</small>
+</span>
+
+<button
+class="smallbtn danger"
+onclick="deleteTicket(${ticket.id})">
+حذف
+</button>
+
+</div>
+
+`;
+
+});
+
+}
+
+
+function deleteTicket(id){
+
+if(!confirm("این بلیط حذف شود؟"))return;
+
+tickets=tickets.filter(t=>t.id!==id);
+
+save();
+
+renderAdminTickets();
+
+updateStats();
+
+toast("بلیط حذف شد.");
+
+}
+
+
+function updateStats(){
+
+document.getElementB
