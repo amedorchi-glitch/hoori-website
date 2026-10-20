@@ -2,1585 +2,581 @@
 <html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#f6f4ef">
 <title>HOORI.COM</title>
 
 <style>
+:root {
+  --bg:#f6f4ef;
+  --card:#fff;
+  --gold:#d8b665;
+  --gold2:#f1d58e;
+  --dark:#211f1b;
+  --text:#292722;
+  --muted:#99948a;
+  --line:#e6e1d7;
+  --danger:#d95d5d;
+}
 *{box-sizing:border-box;margin:0;padding:0}
-
-:root{
- --bg:#f6f4ef;
- --card:#fff;
- --gold:#d8b665;
- --gold2:#f1d58e;
- --dark:#211f1b;
- --text:#292722;
- --muted:#99948a;
- --line:#e6e1d7;
- --danger:#d95d5d;
-}
-
 body{
- background:var(--bg);
- color:var(--text);
- font-family:Tahoma,Arial,sans-serif;
- min-height:100vh;
+  background:var(--bg);color:var(--text);
+  font-family:Tahoma,Arial,sans-serif;min-height:100vh
 }
-
 button,input,select{font-family:inherit}
-
 button{cursor:pointer}
-
-/* HEADER */
-
+button:disabled{opacity:.5;cursor:not-allowed}
 header{
- height:76px;
- background:#fff;
- border-bottom:1px solid var(--line);
- display:flex;
- align-items:center;
- justify-content:space-between;
- padding:0 20px;
- position:sticky;
- top:0;
- z-index:20;
+  min-height:76px;background:#fff;border-bottom:1px solid var(--line);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:12px 20px;position:sticky;top:0;z-index:20
 }
-
-.logo{
- display:flex;
- align-items:center;
- gap:11px;
-}
-
+.logo{display:flex;align-items:center;gap:11px}
 .logoIcon{
- width:45px;
- height:45px;
- border-radius:50%;
- background:var(--dark);
- color:var(--gold2);
- display:flex;
- align-items:center;
- justify-content:center;
- font-size:22px;
+  width:45px;height:45px;border-radius:50%;background:var(--dark);
+  color:var(--gold2);display:flex;align-items:center;
+  justify-content:center;font-size:22px
 }
-
-.logoText{
- font-size:18px;
- font-weight:900;
-}
-
-.logoSub{
- font-size:8px;
- letter-spacing:3px;
- color:var(--muted);
- margin-top:4px;
-}
-
-.menuBtn{
- border:0;
- background:transparent;
- font-size:29px;
- color:var(--dark);
-}
-
-/* MAIN */
-
-.container{
- width:min(1000px,92%);
- margin:auto;
- padding:22px 0 50px;
-}
-
-.top{
- display:flex;
- justify-content:space-between;
- align-items:center;
- margin-bottom:20px;
-}
-
-.top h1{
- font-size:25px;
-}
-
-.top p{
- color:var(--muted);
- font-size:12px;
- margin-top:6px;
-}
-
+.logoText{font-size:18px;font-weight:900}
+.logoSub{font-size:8px;letter-spacing:3px;color:var(--muted);margin-top:4px}
+.menuBtn{border:0;background:transparent;font-size:29px;color:var(--dark)}
+.container{width:min(1000px,92%);margin:auto;padding:22px 0 50px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:20px}
+.top h1{font-size:25px}
+.top p{color:var(--muted);font-size:12px;margin-top:6px}
 .refresh{
- border:0;
- background:linear-gradient(135deg,#eed18b,#d7b462);
- padding:14px 18px;
- border-radius:14px;
- font-weight:bold;
+  border:0;background:linear-gradient(135deg,#eed18b,#d7b462);
+  padding:14px 18px;border-radius:14px;font-weight:bold
 }
-
-/* HERO */
-
 .hero{
- height:180px;
- border-radius:24px;
- overflow:hidden;
- position:relative;
- margin-bottom:18px;
- background:
- linear-gradient(90deg,rgba(20,19,17,.82),rgba(20,19,17,.15)),
- url("https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=1200&q=80")
- center/cover;
+  min-height:180px;border-radius:24px;overflow:hidden;position:relative;
+  margin-bottom:18px;
+  background:linear-gradient(90deg,rgba(20,19,17,.88),rgba(20,19,17,.22)),
+  url("https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=1200&q=80") center/cover
 }
-
 .heroContent{
- position:absolute;
- inset:0;
- padding:24px;
- display:flex;
- flex-direction:column;
- justify-content:flex-end;
- color:#fff;
+  min-height:180px;padding:24px;display:flex;flex-direction:column;
+  justify-content:flex-end;color:#fff
 }
-
-.heroSmall{
- color:var(--gold2);
- font-size:12px;
-}
-
-.hero h2{
- font-size:27px;
- margin-top:8px;
-}
-
-/* STATS */
-
-.stats{
- display:grid;
- grid-template-columns:repeat(2,1fr);
- gap:13px;
-}
-
+.heroSmall{color:var(--gold2);font-size:12px}
+.hero h2{font-size:27px;margin-top:8px}
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:13px}
 .stat{
- background:#fff;
- border:1px solid var(--line);
- border-radius:21px;
- min-height:150px;
- padding:20px;
- box-shadow:0 4px 20px rgba(0,0,0,.025);
+  background:#fff;border:1px solid var(--line);border-radius:21px;
+  min-height:150px;padding:20px;box-shadow:0 4px 20px #00000006
 }
-
 .statIcon{
- width:52px;
- height:52px;
- border-radius:16px;
- background:#faf1d9;
- display:flex;
- align-items:center;
- justify-content:center;
- font-size:23px;
- margin-bottom:15px;
+  width:52px;height:52px;border-radius:16px;background:#faf1d9;
+  display:flex;align-items:center;justify-content:center;font-size:23px;margin-bottom:15px
 }
-
-.statTitle{
- color:var(--muted);
- font-size:13px;
-}
-
-.statNumber{
- font-size:29px;
- font-weight:900;
- margin-top:12px;
-}
-
-.statDesc{
- color:var(--muted);
- font-size:11px;
- margin-top:7px;
-}
-
-/* DARK FEATURE */
-
+.statTitle{color:var(--muted);font-size:13px}
+.statNumber{font-size:29px;font-weight:900;margin-top:12px}
+.statDesc{color:var(--muted);font-size:11px;margin-top:7px}
 .feature{
- margin-top:18px;
- background:linear-gradient(135deg,#1d1c19,#2b2923);
- border-radius:24px;
- padding:25px;
- color:#fff;
+  margin-top:18px;background:linear-gradient(135deg,#1d1c19,#2b2923);
+  border-radius:24px;padding:25px;color:#fff
 }
-
-.feature small{
- color:var(--gold2);
-}
-
-.feature h2{
- font-size:27px;
- margin:13px 0;
-}
-
-.feature p{
- color:#aaa69d;
- line-height:2;
- font-size:13px;
-}
-
+.feature small{color:var(--gold2)}
+.feature h2{font-size:27px;margin:13px 0}
+.feature p{color:#aaa69d;line-height:2;font-size:13px}
 .goldBtn{
- border:0;
- background:linear-gradient(135deg,#f0d58e,#d5af5c);
- color:#27231c;
- padding:15px 21px;
- border-radius:14px;
- font-weight:900;
- margin-top:16px;
+  border:0;background:linear-gradient(135deg,#f0d58e,#d5af5c);
+  color:#27231c;padding:15px 21px;border-radius:14px;
+  font-weight:900;margin-top:16px
 }
-
-.goldBtn:active,
-.refresh:active,
-.quick:active{
- transform:scale(.97);
-}
-
-/* QUICK */
-
-.title{
- font-size:20px;
- margin:25px 0 14px;
-}
-
-.quickGrid{
- display:grid;
- grid-template-columns:repeat(2,1fr);
- gap:12px;
-}
-
+.goldBtn:active,.refresh:active,.quick:active{transform:scale(.98)}
+.title{font-size:20px;margin:25px 0 14px}
+.quickGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
 .quick{
- border:1px solid var(--line);
- background:#fff;
- border-radius:19px;
- padding:18px;
- text-align:right;
- min-height:120px;
- transition:.2s;
+  border:1px solid var(--line);background:#fff;border-radius:19px;
+  padding:18px;text-align:right;min-height:120px;transition:.2s
 }
-
-.quick:hover{
- transform:translateY(-2px);
- box-shadow:0 8px 22px rgba(0,0,0,.05);
-}
-
-.qIcon{
- font-size:24px;
- margin-bottom:11px;
-}
-
-.quick strong{
- display:block;
- margin-bottom:6px;
-}
-
-.quick span{
- color:var(--muted);
- font-size:11px;
-}
-
-/* PANELS */
-
+.quick:hover{transform:translateY(-2px);box-shadow:0 8px 22px #0000000d}
+.qIcon{font-size:24px;margin-bottom:11px}
+.quick strong{display:block;margin-bottom:6px}
+.quick span{color:var(--muted);font-size:11px}
 .panel{
- position:fixed;
- inset:0;
- background:var(--bg);
- z-index:100;
- display:none;
- overflow:auto;
+  position:fixed;inset:0;background:var(--bg);z-index:100;
+  display:none;overflow:auto
 }
-
-.panel.open{
- display:block;
-}
-
+.panel.open{display:block}
 .panelHeader{
- height:75px;
- background:#fff;
- border-bottom:1px solid var(--line);
- display:flex;
- align-items:center;
- gap:13px;
- padding:0 20px;
- position:sticky;
- top:0;
- z-index:5;
+  min-height:75px;background:#fff;border-bottom:1px solid var(--line);
+  display:flex;align-items:center;gap:13px;padding:12px 20px;
+  position:sticky;top:0;z-index:5
 }
-
 .backBtn{
- width:43px;
- height:43px;
- border:1px solid var(--line);
- background:#faf9f6;
- border-radius:13px;
- font-size:20px;
+  width:43px;height:43px;border:1px solid var(--line);
+  background:#faf9f6;border-radius:13px;font-size:20px
 }
-
-.panelHeader h2{
- font-size:19px;
+.panelHeader h2{font-size:19px}
+.panelBody{width:min(850px,92%);margin:auto;padding:25px 0 70px}
+.form,.adminBox{
+  background:#fff;border:1px solid var(--line);border-radius:23px;padding:22px
 }
-
-.panelBody{
- width:min(850px,92%);
- margin:auto;
- padding:25px 0 70px;
+.field{margin-bottom:16px}
+.field label{display:block;font-size:13px;margin-bottom:8px}
+.field input,.field select,.field textarea{
+  width:100%;padding:15px;border:1px solid var(--line);
+  border-radius:13px;background:#faf9f6;outline:none;color:var(--text)
 }
-
-/* FORM */
-
-.form{
- background:#fff;
- border:1px solid var(--line);
- border-radius:23px;
- padding:22px;
-}
-
-.field{
- margin-bottom:16px;
-}
-
-.field label{
- display:block;
- font-size:13px;
- margin-bottom:8px;
-}
-
-.field input,
-.field select{
- width:100%;
- padding:15px;
- border:1px solid var(--line);
- border-radius:13px;
- background:#faf9f6;
- outline:none;
-}
-
-.field input:focus,
-.field select:focus{
- border-color:var(--gold);
-}
-
-/* LIST */
-
-.list{
- display:grid;
- gap:12px;
-}
-
+.field input:focus,.field select:focus{border-color:var(--gold)}
+.list{display:grid;gap:12px}
 .item{
- background:#fff;
- border:1px solid var(--line);
- border-radius:18px;
- padding:17px;
- display:flex;
- align-items:center;
- justify-content:space-between;
- gap:12px;
+  background:#fff;border:1px solid var(--line);border-radius:18px;
+  padding:17px;display:flex;align-items:center;justify-content:space-between;gap:12px
 }
-
-.itemLeft{
- display:flex;
- align-items:center;
- gap:12px;
-}
-
+.itemLeft{display:flex;align-items:center;gap:12px;min-width:0}
 .itemIcon{
- width:46px;
- height:46px;
- border-radius:14px;
- background:#faf1d9;
- display:flex;
- align-items:center;
- justify-content:center;
+  width:46px;height:46px;flex-shrink:0;border-radius:14px;
+  background:#faf1d9;display:flex;align-items:center;justify-content:center
 }
-
-.item small{
- display:block;
- color:var(--muted);
- margin-top:4px;
-}
-
+.item small{display:block;color:var(--muted);margin-top:4px;overflow-wrap:anywhere}
 .delete{
- border:0;
- background:#fff0f0;
- color:var(--danger);
- padding:9px 12px;
- border-radius:10px;
+  border:0;background:#fff0f0;color:var(--danger);
+  padding:9px 12px;border-radius:10px;flex-shrink:0
 }
-
 .empty{
- background:#fff;
- border:1px dashed var(--line);
- border-radius:20px;
- text-align:center;
- padding:45px 15px;
- color:var(--muted);
+  background:#fff;border:1px dashed var(--line);border-radius:20px;
+  text-align:center;padding:35px 15px;color:var(--muted);line-height:2
 }
-
-/* TICKET */
-
 .ticket{
- background:#fff;
- border:1px solid var(--line);
- border-radius:22px;
- padding:20px;
- position:relative;
- overflow:hidden;
+  background:#fff;border:1px solid var(--line);border-radius:22px;
+  padding:20px;position:relative;overflow:hidden
 }
-
 .ticket:before{
- content:"";
- position:absolute;
- right:0;
- top:0;
- width:5px;
- height:100%;
- background:var(--gold);
+  content:"";position:absolute;right:0;top:0;width:5px;height:100%;background:var(--gold)
 }
-
-.ticketTop{
- display:flex;
- justify-content:space-between;
- padding-bottom:13px;
- border-bottom:1px dashed var(--line);
-}
-
-.ticketCode{
- color:#b38b39;
- font-size:11px;
-}
-
-.ticketRow{
- display:flex;
- justify-content:space-between;
- padding:8px 0;
- font-size:13px;
-}
-
-.ticketRow span{
- color:var(--muted);
-}
-
-/* MENU */
-
-.drawer{
- position:fixed;
- inset:0;
- background:rgba(0,0,0,.38);
- z-index:200;
- display:none;
-}
-
-.drawer.open{
- display:block;
-}
-
+.ticketTop{display:flex;justify-content:space-between;gap:10px;padding-bottom:13px;border-bottom:1px dashed var(--line)}
+.ticketCode{color:#b38b39;font-size:11px;overflow-wrap:anywhere}
+.ticketRow{display:flex;justify-content:space-between;gap:12px;padding:8px 0;font-size:13px}
+.ticketRow span{color:var(--muted)}
+.drawer{position:fixed;inset:0;background:#0006;z-index:200;display:none}
+.drawer.open{display:block}
 .drawerBox{
- width:min(340px,88%);
- height:100%;
- background:#fff;
- padding:20px;
- animation:drawer .2s ease;
+  width:min(340px,88%);height:100%;background:#fff;padding:20px;
+  overflow:auto;animation:drawer .2s ease
 }
-
-@keyframes drawer{
- from{transform:translateX(100%)}
- to{transform:translateX(0)}
-}
-
-.drawerHead{
- display:flex;
- justify-content:space-between;
- align-items:center;
- margin-bottom:25px;
-}
-
-.drawerClose{
- border:0;
- background:none;
- font-size:30px;
-}
-
+@keyframes drawer{from{transform:translateX(100%)}to{transform:translateX(0)}}
+.drawerHead{display:flex;justify-content:space-between;align-items:center;margin-bottom:25px}
+.drawerClose{border:0;background:none;font-size:30px}
 .menuItem{
- width:100%;
- padding:16px;
- border:1px solid var(--line);
- background:#faf9f6;
- border-radius:14px;
- text-align:right;
- margin-bottom:10px;
+  width:100%;padding:16px;border:1px solid var(--line);background:#faf9f6;
+  border-radius:14px;text-align:right;margin-bottom:10px
 }
-
-.menuItem:hover{
- background:#f8efd8;
-}
-
-/* ADMIN */
-
-.adminBox{
- background:#fff;
- border:1px solid var(--line);
- border-radius:20px;
- padding:20px;
- margin-bottom:15px;
-}
-
-.adminBox h3{
- margin-bottom:15px;
-}
-
-.addRow{
- display:flex;
- gap:8px;
-}
-
+.menuItem:hover{background:#f8efd8}
+.adminBox{margin-bottom:15px}
+.adminBox h3{margin-bottom:15px}
+.addRow{display:flex;gap:8px}
 .addRow input{
- flex:1;
- border:1px solid var(--line);
- border-radius:12px;
- padding:13px;
+  flex:1;min-width:0;border:1px solid var(--line);
+  border-radius:12px;padding:13px
 }
-
 .addRow button{
- border:0;
- background:var(--dark);
- color:#fff;
- border-radius:12px;
- padding:0 17px;
+  border:0;background:var(--dark);color:#fff;border-radius:12px;padding:0 17px
 }
-
-/* TOAST */
-
 .toast{
- position:fixed;
- bottom:20px;
- left:50%;
- transform:translate(-50%,100px);
- background:#24221e;
- color:#fff;
- padding:13px 20px;
- border-radius:13px;
- opacity:0;
- transition:.25s;
- z-index:500;
+  position:fixed;bottom:20px;left:50%;transform:translate(-50%,100px);
+  background:#24221e;color:#fff;padding:13px 20px;border-radius:13px;
+  opacity:0;transition:.25s;z-index:500;max-width:90%;text-align:center
 }
-
-.toast.show{
- opacity:1;
- transform:translate(-50%,0);
-}
-
-/* DESKTOP */
-
+.toast.show{opacity:1;transform:translate(-50%,0)}
+.muted{color:var(--muted);font-size:12px;line-height:2}
+.status{font-size:12px;color:var(--muted);margin-top:10px}
 @media(min-width:700px){
-
- .stats{
-  grid-template-columns:repeat(4,1fr);
- }
-
- .quickGrid{
-  grid-template-columns:repeat(4,1fr);
- }
-
+  .stats{grid-template-columns:repeat(4,1fr)}
+  .quickGrid{grid-template-columns:repeat(4,1fr)}
 }
-
-/* MOBILE */
-
 @media(max-width:600px){
-
- .container{
-  width:92%;
- }
-
- .hero{
-  height:175px;
- }
-
- .hero h2{
-  font-size:23px;
- }
-
- .top h1{
-  font-size:22px;
- }
-
- .stat{
-  padding:17px;
- }
-
- .statNumber{
-  font-size:25px;
- }
-
+  .hero h2{font-size:23px}.top h1{font-size:22px}
+  .stat{padding:17px}.statNumber{font-size:25px}
+  .addRow{flex-wrap:wrap}.addRow input{flex-basis:100%;min-height:45px}
+  .addRow button{min-height:42px}
 }
 </style>
 </head>
-
 <body>
 
 <header>
-
- <button class="menuBtn" onclick="openMenu()">☰</button>
-
- <div class="logo">
-
-  <div>
-   <div class="logoText">HOORI.COM</div>
-   <div class="logoSub">THE GOLDEN WORLD</div>
+  <button class="menuBtn" onclick="openMenu()" aria-label="بازکردن منو">☰</button>
+  <div class="logo">
+    <div>
+      <div class="logoText">HOORI.COM</div>
+      <div class="logoSub">THE GOLDEN WORLD</div>
+    </div>
+    <div class="logoIcon">♱</div>
   </div>
-
-  <div class="logoIcon">♱</div>
-
- </div>
-
 </header>
 
-
 <main class="container">
-
- <div class="top">
-
-  <div>
-   <h1>سلام 👋</h1>
-   <p>به پنل HOORI خوش اومدی</p>
+  <div class="top">
+    <div>
+      <h1>سلام 👋</h1>
+      <p>به پنل HOORI خوش اومدی</p>
+    </div>
+    <button class="refresh" onclick="refreshData()">↻ بروزرسانی</button>
   </div>
 
-  <button class="refresh" onclick="refreshData()">
-   ↻ بروزرسانی
-  </button>
-
- </div>
-
-
- <div class="hero">
-
-  <div class="heroContent">
-   <div class="heroSmall">HOORI PREMIUM ✦</div>
-   <h2>مدیریت هوشمند بلیط‌ها</h2>
+  <div class="hero">
+    <div class="heroContent">
+      <div class="heroSmall">HOORI PREMIUM ✦</div>
+      <h2>مدیریت هوشمند بلیط‌ها</h2>
+    </div>
   </div>
 
- </div>
-
-
- <div class="stats">
-
-  <div class="stat">
-   <div class="statIcon">✧</div>
-   <div class="statTitle">تعداد حوری‌ها</div>
-   <div class="statNumber" id="hooriCount">0</div>
-   <div class="statDesc">حوری‌های موجود</div>
+  <div class="stats">
+    <div class="stat">
+      <div class="statIcon">✧</div><div class="statTitle">تعداد حوری‌ها</div>
+      <div class="statNumber" id="hooriCount">—</div><div class="statDesc">حوری‌های موجود</div>
+    </div>
+    <div class="stat">
+      <div class="statIcon">🎟️</div><div class="statTitle">کل بلیط‌ها</div>
+      <div class="statNumber" id="ticketCount">—</div><div class="statDesc">فقط برای مدیر</div>
+    </div>
+    <div class="stat">
+      <div class="statIcon">◷</div><div class="statTitle">بلیط‌های امروز</div>
+      <div class="statNumber" id="todayCount">—</div><div class="statDesc">فقط برای مدیر</div>
+    </div>
+    <div class="stat">
+      <div class="statIcon">✓</div><div class="statTitle">وضعیت سیستم</div>
+      <div class="statNumber" id="systemStatus" style="font-size:17px">در حال اتصال</div>
+      <div class="statDesc" id="systemDesc">Supabase</div>
+    </div>
   </div>
 
-  <div class="stat">
-   <div class="statIcon">🎟️</div>
-   <div class="statTitle">کل بلیط‌ها</div>
-   <div class="statNumber" id="ticketCount">0</div>
-   <div class="statDesc">بلیط‌های موجود</div>
+  <div class="feature">
+    <small>HOORI PREMIUM ✦</small>
+    <h2>مدیریت هوشمند بلیط‌ها</h2>
+    <p>ثبت، مشاهده و مدیریت بلیط‌ها در یک محیط ساده و حرفه‌ای.</p>
+    <button class="goldBtn" onclick="openPanel('register')">＋ ثبت بلیط جدید</button>
   </div>
 
-  <div class="stat">
-   <div class="statIcon">◷</div>
-   <div class="statTitle">بلیط‌های امروز</div>
-   <div class="statNumber" id="todayCount">0</div>
-   <div class="statDesc">بر اساس تاریخ</div>
+  <h2 class="title">دسترسی سریع</h2>
+  <div class="quickGrid">
+    <button class="quick" onclick="openPanel('tickets')">
+      <div class="qIcon">🎟️</div><strong>کل بلیط‌ها</strong><span>بلیط‌های ثبت‌شده</span>
+    </button>
+    <button class="quick" onclick="openPanel('hooris')">
+      <div class="qIcon">✧</div><strong>حوری‌ها</strong><span>لیست حوری‌ها</span>
+    </button>
+    <button class="quick" onclick="openPanel('recommended')">
+      <div class="qIcon">⭐</div><strong>پیشنهادی</strong><span>حوری‌های پیشنهادی</span>
+    </button>
+    <button class="quick" onclick="adminLogin()">
+      <div class="qIcon">⚙️</div><strong>مدیریت</strong><span id="adminButtonText">ورود مدیر</span>
+    </button>
   </div>
-
-  <div class="stat">
-   <div class="statIcon">✓</div>
-   <div class="statTitle">وضعیت سیستم</div>
-   <div class="statNumber" style="font-size:20px">فعال</div>
-   <div class="statDesc">HOORI SYSTEM</div>
-  </div>
-
- </div>
-
-
- <div class="feature">
-
-  <small>HOORI PREMIUM ✦</small>
-
-  <h2>مدیریت هوشمند بلیط‌ها</h2>
-
-  <p>
-   ثبت، مشاهده و مدیریت بلیط‌ها
-   در یک محیط ساده و حرفه‌ای.
-  </p>
-
-  <button
-   class="goldBtn"
-   onclick="openPanel('register')">
-   ＋ ثبت بلیط جدید
-  </button>
-
- </div>
-
-
- <h2 class="title">دسترسی سریع</h2>
-
- <div class="quickGrid">
-
-  <button class="quick" onclick="openPanel('tickets')">
-   <div class="qIcon">🎟️</div>
-   <strong>کل بلیط‌ها</strong>
-   <span>بلیط‌های ثبت‌شده</span>
-  </button>
-
-  <button class="quick" onclick="openPanel('hooris')">
-   <div class="qIcon">✧</div>
-   <strong>حوری‌ها</strong>
-   <span>لیست حوری‌ها</span>
-  </button>
-
-  <button class="quick" onclick="openPanel('recommended')">
-   <div class="qIcon">⭐</div>
-   <strong>پیشنهادی</strong>
-   <span>حوری‌های پیشنهادی</span>
-  </button>
-
-  <button class="quick" onclick="adminLogin()">
-   <div class="qIcon">⚙️</div>
-   <strong>مدیریت</strong>
-   <span>پنل مدیریت</span>
-  </button>
-
- </div>
-
+  <p class="status" id="mainStatus">در حال اتصال به دیتابیس...</p>
 </main>
 
-
-<!-- MENU -->
-
 <div class="drawer" id="drawer" onclick="drawerOutside(event)">
-
- <div class="drawerBox">
-
-  <div class="drawerHead">
-   <strong>♱ HOORI.COM</strong>
-
-   <button
-    class="drawerClose"
-    onclick="closeMenu()">×</button>
+  <div class="drawerBox">
+    <div class="drawerHead">
+      <strong>♱ HOORI.COM</strong>
+      <button class="drawerClose" onclick="closeMenu()">×</button>
+    </div>
+    <button class="menuItem" onclick="goHome()">🏠 داشبورد</button>
+    <button class="menuItem" onclick="openPanel('register')">🎟️ ثبت بلیط</button>
+    <button class="menuItem" onclick="openPanel('tickets')">🎫 بلیط‌های ثبت‌شده</button>
+    <button class="menuItem" onclick="openPanel('hooris')">✧ حوری‌ها</button>
+    <button class="menuItem" onclick="openPanel('recommended')">⭐ حوری پیشنهادی</button>
+    <button class="menuItem" onclick="adminLogin()">⚙️ مدیریت</button>
   </div>
-
-  <button class="menuItem" onclick="goHome()">
-   🏠 داشبورد
-  </button>
-
-  <button class="menuItem" onclick="openPanel('register')">
-   🎟️ ثبت بلیط
-  </button>
-
-  <button class="menuItem" onclick="openPanel('tickets')">
-   🎫 بلیط‌های ثبت‌شده
-  </button>
-
-  <button class="menuItem" onclick="openPanel('hooris')">
-   ✧ حوری‌ها
-  </button>
-
-  <button class="menuItem" onclick="openPanel('recommended')">
-   ⭐ حوری پیشنهادی
-  </button>
-
-  <button class="menuItem" onclick="adminLogin()">
-   ⚙️ مدیریت
-  </button>
-
- </div>
-
 </div>
 
-
-<!-- REGISTER -->
-
 <section class="panel" id="register">
-
- <div class="panelHeader">
-
-  <button class="backBtn" onclick="closePanel('register')">
-   →
-  </button>
-
-  <h2>🎟️ ثبت بلیط جدید</h2>
-
- </div>
-
- <div class="panelBody">
-
-  <div class="form">
-
-   <div class="field">
-    <label>نام</label>
-    <input id="first" placeholder="نام">
-   </div>
-
-   <div class="field">
-    <label>نام خانوادگی</label>
-    <input id="last" placeholder="نام خانوادگی">
-   </div>
-
-   <div class="field">
-    <label>انتخاب حوری</label>
-    <select id="hooriSelect"></select>
-   </div>
-
-   <div class="field">
-    <label>تاریخ</label>
-    <input type="date" id="date">
-   </div>
-
-   <button
-    class="goldBtn"
-    style="width:100%"
-    onclick="createTicket()">
-    🎟️ ثبت بلیط
-   </button>
-
+  <div class="panelHeader">
+    <button class="backBtn" onclick="closePanel('register')">→</button>
+    <h2>🎟️ ثبت بلیط جدید</h2>
   </div>
-
-  <div id="newTicket" style="margin-top:18px"></div>
-
- </div>
-
+  <div class="panelBody">
+    <div class="form">
+      <div class="field"><label for="first">نام</label><input id="first" maxlength="80" placeholder="نام"></div>
+      <div class="field"><label for="last">نام خانوادگی</label><input id="last" maxlength="80" placeholder="نام خانوادگی"></div>
+      <div class="field"><label for="hooriSelect">انتخاب حوری</label><select id="hooriSelect"><option value="">در حال بارگذاری...</option></select></div>
+      <div class="field"><label for="date">تاریخ</label><input type="date" id="date"></div>
+      <button class="goldBtn" id="createButton" style="width:100%" onclick="createTicket()">🎟️ ثبت بلیط</button>
+      <p class="muted" style="margin-top:12px">نام و اطلاعات بلیط در دیتابیس ذخیره می‌شوند.</p>
+    </div>
+    <div id="newTicket" style="margin-top:18px"></div>
+  </div>
 </section>
-
-
-<!-- TICKETS -->
 
 <section class="panel" id="tickets">
-
- <div class="panelHeader">
-
-  <button class="backBtn" onclick="closePanel('tickets')">
-   →
-  </button>
-
-  <h2>🎫 بلیط‌های ثبت‌شده</h2>
-
- </div>
-
- <div class="panelBody">
-
-  <div class="list" id="ticketList"></div>
-
- </div>
-
+  <div class="panelHeader">
+    <button class="backBtn" onclick="closePanel('tickets')">→</button><h2>🎫 بلیط‌های ثبت‌شده</h2>
+  </div>
+  <div class="panelBody"><div class="list" id="ticketList"></div></div>
 </section>
-
-
-<!-- HOORIS -->
 
 <section class="panel" id="hooris">
-
- <div class="panelHeader">
-
-  <button class="backBtn" onclick="closePanel('hooris')">
-   →
-  </button>
-
-  <h2>✧ حوری‌ها</h2>
-
- </div>
-
- <div class="panelBody">
-
-  <div class="list" id="hooriList"></div>
-
- </div>
-
+  <div class="panelHeader">
+    <button class="backBtn" onclick="closePanel('hooris')">→</button><h2>✧ حوری‌ها</h2>
+  </div>
+  <div class="panelBody"><div class="list" id="hooriList"></div></div>
 </section>
-
-
-<!-- RECOMMENDED -->
 
 <section class="panel" id="recommended">
-
- <div class="panelHeader">
-
-  <button class="backBtn" onclick="closePanel('recommended')">
-   →
-  </button>
-
-  <h2>⭐ حوری‌های پیشنهادی</h2>
-
- </div>
-
- <div class="panelBody">
-
-  <div class="list" id="recommendedList"></div>
-
- </div>
-
+  <div class="panelHeader">
+    <button class="backBtn" onclick="closePanel('recommended')">→</button><h2>⭐ حوری‌های پیشنهادی</h2>
+  </div>
+  <div class="panelBody"><div class="list" id="recommendedList"></div></div>
 </section>
-
-
-<!-- ADMIN -->
 
 <section class="panel" id="admin">
-
- <div class="panelHeader">
-
-  <button class="backBtn" onclick="closePanel('admin')">
-   →
-  </button>
-
-  <h2>⚙️ مدیریت HOORI.COM</h2>
-
- </div>
-
- <div class="panelBody">
-
-  <div class="adminBox">
-
-   <h3>✧ افزودن حوری</h3>
-
-   <div class="addRow">
-    <input id="newHoori" placeholder="نام حوری">
-    <button onclick="addHoori()">افزودن</button>
-   </div>
-
+  <div class="panelHeader">
+    <button class="backBtn" onclick="closePanel('admin')">→</button>
+    <h2>⚙️ مدیریت HOORI.COM</h2>
   </div>
-
-
-  <div class="adminBox">
-
-   <h3>⭐ افزودن پیشنهادی</h3>
-
-   <div class="addRow">
-    <input id="newRecommended" placeholder="نام حوری">
-    <button onclick="addRecommended()">افزودن</button>
-   </div>
-
+  <div class="panelBody">
+    <div class="adminBox">
+      <h3>✧ افزودن حوری</h3>
+      <div class="addRow"><input id="newHoori" maxlength="100" placeholder="نام حوری"><button onclick="addHoori()">افزودن</button></div>
+    </div>
+    <div class="adminBox">
+      <h3>⭐ افزودن حوری پیشنهادی</h3>
+      <div class="addRow"><input id="newRecommended" maxlength="100" placeholder="نام حوری"><button onclick="addRecommended()">افزودن</button></div>
+      <p class="muted" style="margin-top:8px">حوری پیشنهادی باید قبلاً به فهرست حوری‌ها اضافه شده باشد.</p>
+    </div>
+    <div class="adminBox"><h3>مدیریت حوری‌ها</h3><div class="list" id="adminHooris"></div></div>
+    <div class="adminBox"><h3>مدیریت بلیط‌ها</h3><div class="list" id="adminTickets"></div></div>
+    <button class="goldBtn" onclick="adminLogout()">خروج از حساب مدیر</button>
   </div>
-
-
-  <div class="adminBox">
-
-   <h3>مدیریت حوری‌ها</h3>
-
-   <div class="list" id="adminHooris"></div>
-
-  </div>
-
-
-  <div class="adminBox">
-
-   <h3>مدیریت بلیط‌ها</h3>
-
-   <div class="list" id="adminTickets"></div>
-
-  </div>
-
- </div>
-
 </section>
 
+<div class="toast" id="toast" role="status"></div>
 
-<div class="toast" id="toast"></div>
-
-
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
+'use strict';
 
-const defaultHooris=[
- "مادر طلایی",
- "حوری خاص"
-];
+/* اطلاعات اتصال عمومی پروژه Supabase */
+const SUPABASE_URL = 'https://mttcthmicgnryolaxxdy.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_P6QG6ILA-DN1_GpHwGnz2w_mn5DPwT7';
 
-let hooris=
- JSON.parse(localStorage.getItem("hooris")) ||
- defaultHooris;
+const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-let recommended=
- JSON.parse(localStorage.getItem("recommended")) ||
- ["حوری پیشنهادی"];
+let hooris = [];
+let tickets = [];
+let isAdmin = false;
+let currentUser = null;
+let busy = false;
 
-let tickets=
- JSON.parse(localStorage.getItem("tickets")) ||
- [];
+const $ = id => document.getElementById(id);
 
-
-function save(){
-
- localStorage.setItem(
-  "hooris",
-  JSON.stringify(hooris)
- );
-
- localStorage.setItem(
-  "recommended",
-  JSON.stringify(recommended)
- );
-
- localStorage.setItem(
-  "tickets",
-  JSON.stringify(tickets)
- );
-
+function esc(value) {
+  return String(value ?? '')
+    .replace(/&/g,'&amp;')
+    .replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;')
+    .replace(/"/g,'&quot;')
+    .replace(/'/g,'&#039;');
 }
 
-
-function openPanel(id){
-
- closeMenu();
-
- document
-  .querySelectorAll(".panel")
-  .forEach(x=>x.classList.remove("open"));
-
- document
-  .getElementById(id)
-  .classList.add("open");
-
- if(id==="register") renderSelect();
- if(id==="tickets") renderTickets();
- if(id==="hooris") renderHooris();
- if(id==="recommended") renderRecommended();
- if(id==="admin") renderAdmin();
-
+function toast(message) {
+  const el = $('toast');
+  el.textContent = message;
+  el.classList.add('show');
+  clearTimeout(toast.timer);
+  toast.timer = setTimeout(() => el.classList.remove('show'), 3000);
 }
 
-
-function closePanel(id){
-
- document
-  .getElementById(id)
-  .classList.remove("open");
-
+function localToday() {
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
 }
 
-
-function openMenu(){
-
- document
-  .getElementById("drawer")
-  .classList.add("open");
-
+function makeTicketCode() {
+  const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+  let code = 'HR-';
+  for (let i=0;i<8;i++) code += chars[Math.floor(Math.random()*chars.length)];
+  return code;
 }
 
-
-function closeMenu(){
-
- document
-  .getElementById("drawer")
-  .classList.remove("open");
-
-}
-
-
-function drawerOutside(e){
-
- if(e.target.id==="drawer"){
+function openPanel(id) {
   closeMenu();
- }
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('open'));
+  $(id).classList.add('open');
 
+  if (id === 'register') {
+    renderSelect();
+  } else if (id === 'tickets') {
+    renderTickets();
+  } else if (id === 'hooris') {
+    renderHooris();
+  } else if (id === 'recommended') {
+    renderRecommended();
+  } else if (id === 'admin') {
+    renderAdmin();
+  }
 }
 
-
-function goHome(){
-
- closeMenu();
-
- document
-  .querySelectorAll(".panel")
-  .forEach(x=>x.classList.remove("open"));
-
- window.scrollTo(0,0);
-
+function closePanel(id) {
+  $(id).classList.remove('open');
 }
 
+function openMenu() { $('drawer').classList.add('open'); }
+function closeMenu() { $('drawer').classList.remove('open'); }
 
-/* TICKET */
-
-function createTicket(){
-
- const first=
-  document.getElementById("first").value.trim();
-
- const last=
-  document.getElementById("last").value.trim();
-
- const hoori=
-  document.getElementById("hooriSelect").value;
-
- const date=
-  document.getElementById("date").value;
-
- if(!first || !last || !hoori || !date){
-
-  toast("لطفاً همه قسمت‌ها را کامل کن");
-  return;
-
- }
-
- const ticket={
-  id:Date.now(),
-  code:
-   "HR-"+Math.random()
-   .toString(36)
-   .substring(2,8)
-   .toUpperCase(),
-  first,
-  last,
-  hoori,
-  date,
-  created:new Date().toLocaleDateString("fa-IR")
- };
-
- tickets.unshift(ticket);
-
- save();
-
- document.getElementById("first").value="";
- document.getElementById("last").value="";
- document.getElementById("date").value="";
-
- showTicket(ticket);
- updateStats();
-
- toast("بلیط با موفقیت ثبت شد 🎟️");
-
+function drawerOutside(e) {
+  if (e.target.id === 'drawer') closeMenu();
 }
 
-
-function showTicket(t){
-
- document.getElementById("newTicket").innerHTML=`
-
- <div class="ticket">
-
-  <div class="ticketTop">
-   <strong>♱ HOORI.COM</strong>
-   <span class="ticketCode">${esc(t.code)}</span>
-  </div>
-
-  <div class="ticketRow">
-   <span>نام</span>
-   <strong>${esc(t.first)}</strong>
-  </div>
-
-  <div class="ticketRow">
-   <span>نام خانوادگی</span>
-   <strong>${esc(t.last)}</strong>
-  </div>
-
-  <div class="ticketRow">
-   <span>حوری</span>
-   <strong>${esc(t.hoori)}</strong>
-  </div>
-
-  <div class="ticketRow">
-   <span>تاریخ</span>
-   <strong>${esc(t.date)}</strong>
-  </div>
-
- </div>
-
- `;
-
+function goHome() {
+  closeMenu();
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('open'));
+  window.scrollTo(0,0);
 }
 
+async function loadHooris() {
+  const {data,error} = await db
+    .from('hoori_members')
+    .select('id,name,is_recommended')
+    .order('name');
 
-/* LIST TICKETS */
-
-function renderTickets(){
-
- const box=document.getElementById("ticketList");
-
- if(!tickets.length){
-
-  box.innerHTML=
-   `<div class="empty">هنوز بلیطی ثبت نشده است.</div>`;
-
-  return;
- }
-
- box.innerHTML=tickets.map(t=>`
-
- <div class="ticket">
-
-  <div class="ticketTop">
-   <strong>♱ HOORI.COM</strong>
-   <span class="ticketCode">${esc(t.code)}</span>
-  </div>
-
-  <div class="ticketRow">
-   <span>نام</span>
-   <strong>${esc(t.first)} ${esc(t.last)}</strong>
-  </div>
-
-  <div class="ticketRow">
-   <span>حوری</span>
-   <strong>${esc(t.hoori)}</strong>
-  </div>
-
-  <div class="ticketRow">
-   <span>تاریخ</span>
-   <strong>${esc(t.date)}</strong>
-  </div>
-
- </div>
-
- `).join("");
-
+  if (error) throw error;
+  hooris = data || [];
+  renderSelect();
+  renderHooris();
+  renderRecommended();
+  $('hooriCount').textContent = hooris.length;
 }
 
+function renderSelect() {
+  const select = $('hooriSelect');
+  const previous = select.value;
 
-/* HOORIS */
+  select.innerHTML = '<option value="">انتخاب حوری...</option>' +
+    hooris.map(h=>`<option value="${esc(h.id)}">${esc(h.name)}</option>`).join('');
 
-function renderHooris(){
-
- const box=document.getElementById("hooriList");
-
- if(!hooris.length){
-
-  box.innerHTML=
-   `<div class="empty">حوری‌ای ثبت نشده است.</div>`;
-
-  return;
- }
-
- box.innerHTML=hooris.map(name=>`
-
- <div class="item">
-
-  <div class="itemLeft">
-
-   <div class="itemIcon">✧</div>
-
-   <div>
-    <strong>${esc(name)}</strong>
-    <small>HOORI PREMIUM</small>
-   </div>
-
-  </div>
-
- </div>
-
- `).join("");
-
+  if (hooris.some(h=>h.id === previous)) select.value = previous;
 }
 
+function renderHooris() {
+  const box = $('hooriList');
 
-/* RECOMMENDED */
+  if (!hooris.length) {
+    box.innerHTML = '<div class="empty">هنوز حوری‌ای ثبت نشده است.</div>';
+    return;
+  }
 
-function renderRecommended(){
-
- const box=document.getElementById("recommendedList");
-
- if(!recommended.length){
-
-  box.innerHTML=
-   `<div class="empty">پیشنهادی وجود ندارد.</div>`;
-
-  return;
- }
-
- box.innerHTML=recommended.map(name=>`
-
- <div class="item">
-
-  <div class="itemLeft">
-
-   <div class="itemIcon">⭐</div>
-
-   <strong>${esc(name)}</strong>
-
-  </div>
-
- </div>
-
- `).join("");
-
+  box.innerHTML = hooris.map(h=>`
+    <div class="item">
+      <div class="itemLeft">
+        <div class="itemIcon">✧</div>
+        <div><strong>${esc(h.name)}</strong><small>HOORI PREMIUM</small></div>
+      </div>
+      ${h.is_recommended ? '<span>⭐ پیشنهادی</span>' : ''}
+    </div>
+  `).join('');
 }
 
+function renderRecommended() {
+  const box = $('recommendedList');
+  const list = hooris.filter(h=>h.is_recommended);
 
-/* SELECT */
+  if (!list.length) {
+    box.innerHTML = '<div class="empty">هنوز حوری پیشنهادی ثبت نشده است.</div>';
+    return;
+  }
 
-function renderSelect(){
-
- const select=
-  document.getElementById("hooriSelect");
-
- select.innerHTML=`
-  <option value="">انتخاب حوری...</option>
- `+
- hooris.map(x=>
-  `<option value="${escAttr(x)}">${esc(x)}</option>`
- ).join("");
-
+  box.innerHTML = list.map(h=>`
+    <div class="item">
+      <div class="itemLeft">
+        <div class="itemIcon">⭐</div>
+        <strong>${esc(h.name)}</strong>
+      </div>
+    </div>
+  `).join('');
 }
 
+async function createTicket() {
+  if (busy) return;
 
-/* ADMIN */
+  const first = $('first').value.trim();
+  const last = $('last').value.trim();
+  const hooriId = $('hooriSelect').value;
+  const issueDate = $('date').value;
 
-function adminLogin(){
+  if (!first || !last || !hooriId || !issueDate) {
+    toast('لطفاً همه قسمت‌ها را کامل کن');
+    return;
+  }
 
- const pass=
-  prompt("رمز مدیریت را وارد کن:");
+  if (first.length > 80 || last.length > 80) {
+    toast('نام یا نام خانوادگی بیش از حد طولانی است');
+    return;
+  }
 
- if(pass===null) return;
+  const selected = hooris.find(h=>h.id === hooriId);
+  if (!selected) {
+    toast('این حوری پیدا نشد؛ صفحه را بروزرسانی کن');
+    return;
+  }
 
- if(pass!=="Hoori1405"){
+  busy = true;
+  $('createButton').disabled = true;
 
-  toast("رمز مدیریت اشتباه است");
-  return;
+  try {
+    const ticket = {
+      first_name: first,
+      last_name: last,
+      hoori_id: selected.id,
+      hoori_name: selected.name,
+      issue_date: issueDate,
+      ticket_code: makeTicketCode()
+    };
 
- }
+    const {data,error} = await db
+      .from('hoori_ticket_records')
+      .insert(ticket)
+      .select('id,first_name,last_name,hoori_name,issue_date,ticket_code,created_at')
+      .single();
 
- openPanel("admin");
+    if (error) throw error;
 
+    $('first').value = '';
+    $('last').value = '';
+    $('date').value = '';
+    showTicket(data);
+    toast('بلیط با موفقیت ثبت شد 🎟️');
+
+    if (isAdmin) await loadTickets();
+    await updateStats();
+  } catch (error) {
+    console.error(error);
+    toast('ثبت بلیط ناموفق بود؛ اتصال و مجوزهای دیتابیس را بررسی کن');
+  } finally {
+    busy = false;
+    $('createButton').disabled = false;
+  }
 }
 
-
-function renderAdmin(){
-
- const h=
-  document.getElementById("adminHooris");
-
- h.innerHTML=hooris.map((name,i)=>`
-
- <div class="item">
-
-  <strong>${esc(name)}</strong>
-
-  <button
-   class="delete"
-   onclick="deleteHoori(${i})">
-   حذف
-  </button>
-
- </div>
-
- `).join("");
-
-
- const t=
-  document.getElementById("adminTickets");
-
- if(!tickets.length){
-
-  t.innerHTML=
-   `<div class="empty">بلیطی وجود ندارد.</div>`;
-
- }else{
-
-  t.innerHTML=tickets.map((x,i)=>`
-
-  <div class="item">
-
-   <div>
-
-    <strong>
-     ${esc(x.first)} ${esc(x.last)}
-    </strong>
-
-    <small>
-     ${esc(x.hoori)} · ${esc(x.code)}
-    </small>
-
-   </div>
-
-   <button
-    class="delete"
-    onclick="deleteTicket(${i})">
-    حذف
-   </button>
-
-  </div>
-
-  `).join("");
-
- }
-
+function showTicket(t) {
+  $('newTicket').innerHTML = `
+    <div class="ticket">
+      <div class="ticketTop"><strong>♱ HOORI.COM</strong><span class="ticketCode">${esc(t.ticket_code)}</span></div>
+      <div class="ticketRow"><span>نام</span><strong>${esc(t.first_name)}</strong></div>
+      <div class="ticketRow"><span>نام خانوادگی</span><strong>${esc(t.last_name)}</strong></div>
+      <div class="ticketRow"><span>حوری</span><strong>${esc(t.hoori_name)}</strong></div>
+      <div class="ticketRow"><span>تاریخ</span><strong>${esc(t.issue_date)}</strong></div>
+    </div>`;
 }
 
-
-function addHoori(){
-
- const input=
-  document.getElementById("newHoori");
-
- const name=input.value.trim();
-
- if(!name){
-
-  toast("نام حوری را وارد کن");
-  return;
-
- }
-
- hooris.push(name);
-
- save();
-
- input.value="";
-
- renderAdmin();
- renderSelect();
- updateStats();
-
- toast("حوری اضافه شد ✧");
-
-}
-
-
-function addRecommended(){
-
- const input=
-  document.getElementById("newRecommended");
-
- const name=input.value.trim();
-
- if(!name){
-
- toast("نام حوری را وارد کن");
- return;
-
-}
-
-recommended.push(name);
-
-save();
-
-input.value="";
-
-renderAdmin();
-updateStats();
-
-toast("حوری پیشنهادی اضافه شد ⭐");
-
-}
-
-
-/* DELETE HOORI */
-
-function deleteHoori(index){
-
- if(!confirm("این حوری حذف شود؟")) return;
-
- hooris.splice(index,1);
-
- save();
-
- renderAdmin();
- renderHooris();
- renderSelect();
- updateStats();
-
- toast("حوری حذف شد");
-
-}
-
-
-/* DELETE TICKET */
-
-function deleteTicket(index){
-
- if(!confirm("این بلیط حذف شود؟")) return;
-
- tickets.splice(index,1);
-
- save();
-
- renderAdmin();
- renderTickets();
- updateStats();
-
- toast("بلیط حذف شد");
-
-}
-
-
-/* STATS */
-
-function updateStats(){
-
- document.getElementById("hooriCount").textContent =
-  hooris.length;
-
- document.getElementById("ticketCount").textContent =
-  tickets.length;
-
- const today =
-  new Date().toISOString().split("T")[0];
-
- const count =
-  tickets.filter(x=>x.date===today).length;
-
- document.getElementById("todayCount").textContent =
-  count;
-
-}
-
-
-/* REFRESH */
-
-function refreshData(){
-
- updateStats();
-
- renderHooris();
- renderRecommended();
- renderTickets();
-
- toast("اطلاعات بروزرسانی شد ✓");
-
-}
-
-
-/* TOAST */
-
-function toast(message){
-
- const box=
-  document.getElementById("toast");
-
- box.textContent=message;
-
- box.classList.add("show");
-
- setTimeout(()=>{
-  box.classList.remove("show");
- },2200);
-
-}
-
-
-/* SECURITY */
-
-function esc(value){
-
- return String(value)
-  .replace(/&/g,"&amp;")
-  .replace(/</g,"&lt;")
-  .replace(/>/g,"&gt;")
-  .replace(/"/g,"&quot;")
-  .replace(/'/g,"&#039;");
-
-}
-
-
-function escAttr(value){
-
- return esc(value);
-
-}
-
-
-/* START */
-
-renderSelect();
-
-renderHooris();
-
-renderRecommended();
-
-renderTickets();
-
-updateStats();
-
-</script>
-
-</body>
-</html>
+function renderTickets() {
+  const box = $('ticketList');
+
+  if (!isAdmin) {
+    box.innerHTML = '<div class="empty">🔒 مشاهده فهرست بلیط‌ها مخصوص مدیر است.<br>از بخش مدیریت وارد حساب مدیر شو.</div>';
+    return;
+  }
+
+  if (!tickets.length) {
+    box.innerHTML = '<div class="empty">هنوز بلیطی ثبت نشده است.</div>';
+    return;
+  }
+
+  box.innerHTML = tickets.map(t=>`
+    <div class="ticket">
+      <div class="ticketTop"><strong>♱ HOORI.COM</strong><span class="ticketCode">${esc(t.ticket_code)}</span></div>
+      <div class="ticketRow"><sp
