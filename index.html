@@ -1432,4 +1432,155 @@ function addRecommended(){
 
  const name=input.value.trim();
 
- if(!na
+ if(!name){
+
+ toast("نام حوری را وارد کن");
+ return;
+
+}
+
+recommended.push(name);
+
+save();
+
+input.value="";
+
+renderAdmin();
+updateStats();
+
+toast("حوری پیشنهادی اضافه شد ⭐");
+
+}
+
+
+/* DELETE HOORI */
+
+function deleteHoori(index){
+
+ if(!confirm("این حوری حذف شود؟")) return;
+
+ hooris.splice(index,1);
+
+ save();
+
+ renderAdmin();
+ renderHooris();
+ renderSelect();
+ updateStats();
+
+ toast("حوری حذف شد");
+
+}
+
+
+/* DELETE TICKET */
+
+function deleteTicket(index){
+
+ if(!confirm("این بلیط حذف شود؟")) return;
+
+ tickets.splice(index,1);
+
+ save();
+
+ renderAdmin();
+ renderTickets();
+ updateStats();
+
+ toast("بلیط حذف شد");
+
+}
+
+
+/* STATS */
+
+function updateStats(){
+
+ document.getElementById("hooriCount").textContent =
+  hooris.length;
+
+ document.getElementById("ticketCount").textContent =
+  tickets.length;
+
+ const today =
+  new Date().toISOString().split("T")[0];
+
+ const count =
+  tickets.filter(x=>x.date===today).length;
+
+ document.getElementById("todayCount").textContent =
+  count;
+
+}
+
+
+/* REFRESH */
+
+function refreshData(){
+
+ updateStats();
+
+ renderHooris();
+ renderRecommended();
+ renderTickets();
+
+ toast("اطلاعات بروزرسانی شد ✓");
+
+}
+
+
+/* TOAST */
+
+function toast(message){
+
+ const box=
+  document.getElementById("toast");
+
+ box.textContent=message;
+
+ box.classList.add("show");
+
+ setTimeout(()=>{
+  box.classList.remove("show");
+ },2200);
+
+}
+
+
+/* SECURITY */
+
+function esc(value){
+
+ return String(value)
+  .replace(/&/g,"&amp;")
+  .replace(/</g,"&lt;")
+  .replace(/>/g,"&gt;")
+  .replace(/"/g,"&quot;")
+  .replace(/'/g,"&#039;");
+
+}
+
+
+function escAttr(value){
+
+ return esc(value);
+
+}
+
+
+/* START */
+
+renderSelect();
+
+renderHooris();
+
+renderRecommended();
+
+renderTickets();
+
+updateStats();
+
+</script>
+
+</body>
+</html>
