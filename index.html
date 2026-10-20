@@ -2,11 +2,9 @@
 <html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 
 <title>HOORI.COM</title>
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
 *{
@@ -16,411 +14,381 @@
 }
 
 :root{
-    --bg:#070707;
-    --panel:#10100e;
-    --panel2:#15140f;
-    --gold:#d8b56a;
-    --gold2:#ffe49a;
-    --text:#f8f5ed;
-    --muted:#99958a;
-    --line:rgba(216,181,106,.22);
-    --danger:#ff5f5f;
-    --green:#65d39b;
+    --bg:#f5f3ee;
+    --card:#ffffff;
+    --dark:#1d1c19;
+    --dark2:#292721;
+    --gold:#d9b867;
+    --gold2:#f2d995;
+    --text:#272522;
+    --muted:#918d84;
+    --border:#e4e0d7;
+    --red:#e65c5c;
+    --green:#55a77a;
 }
 
 body{
-    background:
-      radial-gradient(circle at 50% 20%,rgba(216,181,106,.10),transparent 35%),
-      radial-gradient(circle at 10% 80%,rgba(216,181,106,.05),transparent 30%),
-      #070707;
+    background:var(--bg);
     color:var(--text);
-    font-family:Arial,Tahoma,sans-serif;
+    font-family:
+        Tahoma,
+        Arial,
+        sans-serif;
     min-height:100vh;
-    overflow-x:hidden;
 }
 
-button,input,select{
-    font-family:inherit;
-}
+/* HEADER */
 
-button{
-    cursor:pointer;
-}
-
-header{
-    height:105px;
-    border-bottom:1px solid var(--line);
+.header{
+    height:78px;
+    background:rgba(245,243,238,.94);
+    backdrop-filter:blur(15px);
+    border-bottom:1px solid var(--border);
     display:flex;
     align-items:center;
     justify-content:space-between;
-    padding:0 24px;
-    position:relative;
+    padding:0 22px;
+    position:sticky;
+    top:0;
     z-index:20;
-    background:rgba(7,7,7,.88);
-    backdrop-filter:blur(15px);
 }
 
 .logo{
     display:flex;
     align-items:center;
-    gap:13px;
+    gap:10px;
 }
 
-.logoSymbol{
-    width:55px;
-    height:55px;
-    border:1px solid var(--gold);
-    border-radius:50%;
-    display:flex;
-    justify-content:center;
-    align-items:center;
+.logo-icon{
+    width:45px;
+    height:45px;
+    border-radius:14px;
+    background:var(--dark);
     color:var(--gold2);
-    font-size:31px;
-    box-shadow:0 0 25px rgba(216,181,106,.12);
-}
-
-.logoText{
-    font-weight:900;
-    letter-spacing:2px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
     font-size:23px;
 }
 
-.logoSub{
-    display:block;
-    color:#77736b;
+.logo-name{
+    font-size:18px;
+    font-weight:900;
+}
+
+.logo-sub{
     font-size:9px;
-    letter-spacing:5px;
-    margin-top:7px;
-}
-
-.menuBtn{
-    border:0;
-    background:none;
-    color:var(--gold2);
-    font-size:33px;
-    line-height:1;
-}
-
-.hero{
-    min-height:calc(100vh - 105px);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-    padding:40px 20px 70px;
-}
-
-.heroInner{
-    max-width:800px;
-    width:100%;
-}
-
-.orbit{
-    width:330px;
-    height:330px;
-    margin:0 auto 55px;
-    border:1px solid rgba(216,181,106,.28);
-    border-radius:50%;
-    position:relative;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-}
-
-.orbit:before,
-.orbit:after{
-    content:"";
-    position:absolute;
-    border:1px solid rgba(216,181,106,.22);
-    border-radius:50%;
-}
-
-.orbit:before{
-    width:270px;
-    height:270px;
-}
-
-.orbit:after{
-    width:195px;
-    height:195px;
-}
-
-.orbitCore{
-    width:170px;
-    height:170px;
-    border:1px solid var(--gold);
-    border-radius:50%;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    font-size:80px;
-    color:var(--gold2);
-    background:radial-gradient(circle,rgba(216,181,106,.13),#080808 70%);
-    box-shadow:0 0 45px rgba(216,181,106,.13);
-    position:relative;
-    z-index:2;
-}
-
-.dot{
-    position:absolute;
-    width:19px;
-    height:19px;
-    background:var(--gold2);
-    border-radius:50%;
-    box-shadow:0 0 18px var(--gold);
-}
-
-.dot1{top:20px;left:50%}
-.dot2{bottom:82px;left:15px}
-
-.badge{
-    display:inline-block;
-    border:1px solid var(--line);
-    border-radius:40px;
-    padding:13px 25px;
-    color:var(--gold2);
-    font-size:14px;
-    margin-bottom:30px;
-    background:rgba(216,181,106,.025);
-}
-
-h1{
-    font-size:clamp(42px,10vw,82px);
-    line-height:1.1;
-    margin-bottom:22px;
-    font-weight:900;
-}
-
-.gold{
-    color:var(--gold2);
-}
-
-.hero p{
     color:var(--muted);
-    font-size:17px;
-    line-height:2;
-    margin:auto;
-    max-width:650px;
+    letter-spacing:2px;
+    margin-top:3px;
 }
 
-.heroActions{
-    margin-top:35px;
-    display:flex;
-    justify-content:center;
-    gap:12px;
-    flex-wrap:wrap;
-}
-
-.btn{
-    border:1px solid var(--gold);
-    background:linear-gradient(135deg,#d8b56a,#a9823b);
-    color:#080808;
-    padding:15px 25px;
-    border-radius:13px;
-    font-weight:900;
-    transition:.2s;
-}
-
-.btn:hover{
-    transform:translateY(-2px);
-    box-shadow:0 10px 30px rgba(216,181,106,.16);
-}
-
-.btn.secondary{
+.menu{
+    border:0;
     background:transparent;
-    color:var(--gold2);
+    font-size:28px;
+    cursor:pointer;
 }
 
-.drawer{
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,.72);
-    backdrop-filter:blur(8px);
-    z-index:100;
-    display:none;
+/* PAGE */
+
+.page{
+    width:min(1000px,92%);
+    margin:auto;
+    padding:25px 0 70px;
 }
 
-.drawer.show{
-    display:block;
-}
+/* TOP */
 
-.drawerBox{
-    width:min(390px,88%);
-    height:100%;
-    background:
-      radial-gradient(circle at 20% 10%,rgba(216,181,106,.12),transparent 35%),
-      #0b0b0a;
-    border-left:1px solid var(--line);
-    padding:30px 22px;
-    animation:drawerIn .25s ease;
-}
-
-@keyframes drawerIn{
-    from{transform:translateX(100%)}
-    to{transform:translateX(0)}
-}
-
-.drawerTop{
+.top{
     display:flex;
     justify-content:space-between;
     align-items:center;
-    margin-bottom:35px;
+    gap:15px;
+    margin-bottom:22px;
 }
 
-.close{
-    background:none;
+.greeting h1{
+    font-size:28px;
+    margin-bottom:6px;
+}
+
+.greeting p{
+    color:var(--muted);
+    font-size:13px;
+}
+
+.update{
     border:0;
-    color:var(--gold2);
-    font-size:30px;
-}
-
-.menuTitle{
-    color:var(--gold2);
-    font-size:21px;
-    font-weight:900;
-}
-
-.menuItem{
-    width:100%;
-    background:#11110f;
-    color:#eee;
-    border:1px solid var(--line);
-    padding:18px;
-    margin-bottom:11px;
+    background:linear-gradient(135deg,#e7cb85,#d5ad56);
+    color:#29251c;
+    padding:14px 20px;
     border-radius:14px;
-    text-align:right;
-    font-size:15px;
+    font-weight:900;
+    cursor:pointer;
 }
 
-.menuItem:hover{
-    background:#181711;
+/* HERO IMAGE */
+
+.hero-image{
+    height:190px;
+    border-radius:24px;
+    overflow:hidden;
+    margin-bottom:22px;
+    position:relative;
+    background:
+        linear-gradient(
+            90deg,
+            rgba(0,0,0,.65),
+            rgba(0,0,0,.05)
+        ),
+        url("https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=1200&q=80")
+        center/cover;
+}
+
+.hero-overlay{
+    position:absolute;
+    inset:0;
+    display:flex;
+    align-items:flex-end;
+    padding:22px;
+}
+
+.hero-title{
+    color:#fff;
+}
+
+.hero-title small{
     color:var(--gold2);
+    font-size:12px;
 }
 
-.appPanel{
+.hero-title h2{
+    font-size:27px;
+    margin-top:6px;
+}
+
+/* STATS */
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:15px;
+    margin-bottom:22px;
+}
+
+.stat{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:22px;
+    padding:22px;
+    min-height:155px;
+    box-shadow:0 5px 20px rgba(0,0,0,.025);
+}
+
+.stat-icon{
+    width:55px;
+    height:55px;
+    border-radius:17px;
+    background:#faf3df;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:25px;
+    margin-bottom:15px;
+}
+
+.stat-title{
+    color:var(--muted);
+    font-size:14px;
+}
+
+.stat-number{
+    font-size:31px;
+    font-weight:900;
+    margin-top:12px;
+}
+
+.stat-desc{
+    color:var(--muted);
+    font-size:12px;
+    margin-top:7px;
+}
+
+/* DARK CARD */
+
+.dark-card{
+    background:
+        radial-gradient(
+            circle at 90% 20%,
+            rgba(217,184,103,.12),
+            transparent 35%
+        ),
+        var(--dark);
+    border-radius:25px;
+    color:#fff;
+    padding:28px;
+    margin-bottom:22px;
+}
+
+.dark-small{
+    color:var(--gold2);
+    font-size:13px;
+}
+
+.dark-card h2{
+    font-size:29px;
+    margin:15px 0;
+}
+
+.dark-card p{
+    color:#aaa59a;
+    line-height:2;
+    font-size:13px;
+}
+
+.primary{
+    border:0;
+    background:linear-gradient(
+        135deg,
+        #f1d78e,
+        #d5ad58
+    );
+    color:#252118;
+    border-radius:15px;
+    padding:16px 23px;
+    font-weight:900;
+    font-size:15px;
+    cursor:pointer;
+    margin-top:18px;
+}
+
+.primary:active,
+.update:active,
+.action:active{
+    transform:scale(.97);
+}
+
+/* QUICK */
+
+.section-title{
+    font-size:20px;
+    margin:25px 0 15px;
+}
+
+.quick{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:13px;
+}
+
+.action{
+    border:1px solid var(--border);
+    background:#fff;
+    border-radius:18px;
+    padding:18px;
+    cursor:pointer;
+    text-align:right;
+    transition:.2s;
+}
+
+.action:hover{
+    transform:translateY(-2px);
+    box-shadow:0 10px 25px rgba(0,0,0,.06);
+}
+
+.action-icon{
+    font-size:23px;
+    margin-bottom:10px;
+}
+
+.action strong{
+    display:block;
+    margin-bottom:5px;
+}
+
+.action span{
+    color:var(--muted);
+    font-size:11px;
+}
+
+/* PANEL */
+
+.panel{
     position:fixed;
     inset:0;
-    background:
-      radial-gradient(circle at 50% 0%,rgba(216,181,106,.10),transparent 35%),
-      #070707;
-    z-index:80;
+    background:var(--bg);
+    z-index:100;
     display:none;
     overflow:auto;
 }
 
-.appPanel.show{
+.panel.active{
     display:block;
 }
 
-.panelHeader{
-    position:sticky;
-    top:0;
-    z-index:10;
-    height:78px;
+.panel-head{
+    height:75px;
+    background:rgba(245,243,238,.95);
+    border-bottom:1px solid var(--border);
     display:flex;
     align-items:center;
-    gap:15px;
+    gap:14px;
     padding:0 20px;
-    border-bottom:1px solid var(--line);
-    background:rgba(7,7,7,.92);
-    backdrop-filter:blur(15px);
+    position:sticky;
+    top:0;
+    z-index:5;
 }
 
-.backBtn{
-    border:1px solid var(--line);
-    background:#11110f;
-    color:var(--gold2);
-    border-radius:12px;
-    width:44px;
-    height:44px;
-    font-size:22px;
+.back{
+    width:43px;
+    height:43px;
+    border:1px solid var(--border);
+    border-radius:13px;
+    background:#fff;
+    font-size:20px;
+    cursor:pointer;
 }
 
-.panelTitle{
-    font-size:21px;
+.panel-title{
+    font-size:19px;
     font-weight:900;
 }
 
-.panelContent{
-    width:min(900px,92%);
-    margin:0 auto;
-    padding:35px 0 80px;
-}
-
-.panelIntro{
-    text-align:center;
-    margin-bottom:30px;
-}
-
-.panelIntro h2{
-    font-size:34px;
-    margin-bottom:10px;
-}
-
-.panelIntro p{
-    color:var(--muted);
-    line-height:1.9;
-}
-
-.grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-    gap:15px;
-}
-
-.card{
-    background:linear-gradient(145deg,#11110f,#0b0b0a);
-    border:1px solid var(--line);
-    border-radius:18px;
-    padding:22px;
-    position:relative;
-}
-
-.cardSymbol{
-    color:var(--gold2);
-    font-size:27px;
-    margin-bottom:15px;
-}
-
-.card h3{
-    font-size:19px;
-    margin-bottom:8px;
-}
-
-.card p{
-    color:var(--muted);
-    line-height:1.7;
-}
-
-.form{
-    background:#0d0d0c;
-    border:1px solid var(--line);
-    padding:22px;
-    border-radius:20px;
-    max-width:650px;
+.panel-content{
+    width:min(850px,92%);
     margin:auto;
+    padding:30px 0 80px;
+}
+
+/* FORM */
+
+.form-card{
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:23px;
+    padding:22px;
 }
 
 .field{
-    margin-bottom:17px;
+    margin-bottom:16px;
 }
 
 .field label{
     display:block;
-    color:var(--gold2);
+    font-size:13px;
     margin-bottom:8px;
-    font-size:14px;
 }
 
 .field input,
 .field select{
     width:100%;
+    border:1px solid var(--border);
+    background:#faf9f6;
     padding:15px;
-    border-radius:12px;
-    border:1px solid var(--line);
-    background:#080808;
-    color:#fff;
-    outline:none;
+    border-radius:13px;
+    outline:0;
+    font-family:inherit;
 }
 
 .field input:focus,
@@ -428,205 +396,270 @@ h1{
     border-color:var(--gold);
 }
 
+/* TICKETS */
+
 .ticket{
-    background:
-      linear-gradient(135deg,rgba(216,181,106,.08),transparent),
-      #0d0d0c;
-    border:1px solid var(--gold);
+    background:#fff;
+    border:1px solid var(--border);
     border-radius:22px;
-    padding:25px;
-    position:relative;
-    overflow:hidden;
-    margin-bottom:17px;
+    padding:20px;
+    margin-bottom:14px;
 }
 
-.ticket:after{
-    content:"HOORI.COM";
-    position:absolute;
-    left:-20px;
-    bottom:10px;
-    font-size:65px;
-    font-weight:900;
-    color:rgba(216,181,106,.035);
-}
-
-.ticketTop{
+.ticket-top{
     display:flex;
     justify-content:space-between;
-    align-items:center;
-    border-bottom:1px solid var(--line);
-    padding-bottom:15px;
-    margin-bottom:18px;
+    border-bottom:1px dashed var(--border);
+    padding-bottom:13px;
+    margin-bottom:13px;
 }
 
-.ticketBrand{
-    color:var(--gold2);
+.ticket-brand{
     font-weight:900;
-    letter-spacing:2px;
 }
 
-.ticketCode{
-    color:#777;
+.ticket-code{
+    color:var(--gold);
     font-size:11px;
 }
 
-.ticketRow{
+.ticket-row{
     display:flex;
     justify-content:space-between;
-    gap:15px;
-    padding:9px 0;
+    padding:7px 0;
+    font-size:13px;
 }
 
-.ticketRow span:first-child{
-    color:#777;
+.ticket-row span:first-child{
+    color:var(--muted);
 }
 
-.ticketRow span:last-child{
-    font-weight:900;
+/* LIST */
+
+.list{
+    display:grid;
+    gap:12px;
+}
+
+.list-item{
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:17px;
+    padding:18px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+}
+
+.list-left{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.list-icon{
+    width:45px;
+    height:45px;
+    border-radius:13px;
+    background:#faf2dc;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.delete{
+    border:0;
+    background:#fff0f0;
+    color:var(--red);
+    padding:9px 12px;
+    border-radius:10px;
+    cursor:pointer;
 }
 
 .empty{
     text-align:center;
-    color:#777;
-    padding:45px 10px;
-    border:1px dashed var(--line);
-    border-radius:18px;
+    padding:50px 15px;
+    background:#fff;
+    border:1px dashed var(--border);
+    border-radius:20px;
+    color:var(--muted);
 }
 
-.adminBox{
-    background:#0d0d0c;
-    border:1px solid var(--line);
-    border-radius:18px;
+/* MENU */
+
+.drawer{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.4);
+    z-index:200;
+    display:none;
+}
+
+.drawer.active{
+    display:block;
+}
+
+.drawer-box{
+    width:min(350px,88%);
+    height:100%;
+    background:#fff;
+    padding:22px;
+    animation:slide .22s ease;
+}
+
+@keyframes slide{
+    from{
+        transform:translateX(100%);
+    }
+    to{
+        transform:translateX(0);
+    }
+}
+
+.drawer-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:25px;
+}
+
+.close{
+    border:0;
+    background:none;
+    font-size:30px;
+    cursor:pointer;
+}
+
+.menu-item{
+    width:100%;
+    border:1px solid var(--border);
+    background:#faf9f6;
+    padding:17px;
+    border-radius:14px;
+    margin-bottom:10px;
+    text-align:right;
+    cursor:pointer;
+    font-family:inherit;
+}
+
+.menu-item:hover{
+    background:#f7efd9;
+}
+
+/* ADMIN */
+
+.admin-section{
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:20px;
     padding:20px;
-    margin-bottom:20px;
-}
-
-.adminBox h3{
-    color:var(--gold2);
     margin-bottom:15px;
 }
 
-.adminRow{
+.admin-section h3{
+    margin-bottom:15px;
+}
+
+.admin-add{
     display:flex;
     gap:8px;
-    margin-bottom:9px;
-    align-items:center;
-    justify-content:space-between;
-    padding:12px;
-    background:#11110f;
-    border-radius:11px;
 }
 
-.adminRow span{
-    overflow:hidden;
-    text-overflow:ellipsis;
+.admin-add input{
+    flex:1;
+    padding:13px;
+    border:1px solid var(--border);
+    border-radius:12px;
 }
 
-.smallBtn{
-    border:1px solid var(--line);
-    background:#17150f;
-    color:var(--gold2);
-    border-radius:8px;
-    padding:8px 12px;
+.admin-add button{
+    border:0;
+    background:var(--dark);
+    color:#fff;
+    border-radius:12px;
+    padding:0 18px;
 }
 
-.smallBtn.danger{
-    color:#ff7777;
-    border-color:rgba(255,95,95,.3);
-}
-
-.stats{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:10px;
-    margin-bottom:20px;
-}
-
-.stat{
-    background:#0e0e0d;
-    border:1px solid var(--line);
-    padding:17px 10px;
-    border-radius:14px;
-    text-align:center;
-}
-
-.stat strong{
-    display:block;
-    font-size:25px;
-    color:var(--gold2);
-}
-
-.stat span{
-    font-size:11px;
-    color:#777;
-}
+/* TOAST */
 
 .toast{
     position:fixed;
-    bottom:25px;
+    bottom:22px;
     left:50%;
-    transform:translateX(-50%) translateY(100px);
-    background:#15140f;
-    border:1px solid var(--gold);
-    color:var(--gold2);
+    transform:translate(-50%,100px);
+    background:#22211e;
+    color:#fff;
     padding:14px 22px;
     border-radius:13px;
-    z-index:300;
+    z-index:500;
     opacity:0;
-    transition:.3s;
+    transition:.25s;
 }
 
 .toast.show{
     opacity:1;
-    transform:translateX(-50%) translateY(0);
+    transform:translate(-50%,0);
 }
 
+/* MOBILE */
+
 @media(max-width:600px){
-    header{
-        height:90px;
+
+    .page{
+        width:92%;
     }
 
-    .logoText{
-        font-size:18px;
+    .top{
+        align-items:flex-start;
     }
 
-    .logoSymbol{
-        width:48px;
-        height:48px;
-        font-size:27px;
+    .greeting h1{
+        font-size:22px;
     }
 
-    .hero{
-        min-height:calc(100vh - 90px);
-    }
-
-    .orbit{
-        width:280px;
-        height:280px;
-        margin-bottom:40px;
-    }
-
-    .orbitCore{
-        width:145px;
-        height:145px;
-    }
-
-    .orbit:before{
-        width:230px;
-        height:230px;
-    }
-
-    .orbit:after{
-        width:180px;
-        height:180px;
-    }
-
-    h1{
-        font-size:47px;
+    .hero-image{
+        height:170px;
     }
 
     .stats{
-        grid-template-columns:1fr 1fr 1fr;
+        gap:12px;
+    }
+
+    .stat{
+        min-height:145px;
+        padding:18px;
+    }
+
+    .stat-number{
+        font-size:26px;
+    }
+
+    .dark-card{
+        padding:23px;
+    }
+
+    .dark-card h2{
+        font-size:25px;
+    }
+
+    .quick{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .quick .action{
+        min-height:115px;
+    }
+}
+
+@media(min-width:700px){
+
+    .stats{
+        grid-template-columns:repeat(4,1fr);
+    }
+
+    .quick{
+        grid-template-columns:repeat(4,1fr);
     }
 }
 </style>
@@ -634,429 +667,609 @@ h1{
 
 <body>
 
-<header>
-    <button class="menuBtn" onclick="openMenu()">☰</button>
+<!-- HEADER -->
+
+<header class="header">
+
+    <button class="menu" onclick="openMenu()">☰</button>
 
     <div class="logo">
-        <div class="logoText">
-            HOORI.COM
-            <span class="logoSub">THE GOLDEN WORLD</span>
+
+        <div>
+            <div class="logo-name">HOORI.COM</div>
+            <div class="logo-sub">THE GOLDEN WORLD</div>
         </div>
 
-        <div class="logoSymbol">♱</div>
+        <div class="logo-icon">♱</div>
+
     </div>
+
 </header>
 
-<main class="hero">
-    <div class="heroInner">
 
-        <div class="orbit">
-            <div class="dot dot1"></div>
-            <div class="dot dot2"></div>
+<!-- DASHBOARD -->
 
-            <div class="orbitCore">♱</div>
+<main class="page">
+
+    <div class="top">
+
+        <div class="greeting">
+
+            <h1>سلام 👋</h1>
+
+            <p>
+                به پنل HOORI خوش اومدی
+            </p>
+
         </div>
 
-        <div class="badge">
-            HOORI · PREMIUM COLLECTION ●
-        </div>
+        <button class="update" onclick="refreshAll()">
+            ↻ بروزرسانی
+        </button>
 
-        <h1>
-            <span class="gold">اسم خاص</span><br>
-            برای آدم خاص.
-        </h1>
+    </div>
 
-        <p>
-            دنیای HOORI جایی برای اسم‌های خاص،
-            انتخاب‌های متفاوت و بلیط‌های اختصاصی.
-        </p>
 
-        <div class="heroActions">
-            <button class="btn" onclick="openPanel('ticketsPanel')">
-                🎟️ بلیط‌های ثبت‌شده
-            </button>
+    <div class="hero-image">
 
-            <button class="btn secondary" onclick="openPanel('registerPanel')">
-                ✦ ثبت بلیط
-            </button>
+        <div class="hero-overlay">
+
+            <div class="hero-title">
+
+                <small>HOORI PREMIUM ✦</small>
+
+                <h2>
+                    مدیریت هوشمند بلیط‌ها
+                </h2>
+
+            </div>
+
         </div>
 
     </div>
+
+
+    <!-- STATS -->
+
+    <div class="stats">
+
+        <div class="stat">
+
+            <div class="stat-icon">✧</div>
+
+            <div class="stat-title">
+                تعداد حوری‌ها
+            </div>
+
+            <div
+                class="stat-number"
+                id="hooriCount"
+            >
+                0
+            </div>
+
+            <div class="stat-desc">
+                حوری‌های موجود
+            </div>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div class="stat-icon">🎟️</div>
+
+            <div class="stat-title">
+                کل بلیط‌ها
+            </div>
+
+            <div
+                class="stat-number"
+                id="ticketCount"
+            >
+                0
+            </div>
+
+            <div class="stat-desc">
+                بلیط‌های موجود
+            </div>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div class="stat-icon">◷</div>
+
+            <div class="stat-title">
+                بلیط‌های امروز
+            </div>
+
+            <div
+                class="stat-number"
+                id="todayCount"
+            >
+                0
+            </div>
+
+            <div class="stat-desc">
+                بر اساس تاریخ صدور
+            </div>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div class="stat-icon">✓</div>
+
+            <div class="stat-title">
+                اتصال دیتابیس
+            </div>
+
+            <div
+                class="stat-number"
+                id="connection"
+                style="font-size:20px"
+            >
+                بررسی...
+            </div>
+
+            <div class="stat-desc">
+                Supabase
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- DARK ACTION -->
+
+    <div class="dark-card">
+
+        <div class="dark-small">
+            HOORI PREMIUM ✦
+        </div>
+
+        <h2>
+            مدیریت هوشمند بلیط‌ها
+        </h2>
+
+        <p>
+            ثبت، جستجو و مدیریت بلیط‌ها
+            در یک محیط ساده و حرفه‌ای.
+        </p>
+
+        <button
+            class="primary"
+            onclick="openPanel('registerPanel')"
+        >
+            ＋ ثبت بلیط جدید
+        </button>
+
+    </div>
+
+
+    <!-- QUICK -->
+
+    <h2 class="section-title">
+        دسترسی سریع
+    </h2>
+
+    <div class="quick">
+
+        <button
+            class="action"
+            onclick="openPanel('ticketsPanel')"
+        >
+            <div class="action-icon">🎟️</div>
+            <strong>کل بلیط‌ها</strong>
+            <span>مشاهده بلیط‌های ثبت‌شده</span>
+        </button>
+
+
+        <button
+            class="action"
+            onclick="openPanel('hoorisPanel')"
+        >
+            <div class="action-icon">✧</div>
+            <strong>حوری‌ها</strong>
+            <span>مشاهده لیست حوری‌ها</span>
+        </button>
+
+
+        <button
+            class="action"
+            onclick="openPanel('recommendedPanel')"
+        >
+            <div class="action-icon">⭐</div>
+            <strong>پیشنهادی</strong>
+            <span>حوری‌های پیشنهادی</span>
+        </button>
+
+
+        <button
+            class="action"
+            onclick="openAdmin()"
+        >
+            <div class="action-icon">⚙️</div>
+            <strong>مدیریت</strong>
+            <span>مدیریت سایت</span>
+        </button>
+
+    </div>
+
 </main>
 
 
-<!-- MENU -->
+<!-- DRAWER -->
 
-<div class="drawer" id="drawer" onclick="drawerBackground(event)">
-    <div class="drawerBox">
+<div
+    class="drawer"
+    id="drawer"
+    onclick="drawerClick(event)"
+>
 
-        <div class="drawerTop">
-            <div class="menuTitle">♱ HOORI.COM</div>
-            <button class="close" onclick="closeMenu()">×</button>
+    <div class="drawer-box">
+
+        <div class="drawer-head">
+
+            <strong>
+                ♱ HOORI.COM
+            </strong>
+
+            <button
+                class="close"
+                onclick="closeMenu()"
+            >
+                ×
+            </button>
+
         </div>
 
-        <button class="menuItem" onclick="go('home')">
-            🏠 خانه
+
+        <button
+            class="menu-item"
+            onclick="home()"
+        >
+            🏠 داشبورد
         </button>
 
-        <button class="menuItem" onclick="openPanel('hoorisPanel')">
-            👑 حوری‌ها
-        </button>
 
-        <button class="menuItem" onclick="openPanel('recommendedPanel')">
-            ⭐ حوری پیشنهادی
-        </button>
-
-        <button class="menuItem" onclick="openPanel('registerPanel')">
+        <button
+            class="menu-item"
+            onclick="openPanel('registerPanel')"
+        >
             🎟️ ثبت بلیط
         </button>
 
-        <button class="menuItem" onclick="openPanel('ticketsPanel')">
-            🎫 بلیط‌های ثبت‌شده
+
+        <button
+            class="menu-item"
+            onclick="openPanel('ticketsPanel')"
+        >
+            🎫 کل بلیط‌ها
         </button>
 
-        <button class="menuItem" onclick="openPanel('contactPanel')">
+
+        <button
+            class="menu-item"
+            onclick="openPanel('hoorisPanel')"
+        >
+            ✧ حوری‌ها
+        </button>
+
+
+        <button
+            class="menu-item"
+            onclick="openPanel('recommendedPanel')"
+        >
+            ⭐ حوری پیشنهادی
+        </button>
+
+
+        <button
+            class="menu-item"
+            onclick="openPanel('contactPanel')"
+        >
             📩 ارتباط با سازنده
         </button>
 
-        <button class="menuItem" onclick="openAdminLogin()">
+
+        <button
+            class="menu-item"
+            onclick="openAdmin()"
+        >
             ⚙️ مدیریت
         </button>
 
     </div>
+
 </div>
 
 
-<!-- HOORIS -->
+<!-- REGISTER PANEL -->
 
-<section class="appPanel" id="hoorisPanel">
+<section
+    class="panel"
+    id="registerPanel"
+>
 
-    <div class="panelHeader">
-        <button class="backBtn" onclick="closePanel('hoorisPanel')">→</button>
-        <div class="panelTitle">👑 حوری‌ها</div>
-    </div>
+    <div class="panel-head">
 
-    <div class="panelContent">
+        <button
+            class="back"
+            onclick="closePanel('registerPanel')"
+        >
+            →
+        </button>
 
-        <div class="panelIntro">
-            <h2>حوری‌های HOORI</h2>
-            <p>انتخاب خودت رو از بین اسم‌های خاص انجام بده.</p>
+        <div class="panel-title">
+            ثبت بلیط جدید
         </div>
 
-        <div class="grid" id="hoorisList"></div>
+    </div>
+
+
+    <div class="panel-content">
+
+        <div class="form-card">
+
+            <div class="field">
+
+                <label>
+                    نام
+                </label>
+
+                <input
+                    id="firstName"
+                    placeholder="مثلاً مهیار"
+                >
+
+            </div>
+
+
+            <div class="field">
+
+                <label>
+                    نام خانوادگی
+                </label>
+
+                <input
+                    id="lastName"
+                    placeholder="نام خانوادگی"
+                >
+
+            </div>
+
+
+            <div class="field">
+
+                <label>
+                    انتخاب حوری
+                </label>
+
+                <select id="hooriSelect">
+                    <option>
+                        در حال دریافت...
+                    </option>
+                </select>
+
+            </div>
+
+
+            <div class="field">
+
+                <label>
+                    تاریخ
+                </label>
+
+                <input
+                    type="date"
+                    id="ticketDate"
+                >
+
+            </div>
+
+
+            <button
+                class="primary"
+                style="width:100%"
+                onclick="createTicket()"
+            >
+                🎟️ ثبت بلیط
+            </button>
+
+        </div>
+
+
+        <div
+            id="createdTicket"
+            style="margin-top:20px"
+        ></div>
 
     </div>
+
+</section>
+
+
+<!-- TICKETS PANEL -->
+
+<section
+    class="panel"
+    id="ticketsPanel"
+>
+
+    <div class="panel-head">
+
+        <button
+            class="back"
+            onclick="closePanel('ticketsPanel')"
+        >
+            →
+        </button>
+
+        <div class="panel-title">
+            🎟️ کل بلیط‌ها
+        </div>
+
+    </div>
+
+
+    <div class="panel-content">
+
+        <div
+            class="list"
+            id="ticketsList"
+        ></div>
+
+    </div>
+
+</section>
+
+
+<!-- HOORIS PANEL -->
+
+<section
+    class="panel"
+    id="hoorisPanel"
+>
+
+    <div class="panel-head">
+
+        <button
+            class="back"
+            onclick="closePanel('hoorisPanel')"
+        >
+            →
+        </button>
+
+        <div class="panel-title">
+            ✧ حوری‌ها
+        </div>
+
+    </div>
+
+
+    <div class="panel-content">
+
+        <div
+            class="list"
+            id="hoorisList"
+        ></div>
+
+    </div>
+
 </section>
 
 
 <!-- RECOMMENDED -->
 
-<section class="appPanel" id="recommendedPanel">
+<section
+    class="panel"
+    id="recommendedPanel"
+>
 
-    <div class="panelHeader">
-        <button class="backBtn" onclick="closePanel('recommendedPanel')">→</button>
-        <div class="panelTitle">⭐ حوری پیشنهادی</div>
-    </div>
+    <div class="panel-head">
 
-    <div class="panelContent">
+        <button
+            class="back"
+            onclick="closePanel('recommendedPanel')"
+        >
+            →
+        </button>
 
-        <div class="panelIntro">
-            <h2>انتخاب پیشنهادی</h2>
-            <p>اسم‌هایی که توسط مدیریت پیشنهاد شده‌اند.</p>
+        <div class="panel-title">
+            ⭐ حوری پیشنهادی
         </div>
 
-        <div class="grid" id="recommendedList"></div>
-
-    </div>
-</section>
-
-
-<!-- REGISTER -->
-
-<section class="appPanel" id="registerPanel">
-
-    <div class="panelHeader">
-        <button class="backBtn" onclick="closePanel('registerPanel')">→</button>
-        <div class="panelTitle">🎟️ ثبت بلیط</div>
     </div>
 
-    <div class="panelContent">
 
-        <div class="panelIntro">
-            <h2>بلیط اختصاصی خودت</h2>
-            <p>اطلاعات رو وارد کن تا بلیطت در HOORI ثبت بشه.</p>
-        </div>
+    <div class="panel-content">
 
-        <div class="form">
-
-            <div class="field">
-                <label>نام</label>
-                <input id="firstName" placeholder="نام">
-            </div>
-
-            <div class="field">
-                <label>نام خانوادگی</label>
-                <input id="lastName" placeholder="نام خانوادگی">
-            </div>
-
-            <div class="field">
-                <label>انتخاب حوری</label>
-                <select id="hooriSelect">
-                    <option value="">در حال دریافت...</option>
-                </select>
-            </div>
-
-            <div class="field">
-                <label>تاریخ</label>
-                <input type="date" id="ticketDate">
-            </div>
-
-            <button class="btn" style="width:100%" onclick="createTicket()">
-                ✦ ثبت بلیط
-            </button>
-
-        </div>
-
-        <div id="newTicket" style="margin-top:25px"></div>
+        <div
+            class="list"
+            id="recommendedList"
+        ></div>
 
     </div>
-</section>
 
-
-<!-- TICKETS -->
-
-<section class="appPanel" id="ticketsPanel">
-
-    <div class="panelHeader">
-        <button class="backBtn" onclick="closePanel('ticketsPanel')">→</button>
-        <div class="panelTitle">🎫 بلیط‌های ثبت‌شده</div>
-    </div>
-
-    <div class="panelContent">
-
-        <div class="panelIntro">
-            <h2>بلیط‌های HOORI</h2>
-            <p>بلیط‌هایی که کاربران ثبت کرده‌اند.</p>
-        </div>
-
-        <div id="ticketsList"></div>
-
-    </div>
 </section>
 
 
 <!-- CONTACT -->
 
-<section class="appPanel" id="contactPanel">
+<section
+    class="panel"
+    id="contactPanel"
+>
 
-    <div class="panelHeader">
-        <button class="backBtn" onclick="closePanel('contactPanel')">→</button>
-        <div class="panelTitle">📩 ارتباط</div>
+    <div class="panel-head">
+
+        <button
+            class="back"
+            onclick="closePanel('contactPanel')"
+        >
+            →
+        </button>
+
+        <div class="panel-title">
+            📩 ارتباط
+        </div>
+
     </div>
 
-    <div class="panelContent">
 
-        <div class="panelIntro">
-            <h2>ارتباط با سازنده</h2>
-            <p>
-                خوشحالیم که داری از HOORI استفاده می‌کنی.
-                برای ارتباط مستقیم از تلگرام پیام بده.
+    <div class="panel-content">
+
+        <div class="form-card">
+
+            <h2>
+                ارتباط با سازنده
+            </h2>
+
+            <p
+                style="
+                color:var(--muted);
+                line-height:2;
+                margin-top:12px
+                "
+            >
+                خوشحالیم که از HOORI استفاده می‌کنی.
+                برای ارتباط مستقیم از طریق تلگرام پیام بده.
             </p>
-
-            <br>
 
             <a
                 href="https://t.me/Error_1998"
                 target="_blank"
-                class="btn"
-                style="display:inline-block;text-decoration:none"
+                class="primary"
+                style="
+                display:inline-block;
+                text-decoration:none;
+                margin-top:20px
+                "
             >
                 ✈️ @Error_1998
             </a>
+
         </div>
 
     </div>
+
 </section>
 
 
 <!-- ADMIN -->
 
-<section class="appPanel" id="adminPanel">
+<section
+    class="panel"
+    id="adminPanel"
+>
 
-    <div class="panelHeader">
-        <button class="backBtn" onclick="closePanel('adminPanel')">→</button>
-        <div class="panelTitle">♱ MANAGEMENT PANEL</div>
-    </div>
+    <div class="panel-head">
 
-    <div class="panelContent">
-
-        <div class="panelIntro">
-            <h2>HOORI.COM</h2>
-            <p>مدیریت کامل سایت</p>
-        </div>
-
-        <div class="stats">
-            <div class="stat">
-                <strong id="statHooris">0</strong>
-                <span>حوری</span>
-            </div>
-
-            <div class="stat">
-                <strong id="statRecommended">0</strong>
-                <span>پیشنهادی</span>
-            </div>
-
-            <div class="stat">
-                <strong id="statTickets">0</strong>
-                <span>بلیط</span>
-            </div>
-        </div>
-
-
-        <div class="adminBox">
-
-            <h3>👑 افزودن حوری</h3>
-
-            <div style="display:flex;gap:8px">
-                <input
-                    id="newHoori"
-                    placeholder="اسم حوری"
-                    style="flex:1;padding:13px;background:#080808;border:1px solid var(--line);color:#fff;border-radius:10px"
-                >
-
-                <button class="smallBtn" onclick="addHoori()">
-                    افزودن
-                </button>
-            </div>
-
-            <div id="adminHooris" style="margin-top:15px"></div>
-
-        </div>
-
-
-        <div class="adminBox">
-
-            <h3>⭐ افزودن پیشنهادی</h3>
-
-            <div style="display:flex;gap:8px">
-                <input
-                    id="newRecommended"
-                    placeholder="اسم پیشنهادی"
-                    style="flex:1;padding:13px;background:#080808;border:1px solid var(--line);color:#fff;border-radius:10px"
-                >
-
-                <button class="smallBtn" onclick="addRecommended()">
-                    افزودن
-                </button>
-            </div>
-
-            <div id="adminRecommended" style="margin-top:15px"></div>
-
-        </div>
-
-
-        <div class="adminBox">
-
-            <h3>🎫 مدیریت بلیط‌ها</h3>
-
-            <div id="adminTickets"></div>
-
-        </div>
-
-    </div>
-</section>
-
-
-<div class="toast" id="toast"></div>
-
-
-<script>
-
-/* =========================
-   SUPABASE
-========================= */
-
-const SUPABASE_URL =
-"https://mttcthmicgnryolaxxdy.supabase.co";
-
-const SUPABASE_KEY =
-"sb_publishable_P6QG6ILA-DN1_gPhwGnz2w_mn5DPwT7";
-
-const db = supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_KEY
-);
-
-
-/* =========================
-   STATE
-========================= */
-
-let hooris = [];
-let recommended = [];
-let tickets = [];
-
-
-/* =========================
-   MENU
-========================= */
-
-function openMenu(){
-    document.getElementById("drawer").classList.add("show");
-}
-
-function closeMenu(){
-    document.getElementById("drawer").classList.remove("show");
-}
-
-function drawerBackground(e){
-    if(e.target.id === "drawer"){
-        closeMenu();
-    }
-}
-
-
-/* =========================
-   PANELS
-========================= */
-
-function openPanel(id){
-
-    closeMenu();
-
-    document.querySelectorAll(".appPanel").forEach(p=>{
-        p.classList.remove("show");
-    });
-
-    document.getElementById(id).classList.add("show");
-
-    if(id === "hoorisPanel"){
-        loadHooris();
-    }
-
-    if(id === "recommendedPanel"){
-        loadRecommended();
-    }
-
-    if(id === "registerPanel"){
-        loadHooriSelect();
-    }
-
-    if(id === "ticketsPanel"){
-        loadTickets();
-    }
-}
-
-function closePanel(id){
-    document.getElementById(id).classList.remove("show");
-}
-
-function go(where){
-
-    closeMenu();
-
-    document.querySelectorAll(".appPanel").forEach(p=>{
-        p.classList.remove("show");
-    });
-
-    if(whe
+        <button
+            class="back"
+            onclick="closePanel(
