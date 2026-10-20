@@ -3,1046 +3,920 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>HOORI.COM</title>
+<meta name="theme-color" content="#050505">
+
+<title>HOORI.COM | The Golden World</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
 <style>
-:root{
-  --bg:#070707;
-  --card:#101010;
-  --card2:#151515;
-  --gold:#d7b568;
-  --gold2:#f4dda0;
-  --text:#f7f3e9;
-  --muted:#8e8b84;
-  --line:rgba(215,181,104,.18);
-  --red:#ff5555;
-  --green:#54d89a;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
-*{box-sizing:border-box;margin:0;padding:0}
+:root{
+    --black:#050505;
+    --black2:#0a0a0a;
+    --panel:#0d0d0d;
+    --gold:#d4af37;
+    --gold2:#f2d675;
+    --gold3:#9c7918;
+    --white:#f7f4eb;
+    --muted:#929292;
+    --line:rgba(212,175,55,.18);
+}
 
-html{scroll-behavior:smooth}
+html{
+    scroll-behavior:smooth;
+}
 
 body{
-  background:
-    radial-gradient(circle at 50% -10%,rgba(215,181,104,.13),transparent 35%),
-    var(--bg);
-  color:var(--text);
-  font-family:Vazirmatn,sans-serif;
-  min-height:100vh;
+    font-family:"Vazirmatn",sans-serif;
+    background:
+        radial-gradient(circle at 50% -10%,rgba(212,175,55,.12),transparent 35%),
+        radial-gradient(circle at 100% 50%,rgba(212,175,55,.05),transparent 30%),
+        #050505;
+    color:var(--white);
+    min-height:100vh;
+    overflow-x:hidden;
 }
 
-button,input,select{font-family:inherit}
+/* GOLD GLOW */
 
-button{cursor:pointer}
-
-a{
-  color:inherit;
-  text-decoration:none;
+body:before,
+body:after{
+    content:"";
+    position:fixed;
+    width:260px;
+    height:260px;
+    border-radius:50%;
+    filter:blur(100px);
+    pointer-events:none;
+    z-index:-1;
+    opacity:.16;
 }
 
-/* HEADER */
-
-header{
-  position:sticky;
-  top:0;
-  z-index:1000;
-  background:rgba(7,7,7,.88);
-  backdrop-filter:blur(18px);
-  border-bottom:1px solid var(--line);
+body:before{
+    background:#d4af37;
+    top:5%;
+    right:-150px;
 }
 
-.nav{
-  max-width:1150px;
-  margin:auto;
-  min-height:75px;
-  padding:12px 20px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:20px;
+body:after{
+    background:#a37d18;
+    bottom:0;
+    left:-150px;
+}
+
+/* TOP LINE */
+
+.top-line{
+    height:2px;
+    background:linear-gradient(
+        90deg,
+        transparent,
+        var(--gold),
+        #fff0a8,
+        var(--gold),
+        transparent
+    );
+    box-shadow:0 0 18px rgba(212,175,55,.7);
+}
+
+/* NAV */
+
+nav{
+    width:min(1180px,94%);
+    margin:auto;
+    height:82px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    border-bottom:1px solid var(--line);
 }
 
 .logo{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  font-weight:900;
-  letter-spacing:2px;
-  font-size:20px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    font-weight:900;
+    letter-spacing:1px;
+    font-size:22px;
 }
 
-.logo span{
-  color:var(--gold);
-  font-size:28px;
+.logo-symbol{
+    width:42px;
+    height:42px;
+    display:grid;
+    place-items:center;
+    border:1px solid var(--gold);
+    color:var(--gold2);
+    border-radius:50%;
+    box-shadow:
+        inset 0 0 20px rgba(212,175,55,.08),
+        0 0 20px rgba(212,175,55,.1);
+    font-size:22px;
 }
 
-.navlinks{
-  display:flex;
-  gap:7px;
-  flex-wrap:wrap;
+.logo small{
+    display:block;
+    font-size:8px;
+    color:#777;
+    letter-spacing:3px;
+    margin-top:2px;
+    font-weight:500;
 }
 
-.navlinks button{
-  background:transparent;
-  color:#bbb;
-  border:1px solid transparent;
-  padding:10px 13px;
-  border-radius:12px;
+.nav-links{
+    display:flex;
+    gap:8px;
 }
 
-.navlinks button:hover{
-  color:var(--gold2);
-  border-color:var(--line);
-  background:rgba(215,181,104,.05);
+.nav-links button{
+    background:transparent;
+    border:1px solid transparent;
+    color:#aaa;
+    padding:10px 14px;
+    border-radius:10px;
+    font-family:inherit;
+    cursor:pointer;
+    transition:.25s;
+}
+
+.nav-links button:hover{
+    color:var(--gold2);
+    border-color:var(--line);
+    background:rgba(212,175,55,.05);
+}
+
+.menu{
+    display:none;
+    color:var(--gold2);
+    font-size:25px;
 }
 
 /* HERO */
 
 .hero{
-  max-width:1150px;
-  margin:auto;
-  min-height:560px;
-  padding:80px 20px 60px;
-  display:grid;
-  grid-template-columns:1.2fr .8fr;
-  align-items:center;
-  gap:40px;
+    width:min(1180px,94%);
+    margin:auto;
+    min-height:650px;
+    display:grid;
+    grid-template-columns:1.1fr .9fr;
+    align-items:center;
+    gap:50px;
+    position:relative;
+}
+
+.hero-content{
+    animation:heroIn 1s ease both;
 }
 
 .badge{
-  display:inline-flex;
-  align-items:center;
-  gap:8px;
-  border:1px solid var(--line);
-  color:var(--gold2);
-  padding:8px 13px;
-  border-radius:999px;
-  font-size:12px;
-  letter-spacing:1px;
-  margin-bottom:20px;
-  background:rgba(215,181,104,.04);
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    border:1px solid var(--line);
+    background:rgba(212,175,55,.04);
+    color:var(--gold2);
+    padding:8px 15px;
+    border-radius:100px;
+    font-size:12px;
+    margin-bottom:25px;
+    box-shadow:0 0 25px rgba(212,175,55,.04);
+}
+
+.badge span{
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    background:var(--gold);
+    box-shadow:0 0 10px var(--gold);
 }
 
 .hero h1{
-  font-size:clamp(42px,7vw,82px);
-  line-height:1.05;
-  font-weight:900;
-  margin-bottom:22px;
+    font-size:clamp(48px,7vw,88px);
+    line-height:1.05;
+    font-weight:900;
+    letter-spacing:-4px;
+    margin-bottom:25px;
 }
 
-.hero h1 strong{
-  color:var(--gold);
+.hero h1 .gold{
+    background:linear-gradient(
+        110deg,
+        #9b7418,
+        #f8df7b,
+        #c59b2b,
+        #fff1a5,
+        #a67e1b
+    );
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    background-size:250% auto;
+    animation:goldMove 5s linear infinite;
 }
 
 .hero p{
-  color:var(--muted);
-  max-width:600px;
-  line-height:2;
-  font-size:16px;
+    max-width:620px;
+    color:#9b9b9b;
+    font-size:17px;
+    line-height:2.2;
+    margin-bottom:35px;
 }
 
-.heroBtns{
-  display:flex;
-  gap:12px;
-  margin-top:30px;
-  flex-wrap:wrap;
+.buttons{
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
 }
 
 .btn{
-  border:0;
-  padding:13px 20px;
-  border-radius:14px;
-  font-weight:800;
-  transition:.2s;
+    border:none;
+    font-family:inherit;
+    cursor:pointer;
+    padding:15px 25px;
+    border-radius:13px;
+    font-size:14px;
+    font-weight:700;
+    transition:.3s;
 }
 
-.btnGold{
-  background:linear-gradient(135deg,var(--gold2),var(--gold));
-  color:#17130a;
-  box-shadow:0 12px 35px rgba(215,181,104,.12);
+.btn-gold{
+    background:linear-gradient(
+        135deg,
+        #9e781d,
+        #e4c451,
+        #b18a22
+    );
+    color:#080808;
+    box-shadow:0 8px 35px rgba(212,175,55,.17);
 }
 
-.btnGold:hover{
-  transform:translateY(-2px);
+.btn-gold:hover{
+    transform:translateY(-3px);
+    box-shadow:0 12px 40px rgba(212,175,55,.3);
 }
 
-.btnDark{
-  background:#111;
-  color:var(--text);
-  border:1px solid var(--line);
+.btn-dark{
+    color:var(--gold2);
+    background:#0d0d0d;
+    border:1px solid var(--line);
 }
 
-.heroSymbol{
-  width:280px;
-  height:280px;
-  margin:auto;
-  border-radius:50%;
-  border:1px solid rgba(215,181,104,.35);
-  display:grid;
-  place-items:center;
-  position:relative;
-  box-shadow:
-    0 0 100px rgba(215,181,104,.08),
-    inset 0 0 60px rgba(215,181,104,.04);
+.btn-dark:hover{
+    border-color:var(--gold);
+    background:#131313;
 }
 
-.heroSymbol:before,
-.heroSymbol:after{
-  content:"";
-  position:absolute;
-  border-radius:50%;
-  border:1px solid var(--line);
+/* HERO ART */
+
+.hero-art{
+    height:480px;
+    position:relative;
+    display:grid;
+    place-items:center;
 }
 
-.heroSymbol:before{
-  inset:20px;
+.orbit{
+    position:absolute;
+    width:390px;
+    height:390px;
+    border:1px solid rgba(212,175,55,.18);
+    border-radius:50%;
+    animation:rotate 18s linear infinite;
 }
 
-.heroSymbol:after{
-  inset:42px;
+.orbit:before{
+    content:"";
+    position:absolute;
+    width:10px;
+    height:10px;
+    background:var(--gold2);
+    border-radius:50%;
+    top:40px;
+    left:50px;
+    box-shadow:0 0 20px var(--gold);
 }
 
-.heroSymbol div{
-  font-size:110px;
-  color:var(--gold);
+.orbit2{
+    width:300px;
+    height:300px;
+    animation:rotate 12s linear infinite reverse;
+    border-color:rgba(212,175,55,.12);
 }
 
-/* SECTIONS */
+.gold-core{
+    width:220px;
+    height:220px;
+    border-radius:50%;
+    display:grid;
+    place-items:center;
+    border:1px solid rgba(212,175,55,.5);
+    background:
+        radial-gradient(circle at 35% 30%,rgba(255,230,130,.2),transparent 25%),
+        radial-gradient(circle,#17130a,#070707 65%);
+    box-shadow:
+        0 0 80px rgba(212,175,55,.12),
+        inset 0 0 50px rgba(212,175,55,.05);
+}
+
+.core-symbol{
+    color:var(--gold2);
+    font-size:92px;
+    font-weight:300;
+    text-shadow:0 0 35px rgba(212,175,55,.35);
+}
+
+/* SECTION */
 
 section{
-  max-width:1150px;
-  margin:auto;
-  padding:70px 20px;
+    width:min(1180px,94%);
+    margin:0 auto;
+    padding:85px 0;
 }
 
-.sectionHead{
-  display:flex;
-  align-items:end;
-  justify-content:space-between;
-  gap:20px;
-  margin-bottom:30px;
+.section-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:end;
+    margin-bottom:30px;
+    gap:20px;
 }
 
-.sectionHead h2{
-  font-size:32px;
+.eyebrow{
+    color:var(--gold);
+    font-size:11px;
+    letter-spacing:3px;
+    margin-bottom:9px;
 }
 
-.sectionHead p{
-  color:var(--muted);
-  font-size:13px;
-  margin-top:8px;
+.section-head h2{
+    font-size:32px;
+    font-weight:800;
+}
+
+.section-head p{
+    color:#777;
+    font-size:13px;
 }
 
 /* CARDS */
 
-.grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:15px;
+.cards{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
 }
 
-.hooriCard{
-  background:linear-gradient(145deg,#121212,#0d0d0d);
-  border:1px solid var(--line);
-  border-radius:20px;
-  padding:23px;
-  min-height:150px;
-  position:relative;
-  overflow:hidden;
-  transition:.25s;
+.card{
+    min-height:230px;
+    padding:25px;
+    border:1px solid var(--line);
+    border-radius:22px;
+    background:
+        linear-gradient(145deg,rgba(255,255,255,.025),transparent),
+        #0b0b0b;
+    position:relative;
+    overflow:hidden;
+    transition:.35s;
 }
 
-.hooriCard:hover{
-  transform:translateY(-4px);
-  border-color:rgba(215,181,104,.4);
+.card:before{
+    content:"";
+    position:absolute;
+    width:180px;
+    height:180px;
+    border:1px solid rgba(212,175,55,.12);
+    border-radius:50%;
+    left:-80px;
+    bottom:-100px;
 }
 
-.hooriCard:after{
-  content:"";
-  position:absolute;
-  width:100px;
-  height:100px;
-  background:rgba(215,181,104,.08);
-  filter:blur(35px);
-  left:-30px;
-  bottom:-40px;
+.card:after{
+    content:"";
+    position:absolute;
+    width:100px;
+    height:100px;
+    border:1px solid rgba(212,175,55,.1);
+    border-radius:50%;
+    right:-45px;
+    top:-40px;
 }
 
-.cardTop{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:25px;
+.card:hover{
+    transform:translateY(-7px);
+    border-color:rgba(212,175,55,.45);
+    box-shadow:0 20px 50px rgba(0,0,0,.4);
 }
 
-.number{
-  color:var(--gold);
-  font-size:12px;
+.card-number{
+    color:#555;
+    font-size:11px;
+    letter-spacing:2px;
 }
 
-.hooriName{
-  font-size:22px;
-  font-weight:800;
+.card-icon{
+    width:55px;
+    height:55px;
+    border-radius:15px;
+    border:1px solid var(--line);
+    display:grid;
+    place-items:center;
+    color:var(--gold2);
+    font-size:25px;
+    margin:30px 0 20px;
+    background:rgba(212,175,55,.04);
 }
 
-.empty{
-  border:1px dashed var(--line);
-  padding:40px 20px;
-  border-radius:20px;
-  text-align:center;
-  color:var(--muted);
-  grid-column:1/-1;
+.card h3{
+    font-size:23px;
+    margin-bottom:8px;
 }
 
-/* RECOMMENDED */
-
-.recommended{
-  background:
-    linear-gradient(135deg,rgba(215,181,104,.08),transparent 50%),
-    #0d0d0d;
-  border:1px solid var(--line);
-  border-radius:25px;
-  padding:28px;
+.card p{
+    color:#777;
+    font-size:13px;
 }
 
-.recommended .grid{
-  margin-top:20px;
+/* FEATURED */
+
+.featured{
+    border:1px solid rgba(212,175,55,.3);
+    border-radius:28px;
+    padding:35px;
+    background:
+        radial-gradient(circle at 90% 10%,rgba(212,175,55,.12),transparent 25%),
+        #0b0b0b;
+    display:grid;
+    grid-template-columns:1fr auto;
+    align-items:center;
+    overflow:hidden;
+    position:relative;
 }
 
-/* TICKET FORM */
-
-.formBox{
-  background:#0e0e0e;
-  border:1px solid var(--line);
-  border-radius:25px;
-  padding:30px;
-  max-width:800px;
-  margin:auto;
+.featured h2{
+    font-size:38px;
+    color:var(--gold2);
+    margin-bottom:10px;
 }
 
-.formGrid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:15px;
+.featured p{
+    color:#888;
+    line-height:2;
 }
 
-.field{
-  display:flex;
-  flex-direction:column;
-  gap:8px;
-}
-
-.field label{
-  color:#aaa;
-  font-size:13px;
-}
-
-.field input,
-.field select{
-  background:#080808;
-  color:var(--text);
-  border:1px solid var(--line);
-  border-radius:13px;
-  padding:14px;
-  outline:none;
-}
-
-.field input:focus,
-.field select:focus{
-  border-color:var(--gold);
-}
-
-.full{
-  grid-column:1/-1;
-}
-
-.submit{
-  width:100%;
-  margin-top:18px;
+.featured-symbol{
+    width:150px;
+    height:150px;
+    border-radius:50%;
+    border:1px solid rgba(212,175,55,.35);
+    display:grid;
+    place-items:center;
+    color:var(--gold2);
+    font-size:70px;
+    box-shadow:0 0 50px rgba(212,175,55,.08);
 }
 
 /* TICKET */
 
-.ticketWrap{
-  display:none;
-  margin-top:30px;
-}
-
 .ticket{
-  max-width:760px;
-  margin:auto;
-  background:
-    radial-gradient(circle at 10% 10%,rgba(215,181,104,.15),transparent 30%),
-    linear-gradient(135deg,#19150c,#080808);
-  border:1px solid rgba(215,181,104,.55);
-  border-radius:25px;
-  overflow:hidden;
-  box-shadow:0 25px 80px rgba(0,0,0,.5);
-  position:relative;
+    border:1px solid var(--line);
+    border-radius:28px;
+    padding:35px;
+    background:#0a0a0a;
 }
 
-.ticketMain{
-  padding:30px;
+.ticket-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
 }
 
-.ticketBrand{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  border-bottom:1px dashed rgba(215,181,104,.35);
-  padding-bottom:20px;
-  margin-bottom:25px;
+.input{
+    width:100%;
+    background:#101010;
+    color:#fff;
+    border:1px solid #222;
+    outline:none;
+    padding:15px;
+    border-radius:12px;
+    font-family:inherit;
+    transition:.25s;
 }
 
-.ticketBrand strong{
-  color:var(--gold2);
-  letter-spacing:3px;
+.input:focus{
+    border-color:var(--gold);
+    box-shadow:0 0 20px rgba(212,175,55,.06);
 }
 
-.ticketBrand span{
-  font-size:28px;
-  color:var(--gold);
-}
-
-.ticketTitle{
-  color:var(--gold);
-  font-size:13px;
-  letter-spacing:2px;
-}
-
-.ticket h3{
-  font-size:35px;
-  margin:8px 0 25px;
-}
-
-.ticketInfo{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:20px;
-}
-
-.info small{
-  display:block;
-  color:#777;
-  margin-bottom:5px;
-}
-
-.info strong{
-  font-size:16px;
-}
-
-.ticketBottom{
-  border-top:1px dashed rgba(215,181,104,.35);
-  padding:18px 30px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:20px;
-}
-
-.ticketCode{
-  font-family:monospace;
-  color:var(--gold2);
-  letter-spacing:2px;
-}
-
-.downloadBtn{
-  border:1px solid var(--line);
-  background:#0b0b0b;
-  color:var(--gold2);
-  padding:10px 15px;
-  border-radius:10px;
+.ticket .full{
+    grid-column:1/-1;
 }
 
 /* CONTACT */
 
 .contact{
-  text-align:center;
-  border:1px solid var(--line);
-  background:#0c0c0c;
-  border-radius:25px;
-  padding:45px 20px;
+    text-align:center;
+    border:1px solid var(--line);
+    border-radius:28px;
+    padding:55px 25px;
+    background:
+        radial-gradient(circle at center,rgba(212,175,55,.07),transparent 55%),
+        #090909;
 }
 
 .contact h2{
-  font-size:30px;
-  margin-bottom:15px;
+    font-size:35px;
+    margin-bottom:12px;
 }
 
 .contact p{
-  color:var(--muted);
-  max-width:600px;
-  margin:0 auto 20px;
-  line-height:2;
-}
-
-.telegram{
-  display:inline-flex;
-  padding:12px 20px;
-  border-radius:13px;
-  background:linear-gradient(135deg,var(--gold2),var(--gold));
-  color:#151109;
-  font-weight:900;
-}
-
-/* ADMIN */
-
-#adminPage{
-  display:none;
-}
-
-.adminLayout{
-  display:grid;
-  grid-template-columns:220px 1fr;
-  gap:20px;
-}
-
-.adminSide{
-  background:#0d0d0d;
-  border:1px solid var(--line);
-  border-radius:20px;
-  padding:15px;
-  height:max-content;
-  position:sticky;
-  top:95px;
-}
-
-.adminBrand{
-  padding:20px 10px;
-  text-align:center;
-  border-bottom:1px solid var(--line);
-  margin-bottom:10px;
-}
-
-.adminBrand span{
-  color:var(--gold);
-  font-size:28px;
-}
-
-.adminBrand strong{
-  display:block;
-  margin-top:7px;
-  letter-spacing:2px;
-}
-
-.adminMenu button{
-  width:100%;
-  text-align:right;
-  background:transparent;
-  color:#aaa;
-  border:0;
-  padding:13px;
-  border-radius:12px;
-  margin:3px 0;
-}
-
-.adminMenu button:hover,
-.adminMenu button.active{
-  background:rgba(215,181,104,.09);
-  color:var(--gold2);
-}
-
-.adminContent{
-  min-width:0;
-}
-
-.adminTitle{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:20px;
-}
-
-.adminTitle h2{
-  font-size:28px;
-}
-
-.stats{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:15px;
-  margin-bottom:20px;
-}
-
-.stat{
-  background:#101010;
-  border:1px solid var(--line);
-  border-radius:18px;
-  padding:20px;
-}
-
-.stat small{
-  color:#777;
-}
-
-.stat strong{
-  display:block;
-  color:var(--gold);
-  font-size:30px;
-  margin-top:8px;
-}
-
-.adminPanel{
-  background:#0e0e0e;
-  border:1px solid var(--line);
-  border-radius:20px;
-  padding:22px;
-}
-
-.adminPanel h3{
-  margin-bottom:15px;
-}
-
-.adminForm{
-  display:grid;
-  grid-template-columns:1fr 1fr auto;
-  gap:10px;
-}
-
-.adminForm input{
-  background:#080808;
-  color:white;
-  border:1px solid var(--line);
-  border-radius:12px;
-  padding:13px;
-  outline:none;
-}
-
-.list{
-  margin-top:18px;
-  display:flex;
-  flex-direction:column;
-  gap:9px;
-}
-
-.listItem{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:15px;
-  background:#090909;
-  border:1px solid rgba(255,255,255,.05);
-  padding:13px;
-  border-radius:13px;
-}
-
-.delete{
-  background:rgba(255,85,85,.08);
-  border:1px solid rgba(255,85,85,.2);
-  color:#ff7777;
-  border-radius:9px;
-  padding:8px 12px;
-}
-
-.ticketAdmin{
-  display:grid;
-  gap:10px;
-}
-
-.ticketRow{
-  border:1px solid rgba(255,255,255,.06);
-  background:#090909;
-  border-radius:15px;
-  padding:15px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:15px;
-}
-
-.ticketRowInfo{
-  display:grid;
-  gap:4px;
-}
-
-.ticketRowInfo small{
-  color:#777;
-}
-
-/* LOGIN */
-
-.modal{
-  display:none;
-  position:fixed;
-  inset:0;
-  z-index:5000;
-  background:rgba(0,0,0,.8);
-  backdrop-filter:blur(10px);
-  align-items:center;
-  justify-content:center;
-  padding:20px;
-}
-
-.modalBox{
-  width:100%;
-  max-width:430px;
-  background:#111;
-  border:1px solid var(--line);
-  border-radius:22px;
-  padding:25px;
-  box-shadow:0 30px 100px #000;
-}
-
-.modalBox h3{
-  margin-bottom:8px;
-}
-
-.modalBox p{
-  color:#777;
-  font-size:13px;
-  margin-bottom:20px;
-}
-
-.modalBox input{
-  width:100%;
-  padding:14px;
-  background:#080808;
-  color:white;
-  border:1px solid var(--line);
-  border-radius:12px;
-  outline:none;
-}
-
-.modalActions{
-  display:flex;
-  gap:10px;
-  margin-top:15px;
-}
-
-.modalActions button{
-  flex:1;
-}
-
-.close{
-  background:#181818;
-  color:#aaa;
-  border:1px solid #292929;
-}
-
-/* TOAST */
-
-.toast{
-  position:fixed;
-  bottom:20px;
-  right:20px;
-  z-index:9000;
-  background:#151515;
-  border:1px solid var(--line);
-  color:var(--text);
-  padding:13px 18px;
-  border-radius:13px;
-  transform:translateY(100px);
-  opacity:0;
-  transition:.3s;
-}
-
-.toast.show{
-  transform:translateY(0);
-  opacity:1;
+    color:#777;
+    margin-bottom:25px;
 }
 
 /* FOOTER */
 
 footer{
-  border-top:1px solid var(--line);
-  text-align:center;
-  padding:30px 20px;
-  color:#666;
-  font-size:12px;
+    border-top:1px solid var(--line);
+    padding:30px 5%;
+    text-align:center;
+    color:#555;
+    font-size:11px;
 }
 
 footer strong{
-  color:var(--gold);
+    color:var(--gold);
 }
 
 /* MOBILE */
 
 @media(max-width:800px){
 
-  .nav{
-    flex-direction:column;
-    align-items:stretch;
-  }
+    nav{
+        height:70px;
+    }
 
-  .logo{
-    justify-content:center;
-  }
+    .nav-links{
+        display:none;
+    }
 
-  .navlinks{
-    justify-content:center;
-  }
+    .menu{
+        display:block;
+    }
 
-  .hero{
-    grid-template-columns:1fr;
-    text-align:center;
-    padding-top:55px;
-  }
+    .hero{
+        min-height:auto;
+        padding:70px 0 30px;
+        grid-template-columns:1fr;
+        text-align:center;
+    }
 
-  .hero p{
-    margin:auto;
-  }
+    .hero p{
+        margin-left:auto;
+        margin-right:auto;
+        font-size:14px;
+    }
 
-  .heroBtns{
-    justify-content:center;
-  }
+    .buttons{
+        justify-content:center;
+    }
 
-  .heroSymbol{
-    width:220px;
-    height:220px;
-  }
+    .hero-art{
+        height:330px;
+        order:-1;
+    }
 
-  .heroSymbol div{
-    font-size:80px;
-  }
+    .orbit{
+        width:270px;
+        height:270px;
+    }
 
-  .grid{
-    grid-template-columns:1fr;
-  }
+    .orbit2{
+        width:210px;
+        height:210px;
+    }
 
-  .formGrid{
-    grid-template-columns:1fr;
-  }
+    .gold-core{
+        width:155px;
+        height:155px;
+    }
 
-  .full{
-    grid-column:auto;
-  }
+    .core-symbol{
+        font-size:65px;
+    }
 
-  .adminLayout{
-    grid-template-columns:1fr;
-  }
+    section{
+        padding:60px 0;
+    }
 
-  .adminSide{
-    position:static;
-  }
+    .section-head{
+        display:block;
+    }
 
-  .stats{
-    grid-template-columns:1fr;
-  }
+    .section-head p{
+        margin-top:8px;
+    }
 
-  .adminForm{
-    grid-template-columns:1fr;
-  }
+    .cards{
+        grid-template-columns:1fr;
+    }
 
-  .ticketInfo{
-    grid-template-columns:1fr;
-  }
+    .featured{
+        grid-template-columns:1fr;
+        text-align:center;
+        gap:30px;
+    }
 
-  .ticketBottom{
-    flex-direction:column;
-    align-items:stretch;
-  }
+    .featured-symbol{
+        margin:auto;
+    }
 
-  .downloadBtn{
-    width:100%;
-  }
+    .featured h2{
+        font-size:30px;
+    }
 
-  .sectionHead{
-    flex-direction:column;
-    align-items:flex-start;
-  }
+    .ticket-grid{
+        grid-template-columns:1fr;
+    }
+
+    .ticket .full{
+        grid-column:auto;
+    }
+}
+
+/* ANIMATIONS */
+
+@keyframes rotate{
+    from{transform:rotate(0deg)}
+    to{transform:rotate(360deg)}
+}
+
+@keyframes heroIn{
+    from{
+        opacity:0;
+        transform:translateY(25px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+@keyframes goldMove{
+    to{
+        background-position:250% center;
+    }
 }
 </style>
 </head>
 
 <body>
 
-<header id="mainHeader">
-  <div class="nav">
-    <a class="logo" href="#home">
-      <span>♱</span>
-      HOORI.COM
-    </a>
+<div class="top-line"></div>
 
-    <div class="navlinks">
-      <button onclick="showHome()">خانه</button>
-      <button onclick="goTo('hooris')">حوری‌ها</button>
-      <button onclick="goTo('ticketSection')">درخواست بلیط</button>
-      <button onclick="goTo('contact')">ارتباط با سازنده</button>
-      <button onclick="openAdmin()">مدیریت ↗</button>
+<nav>
+
+    <div class="logo">
+        <div class="logo-symbol">♱</div>
+        <div>
+            HOORI.COM
+            <small>THE GOLDEN WORLD</small>
+        </div>
     </div>
-  </div>
-</header>
 
-
-<!-- HOME -->
-
-<main id="homePage">
-
-<section class="hero" id="home">
-
-  <div>
-    <div class="badge">♱ DARK · GOLD · UNIQUE</div>
-
-    <h1>
-      اسم خاص،<br>
-      برای <strong>آدم خاص.</strong>
-    </h1>
-
-    <p>
-      به دنیای HOORI.COM خوش اومدی.
-      حوری مورد علاقه‌ات رو انتخاب کن،
-      درخواست بلیط بده و بلیط اختصاصی خودت رو بساز.
-    </p>
-
-    <div class="heroBtns">
-      <button class="btn btnGold" onclick="goTo('hooris')">
-        مشاهده حوری‌ها
-      </button>
-
-      <button class="btn btnDark" onclick="goTo('ticketSection')">
-        درخواست بلیط
-      </button>
+    <div class="nav-links">
+        <button onclick="go('home')">خانه</button>
+        <button onclick="go('hoori')">حوری‌ها</button>
+        <button onclick="go('ticket')">درخواست بلیط</button>
+        <button onclick="go('contact')">ارتباط</button>
+        <button onclick="admin()">پنل مدیریت</button>
     </div>
-  </div>
 
-  <div class="heroSymbol">
-    <div>♱</div>
-  </div>
+    <div class="menu">☰</div>
+
+</nav>
+
+
+<!-- HERO -->
+
+<main id="home">
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <div class="badge">
+            <span></span>
+            HOORI · PREMIUM COLLECTION
+        </div>
+
+        <h1>
+            اسم <span class="gold">خاص،</span><br>
+            برای آدم خاص.
+        </h1>
+
+        <p>
+            دنیای HOORI جایی برای اسم‌های خاص،
+            انتخاب‌های متفاوت و آدم‌هایی است که
+            معمولی بودن برایشان کافی نیست.
+        </p>
+
+        <div class="buttons">
+            <button class="btn btn-gold" onclick="go('hoori')">
+                مشاهده حوری‌ها
+            </button>
+
+            <button class="btn btn-dark" onclick="go('ticket')">
+                درخواست نام اختصاصی ←
+            </button>
+        </div>
+
+    </div>
+
+
+    <div class="hero-art">
+
+        <div class="orbit"></div>
+        <div class="orbit orbit2"></div>
+
+        <div class="gold-core">
+            <div class="core-symbol">♱</div>
+        </div>
+
+    </div>
 
 </section>
 
 
-<!-- HOORIS -->
+<!-- HOORI -->
 
-<section id="hooris">
+<section id="hoori">
 
-  <div class="sectionHead">
-    <div>
-      <h2>حوری‌ها</h2>
-      <p>لیست حوری‌ها برای همه قابل مشاهده است.</p>
+    <div class="section-head">
+
+        <div>
+            <div class="eyebrow">THE COLLECTION</div>
+            <h2>حوری‌ها</h2>
+        </div>
+
+        <p>
+            اسم‌هایی که معمولی نیستند.
+        </p>
+
     </div>
-  </div>
 
-  <div class="grid" id="hooriList"></div>
+
+    <div class="cards">
+
+        <div class="card">
+
+            <div class="card-number">01 · GOLDEN</div>
+
+            <div class="card-icon">♱</div>
+
+            <h3>مادر طلایی</h3>
+
+            <p>
+                یک انتخاب ویژه از مجموعه HOORI.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-number">02 · PREMIUM</div>
+
+            <div class="card-icon">✦</div>
+
+            <h3>حوری خاص</h3>
+
+            <p>
+                برای کسانی که اسم متفاوت می‌خواهند.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-number">03 · UNIQUE</div>
+
+            <div class="card-icon">◈</div>
+
+            <h3>حوری پیشنهادی</h3>
+
+            <p>
+                انتخاب‌های پیشنهادی مجموعه HOORI.
+            </p>
+
+        </div>
+
+    </div>
 
 </section>
 
 
-<!-- RECOMMENDED -->
+<!-- FEATURED -->
 
-<section id="recommendedSection">
+<section>
 
-  <div class="recommended">
+    <div class="eyebrow">FEATURED</div>
 
-    <div class="sectionHead">
-      <div>
-        <h2>حوری‌های پیشنهادی ✦</h2>
-        <p>انتخاب‌های ویژه HOORI.COM</p>
-      </div>
+    <div class="featured">
+
+        <div>
+
+            <h2>مادر طلایی</h2>
+
+            <p>
+                انتخاب ویژه و نمادین HOORI.
+                <br>
+                یک اسم برای آدم‌هایی که خاص بودن را انتخاب می‌کنند.
+            </p>
+
+            <br>
+
+            <button class="btn btn-gold" onclick="go('ticket')">
+                دریافت بلیط ✦
+            </button>
+
+        </div>
+
+        <div class="featured-symbol">
+            ♱
+        </div>
+
     </div>
-
-    <div class="grid" id="recommendedList"></div>
-
-  </div>
 
 </section>
 
 
 <!-- TICKET -->
 
-<section id="ticketSection">
+<section id="ticket">
 
-  <div class="sectionHead">
-    <div>
-      <h2>درخواست بلیط 🎟️</h2>
-      <p>اطلاعاتت رو وارد کن تا بلیط اختصاصی ساخته بشه.</p>
-    </div>
-  </div>
+    <div class="section-head">
 
-  <div class="formBox">
+        <div>
+            <div class="eyebrow">EXCLUSIVE TICKET</div>
+            <h2>درخواست بلیط</h2>
+        </div>
 
-    <div class="formGrid">
-
-      <div class="field">
-        <label>نام</label>
-        <input id="firstName" placeholder="نام">
-      </div>
-
-      <div class="field">
-        <label>نام خانوادگی</label>
-        <input id="lastName" placeholder="نام خانوادگی">
-      </div>
-
-      <div class="field">
-        <label>انتخاب حوری</label>
-        <select id="hooriSelect"></select>
-      </div>
-
-      <div class="field">
-        <label>تاریخ</label>
-        <input id="ticketDate" type="date">
-      </div>
+        <p>
+            بلیط اختصاصی خودت را بساز.
+        </p>
 
     </div>
 
-    <button class="btn btnGold submit" onclick="createTicket()">
-      ✦ ساخت بلیط اختصاصی
-    </button>
 
-  </div>
+    <div class="ticket">
 
+        <div class="ticket-grid">
 
-  <div class="ticketWrap" id="ticketWrap">
+            <input
+                class="input"
+                id="firstName"
+                placeholder="نام"
+            >
 
-    <div class="ticket" id="ticket">
+            <input
+                class="input"
+                id="lastName"
+                placeholder="نام خانوادگی"
+            >
 
-      <div class="ticketMain">
+            <select class="input" id="hooriSelect">
+                <option>مادر طلایی</option>
+                <option>حوری خاص</option>
+                <option>حوری پیشنهادی</option>
+            </select>
 
-        <div class="ticketBrand">
-          <strong>HOORI.COM</strong>
-          <span>♱</span>
-        </div>
+            <input
+                class="input"
+                type="date"
+                id="ticketDate"
+            >
 
-        <div class="ticketTitle">
-          EXCLUSIVE TICKET
-        </div>
-
-        <h3 id="ticketFullName">نام کاربر</h3>
-
-        <div class="ticketInfo">
-
-          <div class="info">
-            <small>حوری انتخاب‌شده</small>
-            <strong id="ticketHoori">---</strong>
-          </div>
-
-          <div class="info">
-            <small>تاریخ</small>
-            <strong id="ticketDateShow">---</strong>
-          </div>
-
-          <div class="info">
-            <small>نوع بلیط</small>
-            <strong>GOLDEN</strong>
-          </div>
-
-          <div class="info">
-            <small>شماره بلیط</small>
-            <strong id="ticketNumber">---</strong>
-          </div>
+            <button
+                class="btn btn-gold full"
+                onclick="makeTicket()"
+            >
+                ✦ ساخت بلیط اختصاصی
+            </button>
 
         </div>
 
-      </div>
-
-      <div class="ticketBottom">
-        <div class="ticketCode" id="ticketCode">
-          HOORI-000000
-        </div>
-
-        <button class="downloadBtn" onclick="printTicket()">
-          🖨️ ذخیره / چاپ بلیط
-        </button>
-      </div>
+        <div id="ticketResult"></div>
 
     </div>
-
-  </div>
 
 </section>
 
@@ -1051,188 +925,192 @@ footer strong{
 
 <section id="contact">
 
-  <div class="contact">
+    <div class="contact">
 
-    <h2>ارتباط با سازنده</h2>
+        <div class="eyebrow">CONTACT</div>
 
-    <p>
-      خوشحالیم که داری از HOORI.COM استفاده می‌کنی 🖤
-      این سایت برای ساختن یک تجربه خاص و متفاوت طراحی شده.
-      اگر پیشنهاد، انتقاد یا مشکلی داشتی، می‌تونی مستقیماً با سازنده در ارتباط باشی.
-    </p>
+        <h2>ارتباط با سازنده</h2>
 
-    <a class="telegram"
-       href="https://t.me/Error_1998"
-       target="_blank">
-      ✦ @Error_1998
-    </a>
+        <p>
+            خوشحالیم که داری از HOORI استفاده می‌کنی 🖤
+            <br>
+            برای ارتباط، پیشنهاد یا گزارش مشکل با ما در تماس باش.
+        </p>
 
-  </div>
+        <a
+            href="https://t.me/Error_1998"
+            target="_blank"
+            class="btn btn-gold"
+            style="display:inline-block;text-decoration:none"
+        >
+            ارتباط در تلگرام
+        </a>
+
+    </div>
 
 </section>
 
 </main>
 
 
-<!-- ADMIN PAGE -->
-
-<main id="adminPage">
-
-<section>
-
-  <div class="adminLayout">
-
-    <aside class="adminSide">
-
-      <div class="adminBrand">
-        <span>♱</span>
-        <strong>HOORI.COM</strong>
-        <small>MANAGEMENT PANEL</small>
-      </div>
-
-      <div class="adminMenu">
-
-        <button class="active" onclick="adminTab('dashboard',this)">
-          ◈ داشبورد
-        </button>
-
-        <button onclick="adminTab('hoorisAdmin',this)">
-          👑 مدیریت حوری‌ها
-        </button>
-
-        <button onclick="adminTab('recommendedAdmin',this)">
-          ✦ حوری‌های پیشنهادی
-        </button>
-
-        <button onclick="adminTab('ticketsAdmin',this)">
-          🎟️ مدیریت بلیط‌ها
-        </button>
-
-        <button onclick="showHome()">
-          ↩ بازگشت به سایت
-        </button>
-
-      </div>
-
-    </aside>
+<footer>
+    ♱ <strong>HOORI.COM</strong>
+    · THE GOLDEN WORLD
+    <br><br>
+    ساخته شده برای آدم‌های خاص.
+</footer>
 
 
-    <div class="adminContent">
+<script>
 
-      <!-- DASHBOARD -->
+function go(id){
 
-      <div class="adminTab" id="dashboard">
+    const el = document.getElementById(id);
 
-        <div class="adminTitle">
-          <h2>داشبورد</h2>
-          <span class="badge">HOORI.COM</span>
-        </div>
+    if(el){
+        el.scrollIntoView({
+            behavior:"smooth",
+            block:"start"
+        });
+    }
 
-        <div class="stats">
-
-          <div class="stat">
-            <small>کل حوری‌ها</small>
-            <strong id="statHooris">0</strong>
-          </div>
-
-          <div class="stat">
-            <small>حوری‌های پیشنهادی</small>
-            <strong id="statRecommended">0</strong>
-          </div>
-
-          <div class="stat">
-            <small>کل بلیط‌ها</small>
-            <strong id="statTickets">0</strong>
-          </div>
-
-        </div>
-
-        <div class="adminPanel">
-          <h3>خوش آمدی 👑</h3>
-          <p style="color:#777;line-height:2">
-            از این بخش می‌تونی محتوای HOORI.COM،
-            حوری‌ها، حوری‌های پیشنهادی و بلیط‌ها رو مدیریت کنی.
-          </p>
-        </div>
-
-      </div>
+}
 
 
-      <!-- HOORIS ADMIN -->
+function makeTicket(){
 
-      <div class="adminTab" id="hoorisAdmin" style="display:none">
+    const first =
+        document.getElementById("firstName").value.trim();
 
-        <div class="adminTitle">
-          <h2>مدیریت حوری‌ها</h2>
-        </div>
+    const last =
+        document.getElementById("lastName").value.trim();
 
-        <div class="adminPanel">
+    const hoori =
+        document.getElementById("hooriSelect").value;
 
-          <h3>➕ اضافه کردن حوری</h3>
+    const date =
+        document.getElementById("ticketDate").value;
 
-          <div class="adminForm">
+    if(!first || !last || !date){
 
-            <input id="newHoori"
-                   placeholder="نام حوری">
+        alert("لطفاً نام، نام خانوادگی و تاریخ را وارد کن.");
 
-            <input id="newHooriDesc"
-                   placeholder="توضیح کوتاه">
-
-            <button class="btn btnGold"
-                    onclick="addHoori()">
-              اضافه کردن
-            </button>
-
-          </div>
-
-          <div class="list" id="adminHooriList"></div>
-
-        </div>
-
-      </div>
+        return;
+    }
 
 
-      <!-- RECOMMENDED ADMIN -->
+    const number =
+        "H-" +
+        Math.floor(100000 + Math.random()*900000);
 
-      <div class="adminTab"
-           id="recommendedAdmin"
-           style="display:none">
 
-        <div class="adminTitle">
-          <h2>حوری‌های پیشنهادی</h2>
-        </div>
+    document.getElementById("ticketResult").innerHTML = `
 
-        <div class="adminPanel">
+        <div style="
+            margin-top:30px;
+            border:1px solid rgba(212,175,55,.45);
+            border-radius:22px;
+            padding:28px;
+            background:
+            radial-gradient(circle at 100% 0%,rgba(212,175,55,.15),transparent 30%),
+            #080808;
+            position:relative;
+            overflow:hidden;
+        ">
 
-          <h3>➕ اضافه کردن حوری پیشنهادی</h3>
+            <div style="
+                color:#d4af37;
+                font-size:11px;
+                letter-spacing:3px;
+                margin-bottom:15px;
+            ">
+                HOORI.COM · EXCLUSIVE
+            </div>
 
-          <div class="adminForm">
+            <div style="
+                font-size:30px;
+                font-weight:800;
+                color:#f2d675;
+                margin-bottom:20px;
+            ">
+                بلیط اختصاصی
+            </div>
 
-            <input id="newRecommended"
-                   placeholder="نام حوری پیشنهادی">
+            <div style="
+                display:grid;
+                gap:10px;
+                color:#aaa;
+                font-size:14px;
+            ">
 
-            <input id="newRecommendedDesc"
-                   placeholder="توضیح کوتاه">
+                <div>
+                    نام:
+                    <strong style="color:#fff">
+                        ${first} ${last}
+                    </strong>
+                </div>
 
-            <button class="btn btnGold"
-                    onclick="addRecommended()">
-              اضافه کردن
-            </button>
+                <div>
+                    حوری:
+                    <strong style="color:#f2d675">
+                        ${hoori}
+                    </strong>
+                </div>
 
-          </div>
+                <div>
+                    تاریخ:
+                    <strong style="color:#fff">
+                        ${date}
+                    </strong>
+                </div>
 
-          <div class="list"
-               id="adminRecommendedList"></div>
+                <div>
+                    شماره:
+                    <strong style="color:#f2d675">
+                        ${number}
+                    </strong>
+                </div>
+
+            </div>
+
+            <div style="
+                margin-top:25px;
+                padding-top:18px;
+                border-top:1px solid rgba(212,175,55,.15);
+                color:#666;
+                font-size:11px;
+            ">
+                ♱ HOORI · THE GOLDEN WORLD
+            </div>
 
         </div>
 
-      </div>
+    `;
+
+}
 
 
-      <!-- TICKETS ADMIN -->
+function admin(){
 
-      <div class="adminTab"
-           id="ticketsAdmin"
-           style="display:none">
+    const password = prompt("رمز پنل مدیریت:");
 
-        <div class="adminTitle">
+    if(password === "Hoori1405"){
+
+        alert(
+            "♱ HOORI.COM\n\n" +
+            "ورود به پنل مدیریت تأیید شد.\n" +
+            "پنل مدیریت در حال توسعه است."
+        );
+
+    }else if(password !== null){
+
+        alert("رمز اشتباه است.");
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>
